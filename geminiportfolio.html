@@ -274,21 +274,77 @@
             object-fit: cover;
             object-position: top center;
         }
-        .photo-tag {
+        
+        /* Headshot SV UI Additions */
+        .sv-photo-container {
+            position: relative;
+            padding: 1.5rem;
+            padding-bottom: 2.5rem; /* Added padding to prevent badge from spilling */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sv-grid-bg {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(var(--gold-dim) 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            opacity: 0.6;
+            border-radius: 20px;
+            z-index: 0;
+        }
+        .sv-frame {
+            z-index: 1;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15), inset 0 0 20px rgba(212, 175, 55, 0.05);
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 10px;
+        }
+        .sv-corner {
+            position: absolute;
+            width: 16px; height: 16px;
+            border: 2px solid var(--gold);
+            z-index: 2;
+        }
+        .sv-corner.top-left { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .sv-corner.top-right { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+        .sv-corner.bottom-left { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+        .sv-corner.bottom-right { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+        
+        .floating-badge {
+            position: absolute;
+            bottom: 10px; /* Shifted up into the padding container */
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 10, 10, 0.85);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            backdrop-filter: blur(12px);
+            padding: 10px 20px;
+            border-radius: 30px;
             font-size: 0.85rem;
-            color: var(--gold);
+            font-weight: 500;
+            color: var(--text-main);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 10px;
+            z-index: 3;
+            white-space: nowrap;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+            animation: fadeUp 1s ease-out forwards 0.5s;
+            opacity: 0;
         }
-        .photo-tag::before {
-            content: '';
-            display: block;
-            width: 8px; height: 8px;
-            background: var(--gold);
+        .floating-badge .pulse-dot {
+            width: 10px; height: 10px;
+            background: var(--green);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--gold);
-            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px var(--green);
+            animation: pulse-green 2s infinite;
+        }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.5); }
+            70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
         }
 
         /* 3. LOGO WALL */
@@ -322,6 +378,8 @@
             padding-right: 3rem;
         }
         .marquee-item {
+            display: flex;
+            align-items: center;
             font-weight: 500;
             font-size: 1.25rem;
             color: var(--text-muted);
@@ -329,6 +387,19 @@
             margin: 0 1.5rem;
             transition: var(--transition);
             cursor: default;
+        }
+        .marquee-logo {
+            height: 34px;
+            width: auto;
+            object-fit: contain;
+            margin-right: 12px;
+            opacity: 0.7;
+            filter: grayscale(100%) brightness(1.2);
+            transition: var(--transition);
+        }
+        .marquee-item:hover .marquee-logo {
+            opacity: 1;
+            filter: grayscale(0%) brightness(1);
         }
         .marquee-item::after {
             content: '·';
@@ -745,40 +816,56 @@
             100% { background-position: 200% 0; }
         }
 
-        /* 9. TOOLBOX */
-        .toolbox-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-        .tool-col h4 {
-            font-size: 1.25rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .tool-list {
+        /* 9. TOOLBOX MARQUEE */
+        .toolbox-marquee-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.5rem;
+            overflow: hidden;
+            padding: 1rem 0;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
-        .tool-item {
-            font-size: 0.95rem;
-            color: #d0d0d0;
+        .toolbox-track {
+            display: flex;
+            width: fit-content;
+            animation: marquee 35s linear infinite;
+        }
+        .toolbox-track.reverse {
+            animation-direction: reverse;
+            animation-duration: 40s;
+        }
+        .toolbox-track:hover {
+            animation-play-state: paused;
+        }
+        
+        /* New Toolbox Marquee Item Styles */
+        .tbx-mq-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            margin: 0 0.75rem;
             display: flex;
             align-items: center;
+            gap: 12px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: var(--transition);
+            color: #d0d0d0;
         }
-        .tool-badge {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 10px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+        .tbx-mq-item:hover {
+            border-color: var(--gold);
+            background: var(--surface-hover);
+            color: var(--text-main);
+            transform: translateY(-2px);
         }
-        .badge-core { background: var(--gold-dim); color: var(--gold); }
-        .badge-active { background: rgba(52, 152, 219, 0.15); color: #3498db; }
+        .tbx-mq-logo {
+            height: 28px;
+            width: auto;
+            object-fit: contain;
+        }
 
         /* 10. BEYOND THE NUMBERS */
         .beyond-grid {
@@ -973,7 +1060,7 @@
     <section class="hero" id="about">
         <div class="container hero-inner">
             <div class="hero-left reveal active">
-                <span class="eyebrow mono gold">Finance × Technology × Venture Capital</span>
+                <span class="eyebrow mono gold">Investment Research × Technology × Entrepreneurship</span>
                 <h1 class="hero-h1 serif">Parth <span class="italic gold">Khanna</span></h1>
                 <p class="hero-tagline">Generalist working on Investment Research, Product Dev, CRM & Marketing for an Institutional Newsletter, Managed Portfolios (~$25Mn AUM), and a US Private Equity Fund.</p>
                 
@@ -992,7 +1079,7 @@
                     </div>
                     <div class="meta-item">
                         <span class="meta-label">Certifications</span>
-                        <p>CFA L2 · NISM VIII & XV</p>
+                        <p>CFA L2 Candidate · NISM VIII & XV</p>
                     </div>
                 </div>
 
@@ -1004,12 +1091,22 @@
             </div>
             
             <div class="hero-right">
-                <div class="photo-frame">
-                    <div class="photo-inner">
-                        <img src="https://i.ibb.co/HpG4Q7XB/1697743215256.jpg" alt="Parth Khanna">
+                <div class="sv-photo-container">
+                    <div class="sv-grid-bg"></div>
+                    <div class="photo-frame sv-frame">
+                        <div class="photo-inner">
+                            <img src="https://i.ibb.co/HpG4Q7XB/1697743215256.jpg" alt="Parth Khanna">
+                        </div>
+                        <div class="sv-corner top-left"></div>
+                        <div class="sv-corner top-right"></div>
+                        <div class="sv-corner bottom-left"></div>
+                        <div class="sv-corner bottom-right"></div>
+                    </div>
+                    <div class="floating-badge mono">
+                        <span class="pulse-dot"></span>
+                        Available for Opportunities
                     </div>
                 </div>
-                <div class="photo-tag mono">Available for Opportunities</div>
             </div>
         </div>
     </section>
@@ -1020,38 +1117,32 @@
         <div class="marquee-container">
             <!-- Double content for seamless loop -->
             <div class="marquee-content">
-                <span class="marquee-item">Cornell University</span>
-                <span class="marquee-item">Bain & Company</span>
-                <span class="marquee-item">BlackRock</span>
-                <span class="marquee-item">Kearney</span>
-                <span class="marquee-item">Amazon India</span>
-                <span class="marquee-item">IIM Ahmedabad</span>
-                <span class="marquee-item">IIM Bangalore</span>
-                <span class="marquee-item">Oberoi Group</span>
-                <span class="marquee-item">Costa Coffee</span>
-                <span class="marquee-item">CPP Investments</span>
-                <span class="marquee-item">SBI Securities</span>
-                <span class="marquee-item">McGill University</span>
-                <span class="marquee-item">35 North Ventures</span>
-                <span class="marquee-item">Vodafone Idea</span>
-                <span class="marquee-item">Vedantu</span>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Corn.png" alt="Cornell University" class="marquee-logo">Cornell University</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Bain.png" alt="Bain & Company" class="marquee-logo">Bain & Company</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/BlackRock_wordmark.svg.png" alt="BlackRock" class="marquee-logo">BlackRock</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Kearney_Logo.svg.png" alt="Kearney" class="marquee-logo">Kearney</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Amazon_India_Logo.svg" alt="Amazon India" class="marquee-logo">Amazon India</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/iima.svg" alt="IIM Ahmedabad" class="marquee-logo">IIM Ahmedabad</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/iiimb.svg" alt="IIM Bangalore" class="marquee-logo">IIM Bangalore</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/The_Oberoi_Group_-_Logo.png" alt="Oberoi Group" class="marquee-logo">Oberoi Group</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Costa_Coffee-logo-DC0FF384B3-seeklogo.com-3-1.png" alt="Costa Coffee" class="marquee-logo">Costa Coffee</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Mcgill_univ_ca_logo.png" alt="McGill University" class="marquee-logo">McGill University</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/realtime-logo.png" alt="Real Time Angel Fund" class="marquee-logo">Real Time Angel Fund</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/1.5_degree_logo.avif" alt="1.5 Degree" class="marquee-logo">1.5 Degree</div>
             </div>
             <div class="marquee-content" aria-hidden="true">
-                <span class="marquee-item">Cornell University</span>
-                <span class="marquee-item">Bain & Company</span>
-                <span class="marquee-item">BlackRock</span>
-                <span class="marquee-item">Kearney</span>
-                <span class="marquee-item">Amazon India</span>
-                <span class="marquee-item">IIM Ahmedabad</span>
-                <span class="marquee-item">IIM Bangalore</span>
-                <span class="marquee-item">Oberoi Group</span>
-                <span class="marquee-item">Costa Coffee</span>
-                <span class="marquee-item">CPP Investments</span>
-                <span class="marquee-item">SBI Securities</span>
-                <span class="marquee-item">McGill University</span>
-                <span class="marquee-item">35 North Ventures</span>
-                <span class="marquee-item">Vodafone Idea</span>
-                <span class="marquee-item">Vedantu</span>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Corn.png" alt="Cornell University" class="marquee-logo">Cornell University</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Bain.png" alt="Bain & Company" class="marquee-logo">Bain & Company</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/BlackRock_wordmark.svg.png" alt="BlackRock" class="marquee-logo">BlackRock</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Kearney_Logo.svg.png" alt="Kearney" class="marquee-logo">Kearney</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Amazon_India_Logo.svg" alt="Amazon India" class="marquee-logo">Amazon India</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/iima.svg" alt="IIM Ahmedabad" class="marquee-logo">IIM Ahmedabad</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/iiimb.svg" alt="IIM Bangalore" class="marquee-logo">IIM Bangalore</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/The_Oberoi_Group_-_Logo.png" alt="Oberoi Group" class="marquee-logo">Oberoi Group</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Costa_Coffee-logo-DC0FF384B3-seeklogo.com-3-1.png" alt="Costa Coffee" class="marquee-logo">Costa Coffee</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Mcgill_univ_ca_logo.png" alt="McGill University" class="marquee-logo">McGill University</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/realtime-logo.png" alt="Real Time Angel Fund" class="marquee-logo">Real Time Angel Fund</div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/1.5_degree_logo.avif" alt="1.5 Degree" class="marquee-logo">1.5 Degree</div>
             </div>
         </div>
     </div>
@@ -1089,8 +1180,8 @@
     <section class="stats-bar reveal">
         <div class="container stats-grid">
             <div>
-                <div class="stat-num">$25Mn</div>
-                <div class="stat-label">AUM Managed</div>
+                <div class="stat-num">0→$25Mn</div>
+                <div class="stat-label">AUM Journey</div>
             </div>
             <div>
                 <div class="stat-num">15+</div>
@@ -1101,8 +1192,8 @@
                 <div class="stat-label">LinkedIn Impressions</div>
             </div>
             <div>
-                <div class="stat-num">9</div>
-                <div class="stat-label">Solo Trips Last Year</div>
+                <div class="stat-num">5+</div>
+                <div class="stat-label" style="line-height:1.2;">Live Projects<br><span style="font-size:0.65rem; color:#666; font-weight:600; text-transform:uppercase;">Incl. Billion-Dollar Conglomerates</span></div>
             </div>
         </div>
     </section>
@@ -1139,6 +1230,9 @@
                 </div>
                 <p class="timeline-desc">Founded and leads a financial market research team with members from University of Virginia, IIT Bombay, IIT KGP, St. Stephen's College, and SSCBS.</p>
                 <div class="impact-badge">↗ UVA · IIT Bombay · IIT KGP · Stephens · SSCBS</div>
+                <div style="margin-top: 1.2rem;">
+                    <a href="mailto:partners@goldfibcapital.in" class="btn btn-outline" style="padding: 0.4rem 1rem; font-size: 0.85rem;">Write to us →</a>
+                </div>
             </div>
 
             <div class="timeline-item reveal">
@@ -1349,38 +1443,59 @@
         <h2 class="section-title">Toolbox</h2>
         <p class="section-subtitle">The technical and analytical stack.</p>
 
-        <div class="toolbox-grid">
-            <div class="tool-col">
-                <h4 class="mono gold">Finance</h4>
-                <div class="tool-list">
-                    <div class="tool-item">Investment Research <span class="tool-badge badge-core">Core</span></div>
-                    <div class="tool-item">Equity Research & Valuation</div>
-                    <div class="tool-item">Options Flow & Derivatives</div>
-                    <div class="tool-item">Financial Modelling & FP&A</div>
-                    <div class="tool-item">Portfolio Construction</div>
-                    <div class="tool-item">Macro & Fed Policy Analysis</div>
+        <div class="toolbox-marquee-wrapper">
+            <!-- Track 1 -->
+            <div class="toolbox-track">
+                <!-- Inner loop 1 -->
+                <div class="tbx-mq-item">
+                    <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/HubSpot_Logo.svg.png" alt="HubSpot" class="tbx-mq-logo" style="background:#fff;border-radius:5px;padding:3px;">
+                    <span class="tbx-mq-name">HubSpot</span>
                 </div>
-            </div>
-            <div class="tool-col">
-                <h4 class="mono gold">Technology</h4>
-                <div class="tool-list">
-                    <div class="tool-item">Python / Pandas <span class="tool-badge badge-active">Active</span></div>
-                    <div class="tool-item">HTML · CSS · JavaScript</div>
-                    <div class="tool-item">Claude Code & AI Tools</div>
-                    <div class="tool-item">TradingView</div>
-                    <div class="tool-item">Blockchain & DeFi</div>
-                    <div class="tool-item">Web3 & Digital Assets</div>
+                <div class="tbx-mq-item">
+                    <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/tradingview-logo-vector.png" alt="TradingView" class="tbx-mq-logo">
+                    <span class="tbx-mq-name">TradingView</span>
                 </div>
-            </div>
-            <div class="tool-col">
-                <h4 class="mono gold">CRM & Growth</h4>
-                <div class="tool-list">
-                    <div class="tool-item">HubSpot <span class="tool-badge badge-active">Active</span></div>
-                    <div class="tool-item">Apollo.io</div>
-                    <div class="tool-item">Funnel Management</div>
-                    <div class="tool-item">Newsletter Growth</div>
-                    <div class="tool-item">Startup Advisory</div>
-                    <div class="tool-item">Product Development</div>
+                <div class="tbx-mq-item">
+                    <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Python-logo-notext.svg.png" alt="Python" class="tbx-mq-logo" style="background:#fff;border-radius:5px;padding:3px;">
+                    <span class="tbx-mq-name">Python</span>
+                </div>
+                <div class="tbx-mq-item">
+                    <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/HTML5_logo_and_wordmark.svg.png" alt="HTML/CSS/JS" class="tbx-mq-logo">
+                    <span class="tbx-mq-name">HTML/CSS/JS</span>
+                </div>
+                <div class="tbx-mq-item">
+                    <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/claudecode.png" alt="Claude Code" class="tbx-mq-logo">
+                    <span class="tbx-mq-name">Claude Code</span>
+                </div>
+                <div class="tbx-mq-item">
+                    <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Apollo_logotype_OnWhite_Logo.jpg" alt="Apollo.io" class="tbx-mq-logo" style="background:#fff;border-radius:5px;padding:3px;">
+                    <span class="tbx-mq-name">Apollo.io</span>
+                </div>
+                
+                <!-- Inner loop 2 (Duplicated for Marquee) -->
+                <div class="tbx-mq-item">
+                    <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/HubSpot_Logo.svg.png" alt="HubSpot" class="tbx-mq-logo" style="background:#fff;border-radius:5px;padding:3px;">
+                    <span class="tbx-mq-name">HubSpot</span>
+                </div>
+                <div class="tbx-mq-item">
+                    <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/tradingview-logo-vector.png" alt="TradingView" class="tbx-mq-logo">
+                    <span class="tbx-mq-name">TradingView</span>
+                </div>
+                <div class="tbx-mq-item">
+                    <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Python-logo-notext.svg.png" alt="Python" class="tbx-mq-logo" style="background:#fff;border-radius:5px;padding:3px;">
+                    <span class="tbx-mq-name">Python</span>
+                </div>
+                <div class="tbx-mq-item">
+                    <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/HTML5_logo_and_wordmark.svg.png" alt="HTML/CSS/JS" class="tbx-mq-logo">
+                    <span class="tbx-mq-name">HTML/CSS/JS</span>
+                </div>
+                <div class="tbx-mq-item">
+                    <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/claudecode.png" alt="Claude Code" class="tbx-mq-logo">
+                    <span class="tbx-mq-name">Claude Code</span>
+                </div>
+                <div class="tbx-mq-item">
+                    <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Apollo_logotype_OnWhite_Logo.jpg" alt="Apollo.io" class="tbx-mq-logo" style="background:#fff;border-radius:5px;padding:3px;">
+                    <span class="tbx-mq-name">Apollo.io</span>
                 </div>
             </div>
         </div>
