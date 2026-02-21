@@ -1,339 +1,1730 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parth Khanna | FinTech Entrepreneur & Operator</title>
-    <meta name="description" content="Portfolio of Parth Khanna - Silicon Valley Experience, Finance Acumen, Entrepreneurship.">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter and Cal Sans -->
+    <title>Parth Khanna | Finance, Tech & Venture Capital</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
     
-    <!-- Icons (Lucide) -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <!-- Chart.js for the Spike Visualization -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        bg: '#0a0a0a',
-                        card: '#171717',
-                        border: '#262626',
-                        accent: '#3b82f6', // SV Blue
-                        text: '#ededed',
-                        muted: '#a1a1aa'
-                    },
-                    animation: {
-                        'scroll': 'scroll 20s linear infinite',
-                        'fade-in': 'fadeIn 0.8s ease-out forwards',
-                    },
-                    keyframes: {
-                        scroll: {
-                            '0%': { transform: 'translateX(0)' },
-                            '100%': { transform: 'translateX(-50%)' },
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(10px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <style>
-        body { background-color: #0a0a0a; color: #ededed; }
-        .glass-card {
-            background: rgba(23, 23, 23, 0.6);
+        :root {
+            --bg: #050505;
+            --surface: #121212;
+            --surface-hover: #1a1a1a;
+            --surface-light: #222222;
+            --text-main: #f0f0f0;
+            --text-muted: #888888;
+            --gold: #d4af37;
+            --gold-hover: #e8c657;
+            --gold-dim: rgba(212, 175, 55, 0.15);
+            --border: #2a2a2a;
+            --green: #2ecc71;
+            --green-dim: rgba(46, 204, 113, 0.15);
+            
+            --font-sans: 'Inter', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            --container-w: 1200px;
+            --transition: all 0.3s ease;
+        }
+
+        /* RESET & BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Noise Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: var(--container-w);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        /* TYPOGRAPHY */
+        .mono { font-family: var(--font-mono); }
+        .serif { font-family: var(--font-serif); }
+        .gold { color: var(--gold); }
+        .muted { color: var(--text-muted); }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--bg);
+            border: 1px solid var(--gold);
+        }
+        .btn-primary:hover {
+            background: var(--gold-hover);
+            border-color: var(--gold-hover);
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* 1. NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.75);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1.25rem 0;
         }
-        .gradient-text {
-            background: linear-gradient(to right, #ffffff, #a1a1aa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .grid-bg {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: -1px;
         }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #262626; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #404040; }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* 2. HERO */
+        .hero {
+            padding-top: 10rem;
+            padding-bottom: 4rem;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            justify-content: space-between;
+        }
+        .hero-left {
+            flex: 0 0 60%;
+            max-width: 60%;
+        }
+        .hero-right {
+            flex: 0 0 40%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .eyebrow {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+        .hero-h1 {
+            font-size: 4.5rem;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.03em;
+        }
+        .hero-h1 span.italic {
+            font-style: italic;
+            font-weight: 500;
+        }
+        .hero-tagline {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 90%;
+            line-height: 1.6;
+        }
+        
+        .meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+        .meta-item p {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-top: 0.25rem;
+        }
+        .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .photo-frame {
+            width: 320px;
+            height: 400px;
+            border-radius: 20px;
+            position: relative;
+            padding: 6px;
+            background: linear-gradient(135deg, rgba(212,175,55,0.4) 0%, rgba(212,175,55,0.05) 100%);
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+            margin-bottom: 1.5rem;
+            animation: fadeUp 1.2s ease-out forwards;
+        }
+        .photo-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+        }
+        .photo-inner::after {
+            content: '';
+            position: absolute;
+            top:0; left:0; right:0; bottom:0;
+            background: linear-gradient(to bottom, transparent 70%, rgba(5,5,5,0.8) 100%);
+            pointer-events: none;
+        }
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+        .photo-tag {
+            font-size: 0.85rem;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .photo-tag::before {
+            content: '';
+            display: block;
+            width: 8px; height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--gold);
+            animation: pulse 2s infinite;
+        }
+
+        /* 3. LOGO WALL */
+        .logo-wall {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: rgba(255,255,255,0.02);
+            overflow: hidden;
+            position: relative;
+        }
+        .logo-wall-label {
+            text-align: center;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        .marquee-container {
+            display: flex;
+            width: fit-content;
+            animation: marquee 40s linear infinite;
+        }
+        .logo-wall:hover .marquee-container {
+            animation-play-state: paused;
+        }
+        .marquee-content {
+            display: flex;
+            align-items: center;
+            padding-right: 3rem;
+        }
+        .marquee-item {
+            font-weight: 500;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            margin: 0 1.5rem;
+            transition: var(--transition);
+            cursor: default;
+        }
+        .marquee-item::after {
+            content: '·';
+            margin-left: 3rem;
+            color: var(--border);
+        }
+        .marquee-item:last-child::after {
+            display: none;
+        }
+        .marquee-item:hover {
+            color: var(--text-main);
+            text-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+
+        /* 4. THE SPIKE (Grid) */
+        .spike-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: var(--transition);
+            height: 100%;
+        }
+        .card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            background: var(--surface-hover);
+            transform: translateY(-4px);
+        }
+        .card-tag {
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            background: var(--gold-dim);
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+        .card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* 5. STATS BAR */
+        .stats-bar {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            text-align: center;
+            gap: 2rem;
+        }
+        .stat-num {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--gold);
+            font-family: var(--font-mono);
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* 6. EXPERIENCE TIMELINE */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 18px;
+            width: 2px; height: 100%;
+            background: linear-gradient(to bottom, var(--gold) 0%, rgba(212,175,55,0.1) 100%);
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 4rem;
+            margin-bottom: 4rem;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-logo {
+            position: absolute;
+            left: 0; top: 0;
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: var(--surface-light);
+            border: 2px solid var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gold);
+            z-index: 2;
+            overflow: hidden;
+            box-shadow: 0 0 0 4px var(--bg);
+        }
+        .timeline-logo.proflex {
+            background: white;
+            padding: 4px;
+            border-radius: 50%;
+        }
+        .timeline-logo img {
+            width: 100%; height: 100%;
+            object-fit: contain;
+        }
+        .timeline-role {
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        .timeline-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .timeline-company {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .timeline-location {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .timeline-location a { text-decoration: underline; text-underline-offset: 4px;}
+        .timeline-desc {
+            color: #d0d0d0;
+            margin-bottom: 1rem;
+        }
+        .timeline-bullets {
+            padding-left: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .timeline-bullets li {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            list-style-type: disc;
+        }
+        .impact-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--green-dim);
+            color: var(--green);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* 7. ACHIEVEMENTS SLIDER */
+        .achievements-section {
+            background: #0a0a0a;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+        .carousel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+        }
+        .carousel-controls {
+            display: flex;
+            gap: 1rem;
+        }
+        .btn-icon {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-main);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-icon:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        
+        .carousel-container {
+            overflow: hidden;
+            width: 100%;
+            padding: 10px 0;
+        }
+        .carousel-track {
+            display: flex;
+            gap: 1.5rem;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform;
+        }
+        .slide {
+            flex: 0 0 calc(33.333% - 1rem);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+        }
+        .slide-meta {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        .slide-rank {
+            font-size: 3rem;
+            font-weight: 600;
+            font-family: var(--font-serif);
+            font-style: italic;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+        .slide-rank.gold-text { color: var(--gold); }
+        .slide-rank.blue-text { color: #3498db; }
+        .slide-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+        .slide-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        .slide-prize {
+            display: inline-block;
+            background: var(--green-dim);
+            color: var(--green);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            align-self: flex-start;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 3rem;
+        }
+        .dot {
+            width: 8px; height: 8px;
+            border-radius: 4px;
+            background: var(--border);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .dot.active {
+            width: 24px;
+            background: var(--gold);
+        }
+
+        /* 8. WRITING & AI WIDGETS */
+        .writing-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 4rem;
+        }
+        .writing-tag {
+            display: inline-block;
+            background: var(--gold-dim);
+            color: var(--gold);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+        .writing-h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .writing-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+        .topic-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+        }
+        .topic-pill {
+            font-size: 0.8rem;
+            border: 1px solid var(--border);
+            padding: 4px 12px;
+            border-radius: 12px;
+            color: #ccc;
+        }
+        .issue-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .issue-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 1.25rem;
+            border-radius: 12px;
+        }
+        .issue-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        .issue-title {
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        /* AI Widgets Styles */
+        .ai-widget {
+            background: var(--surface-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .ai-widget::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0.5;
+        }
+        .ai-input-group {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        .ai-input {
+            flex-grow: 1;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        .ai-input:focus {
+            border-color: var(--gold);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+        .ai-result {
+            background: var(--bg);
+            padding: 1.25rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #e0e0e0;
+            min-height: 60px;
+            display: none;
+            border: 1px solid var(--border);
+            line-height: 1.6;
+            margin-top: 1rem;
+            white-space: pre-wrap;
+        }
+        .loading-shimmer {
+            display: block !important;
+            animation: shimmer 2s infinite linear;
+            background: linear-gradient(90deg, var(--bg) 0%, var(--surface-light) 50%, var(--bg) 100%);
+            background-size: 200% 100%;
+            color: transparent !important;
+            border: 1px solid var(--border);
+            user-select: none;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* 9. TOOLBOX */
+        .toolbox-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .tool-col h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .tool-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .tool-item {
+            font-size: 0.95rem;
+            color: #d0d0d0;
+            display: flex;
+            align-items: center;
+        }
+        .tool-badge {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .badge-core { background: var(--gold-dim); color: var(--gold); }
+        .badge-active { background: rgba(52, 152, 219, 0.15); color: #3498db; }
+
+        /* 10. BEYOND THE NUMBERS */
+        .beyond-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        .beyond-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+        .beyond-card:hover {
+            border-color: rgba(255,255,255,0.15);
+            background: var(--surface-hover);
+        }
+        .beyond-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .beyond-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+        .beyond-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+        .beyond-stat {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--gold);
+            background: var(--gold-dim);
+            padding: 6px 12px;
+            border-radius: 4px;
+            align-self: flex-start;
+        }
+
+        /* 11. CTA */
+        .cta-section {
+            text-align: center;
+            padding: 8rem 0;
+            background: linear-gradient(to top, rgba(212,175,55,0.05) 0%, transparent 100%);
+            border-bottom: 1px solid var(--border);
+        }
+        .cta-title {
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 3rem auto;
+        }
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* 12. FOOTER */
+        footer {
+            padding: 3rem 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .footer-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* UTILITIES & ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Shift by 50% since we duplicate content */
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 900px) {
+            .hero-inner {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 3rem;
+            }
+            .hero-left, .hero-right {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+            .hero-right {
+                align-items: center;
+            }
+            .hero-h1 {
+                font-size: 3.5rem;
+            }
+            .hero-tagline {
+                margin: 0 auto 2.5rem auto;
+            }
+            .hero-cta {
+                justify-content: center;
+            }
+            .writing-card {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .ai-input-group {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* simple mobile nav hide for constraints */
+            }
+            section { padding: 4rem 0; }
+            .section-title { font-size: 2rem; }
+            
+            .meta-grid { grid-template-columns: 1fr; gap: 1rem; text-align: center;}
+            
+            .spike-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 2rem 1rem;}
+            
+            .timeline::before { left: 16px; }
+            .timeline-item { padding-left: 3rem; }
+            .timeline-logo { width: 32px; height: 32px; font-size: 0.6rem; }
+            
+            .carousel-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+            .slide { flex: 0 0 100%; }
+            
+            .toolbox-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .beyond-grid { grid-template-columns: 1fr; }
+            
+            .cta-title { font-size: 2.25rem; }
+            
+            .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
+        }
     </style>
 </head>
-<body class="antialiased grid-bg min-h-screen selection:bg-accent selection:text-white overflow-x-hidden">
+<body>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-bg/80 backdrop-blur-md">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="text-xl font-bold tracking-tight">PK.</a>
-            <div class="hidden md:flex gap-8 text-sm font-medium text-muted">
-                <a href="#about" class="hover:text-white transition-colors">About</a>
-                <a href="#spikes" class="hover:text-white transition-colors">The Edge</a>
-                <a href="#projects" class="hover:text-white transition-colors">Ventures</a>
-                <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+    <!-- 1. NAV -->
+    <nav>
+        <div class="container nav-inner">
+            <a href="#" class="nav-logo mono gold">PK</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#wins">Wins</a>
+                <a href="#writing">Writing</a>
+                <a href="#connect">Connect</a>
             </div>
-            <a href="https://www.linkedin.com/in/parthkhanna1/" target="_blank" class="px-4 py-2 bg-white text-black text-sm font-semibold rounded-full hover:bg-gray-200 transition-colors">
-                LinkedIn ↗
-            </a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <main class="pt-32 pb-20 px-6 max-w-6xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <!-- Text Content -->
-            <div class="lg:col-span-7 space-y-8 animate-fade-in">
-                <div class="inline-flex items-center px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-medium mb-4">
-                    <span class="relative flex h-2 w-2 mr-2">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-                    </span>
-                    Open to New Ventures
-                </div>
+    <!-- 2. HERO -->
+    <section class="hero" id="about">
+        <div class="container hero-inner">
+            <div class="hero-left reveal active">
+                <span class="eyebrow mono gold">Finance × Technology × Venture Capital</span>
+                <h1 class="hero-h1 serif">Parth <span class="italic gold">Khanna</span></h1>
+                <p class="hero-tagline">Generalist working on Investment Research, Product Dev, CRM & Marketing for an Institutional Newsletter, Managed Portfolios (~$25Mn AUM), and a US Private Equity Fund.</p>
                 
-                <h1 class="text-5xl md:text-7xl font-bold tracking-tighter leading-[1.1]">
-                    Bridging <br>
-                    <span class="text-gray-500">Finance, Tech &</span><br>
-                    <span class="gradient-text">Silicon Valley.</span>
-                </h1>
-                
-                <p class="text-lg text-muted max-w-xl leading-relaxed">
-                    I build scalable revenue engines at the intersection of capital and code. 
-                    Entrepreneur with deep finance acumen and a technical tool belt, bringing a Silicon Valley operator's mindset to complex problems.
-                </p>
-
-                <div class="flex flex-wrap gap-4 pt-4">
-                    <a href="#contact" class="px-8 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-all transform hover:scale-[1.02]">
-                        Get in Touch
-                    </a>
-                    <a href="#projects" class="px-8 py-3 border border-white/20 text-white font-medium rounded-lg hover:bg-white/5 transition-all">
-                        View Work
-                    </a>
-                </div>
-
-                <!-- Tool Ticker -->
-                <div class="pt-8 opacity-70">
-                    <p class="text-xs uppercase tracking-widest text-gray-500 mb-3 font-semibold">My Stack</p>
-                    <div class="flex gap-6 text-2xl text-gray-400">
-                        <i data-lucide="database"></i>
-                        <i data-lucide="bar-chart-2"></i>
-                        <i data-lucide="code-2"></i>
-                        <i data-lucide="cpu"></i>
-                        <i data-lucide="users"></i>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Current</span>
+                        <p>Proflex by Blockstart LLC</p>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Base</span>
+                        <p>Silicon Valley ↔ Mumbai</p>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Education</span>
+                        <p>SSCBS, Delhi · CS Graduate</p>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Certifications</span>
+                        <p>CFA L2 · NISM VIII & XV</p>
                     </div>
                 </div>
-            </div>
 
-            <!-- Visual Spike (Radar Chart) -->
-            <div class="lg:col-span-5 relative group">
-                <div class="absolute -inset-1 bg-gradient-to-r from-accent to-purple-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-                <div class="glass-card p-8 rounded-2xl relative border border-white/10">
-                    <h3 class="text-sm font-semibold text-gray-400 mb-6 uppercase tracking-widest text-center">The "Hybrid" Spike</h3>
-                    <div class="aspect-square">
-                        <canvas id="spikeChart"></canvas>
-                    </div>
+                <div class="hero-cta">
+                    <a href="https://bit.ly/ParthProofofWork" target="_blank" class="btn btn-primary">Proof of Work ↗</a>
+                    <a href="https://calendly.com/parthbusinessofficialid/catchup-with-parth" target="_blank" class="btn btn-outline">Book a Call</a>
+                    <a href="mailto:parth@proflexfinance.com" class="btn btn-outline">Email</a>
                 </div>
             </div>
-        </div>
-    </main>
-
-    <!-- "Bento Box" Grid Section: The Spike Pointers -->
-    <section id="spikes" class="py-20 px-6 max-w-6xl mx-auto border-t border-white/5">
-        <div class="mb-12">
-            <h2 class="text-3xl font-bold mb-4">Why Me?</h2>
-            <p class="text-muted">A rare combination of skills optimized for high-growth environments.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px]">
             
-            <!-- Card 1: Silicon Valley Experience -->
-            <div class="glass-card p-8 rounded-2xl md:col-span-2 relative overflow-hidden group hover:border-accent/50 transition-colors">
-                <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <i data-lucide="zap" class="w-32 h-32"></i>
-                </div>
-                <div class="relative z-10 h-full flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center text-blue-400 mb-4">
-                            <i data-lucide="map-pin" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-2">Silicon Valley Experience</h3>
-                        <p class="text-muted leading-relaxed">
-                            It's not just a location; it's a mindset. I bring the 
-                            <span class="text-white font-medium">speed, iteration, and network</span> 
-                            of the Valley to every project. Experienced in navigating the VC ecosystem, rapid prototyping, and "move fast" culture.
-                        </p>
+            <div class="hero-right">
+                <div class="photo-frame">
+                    <div class="photo-inner">
+                        <img src="https://i.ibb.co/HpG4Q7XB/1697743215256.jpg" alt="Parth Khanna">
                     </div>
                 </div>
+                <div class="photo-tag mono">Available for Opportunities</div>
             </div>
-
-            <!-- Card 2: Finance Acumen -->
-            <div class="glass-card p-8 rounded-2xl relative overflow-hidden group hover:border-green-500/50 transition-colors">
-                <div class="relative z-10 h-full flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center text-green-400 mb-4">
-                            <i data-lucide="trending-up" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">Finance Acumen</h3>
-                        <p class="text-sm text-muted">
-                            Financial Modeling, P&L Management, Unit Economics, Fundraising Strategy. I speak the language of ROI.
-                        </p>
-                    </div>
-                    <div class="text-2xl font-mono text-green-400 mt-4">
-                        +ROI
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 3: Tool Base (Tech + CRM) -->
-            <div class="glass-card p-8 rounded-2xl relative overflow-hidden group hover:border-orange-500/50 transition-colors">
-                <div class="relative z-10 h-full flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center text-orange-400 mb-4">
-                            <i data-lucide="wrench" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="text-xl font-bold mb-2">The Tool Base</h3>
-                        <p class="text-sm text-muted">
-                            Bridging the gap between strategy and execution.
-                        </p>
-                    </div>
-                    <div class="flex flex-wrap gap-2 mt-4">
-                        <span class="px-2 py-1 bg-white/5 rounded text-xs text-gray-300">Salesforce</span>
-                        <span class="px-2 py-1 bg-white/5 rounded text-xs text-gray-300">Python</span>
-                        <span class="px-2 py-1 bg-white/5 rounded text-xs text-gray-300">HubSpot</span>
-                        <span class="px-2 py-1 bg-white/5 rounded text-xs text-gray-300">Tableau</span>
-                        <span class="px-2 py-1 bg-white/5 rounded text-xs text-gray-300">Excel</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 4: Entrepreneurship -->
-            <div class="glass-card p-8 rounded-2xl md:col-span-2 relative overflow-hidden group hover:border-purple-500/50 transition-colors">
-                <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <i data-lucide="rocket" class="w-32 h-32"></i>
-                </div>
-                <div class="relative z-10 h-full flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center text-purple-400 mb-4">
-                            <i data-lucide="flag" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-2">Entrepreneurship</h3>
-                        <p class="text-muted leading-relaxed">
-                            Zero-to-One execution. I have worn every hat—from product discovery to closing the first sales. I understand the resilience required to build something from nothing.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <!-- Detailed Skill/Tool Ticker -->
-    <div class="w-full bg-white/5 border-y border-white/5 py-8 overflow-hidden">
-        <div class="max-w-6xl mx-auto px-6 mb-4">
-            <span class="text-sm font-semibold text-gray-400 uppercase tracking-widest">Technical Proficiency</span>
-        </div>
-        <div class="flex gap-8 animate-scroll whitespace-nowrap min-w-full pl-6">
-            <!-- Repeated items for infinite scroll effect -->
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Financial Modeling</span>
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Salesforce CRM</span>
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Python & SQL</span>
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Venture Capital</span>
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Go-To-Market Strategy</span>
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Product Management</span>
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Business Intelligence</span>
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Startup Operations</span>
-            <!-- Duplicate set -->
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Financial Modeling</span>
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Salesforce CRM</span>
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Python & SQL</span>
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Venture Capital</span>
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Go-To-Market Strategy</span>
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Product Management</span>
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Business Intelligence</span>
-            <span class="text-2xl font-bold text-gray-600 hover:text-white transition-colors">Startup Operations</span>
+    <!-- 3. LOGO WALL -->
+    <div class="logo-wall reveal">
+        <div class="logo-wall-label">Recognized & worked with</div>
+        <div class="marquee-container">
+            <!-- Double content for seamless loop -->
+            <div class="marquee-content">
+                <span class="marquee-item">Cornell University</span>
+                <span class="marquee-item">Bain & Company</span>
+                <span class="marquee-item">BlackRock</span>
+                <span class="marquee-item">Kearney</span>
+                <span class="marquee-item">Amazon India</span>
+                <span class="marquee-item">IIM Ahmedabad</span>
+                <span class="marquee-item">IIM Bangalore</span>
+                <span class="marquee-item">Oberoi Group</span>
+                <span class="marquee-item">Costa Coffee</span>
+                <span class="marquee-item">CPP Investments</span>
+                <span class="marquee-item">SBI Securities</span>
+                <span class="marquee-item">McGill University</span>
+                <span class="marquee-item">35 North Ventures</span>
+                <span class="marquee-item">Vodafone Idea</span>
+                <span class="marquee-item">Vedantu</span>
+            </div>
+            <div class="marquee-content" aria-hidden="true">
+                <span class="marquee-item">Cornell University</span>
+                <span class="marquee-item">Bain & Company</span>
+                <span class="marquee-item">BlackRock</span>
+                <span class="marquee-item">Kearney</span>
+                <span class="marquee-item">Amazon India</span>
+                <span class="marquee-item">IIM Ahmedabad</span>
+                <span class="marquee-item">IIM Bangalore</span>
+                <span class="marquee-item">Oberoi Group</span>
+                <span class="marquee-item">Costa Coffee</span>
+                <span class="marquee-item">CPP Investments</span>
+                <span class="marquee-item">SBI Securities</span>
+                <span class="marquee-item">McGill University</span>
+                <span class="marquee-item">35 North Ventures</span>
+                <span class="marquee-item">Vodafone Idea</span>
+                <span class="marquee-item">Vedantu</span>
+            </div>
         </div>
     </div>
 
-    <!-- Contact / Footer -->
-    <section id="contact" class="py-24 px-6 max-w-2xl mx-auto text-center">
-        <h2 class="text-4xl font-bold mb-6">Ready to Build?</h2>
-        <p class="text-muted mb-8 text-lg">
-            I am always open to discussing new ventures, advisory roles, or complex problems that require a blend of financial discipline and technical innovation.
-        </p>
-        <div class="flex justify-center gap-4">
-            <a href="mailto:contact@parthkhanna.com" class="px-6 py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors">
-                Email Me
-            </a>
-            <a href="https://www.linkedin.com/in/parthkhanna1/" target="_blank" class="px-6 py-3 border border-white/20 text-white font-medium rounded-lg hover:bg-white/10 transition-colors flex items-center gap-2">
-                <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
-            </a>
+    <!-- 4. THE SPIKE -->
+    <section id="spike" class="container">
+        <h2 class="section-title reveal">The Spike</h2>
+        <p class="section-subtitle reveal">Core competencies built across high-stakes environments.</p>
+        
+        <div class="spike-grid">
+            <div class="card reveal">
+                <span class="card-tag">Proflex · Blockstart LLC</span>
+                <h3>Institutional Finance</h3>
+                <p>Running investment research, managed portfolios (~$25Mn AUM), and advisory for a Silicon Valley multi-strategy firm. Covering SPX, options flow, Fed policy, AI valuations, BTC macro, and DeFi.</p>
+            </div>
+            <div class="card reveal">
+                <span class="card-tag">Global · National</span>
+                <h3>Competition Pedigree</h3>
+                <p>15+ podium finishes across global and national arenas. Recognized by Bain, Kearney, BlackRock, CPP, Cornell, and IIM Ahmedabad judges at the highest competitive levels.</p>
+            </div>
+            <div class="card reveal">
+                <span class="card-tag">Amazon · Oberoi · RTAF</span>
+                <h3>Enterprise Live Projects</h3>
+                <p>5+ live projects for billion-dollar conglomerates during graduation: Amazon, Oberoi Group, Vodafone Idea, Vedantu, and a $62Mn AUM angel fund. Real stakes, real outputs.</p>
+            </div>
+            <div class="card reveal">
+                <span class="card-tag">Goldfib · FinOak</span>
+                <h3>Founder & Builder</h3>
+                <p>Founded Goldfib Capital with a research team from UVA, IIT Bombay, IIT KGP, Stephens, and SSCBS. Previously founded FinOak to democratize financial literacy.</p>
+            </div>
         </div>
-        <footer class="mt-20 text-sm text-gray-600">
-            &copy; 2024 Parth Khanna. All Rights Reserved.
-        </footer>
     </section>
 
-    <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
+    <!-- 5. STATS BAR -->
+    <section class="stats-bar reveal">
+        <div class="container stats-grid">
+            <div>
+                <div class="stat-num">$25Mn</div>
+                <div class="stat-label">AUM Managed</div>
+            </div>
+            <div>
+                <div class="stat-num">15+</div>
+                <div class="stat-label">Podium Finishes</div>
+            </div>
+            <div>
+                <div class="stat-num">0.5Mn</div>
+                <div class="stat-label">LinkedIn Impressions</div>
+            </div>
+            <div>
+                <div class="stat-num">9</div>
+                <div class="stat-label">Solo Trips Last Year</div>
+            </div>
+        </div>
+    </section>
 
-        // Chart.js Configuration
-        const ctx = document.getElementById('spikeChart').getContext('2d');
-        const spikeChart = new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: ['Finance', 'Tech/Code', 'Sales/CRM', 'Strategy', 'Ops/Execution'],
-                datasets: [{
-                    label: 'Skill Density',
-                    data: [90, 75, 85, 95, 88], // High values reflecting the user's prompt
-                    backgroundColor: 'rgba(59, 130, 246, 0.2)', // Accent color low opacity
-                    borderColor: '#3b82f6', // Accent color
-                    pointBackgroundColor: '#fff',
-                    pointBorderColor: '#3b82f6',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: '#3b82f6',
-                    borderWidth: 2,
-                }]
-            },
-            options: {
-                scales: {
-                    r: {
-                        angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                        pointLabels: {
-                            color: '#a1a1aa',
-                            font: { size: 12, family: 'Inter' }
-                        },
-                        ticks: { display: false, backdropColor: 'transparent' },
-                        suggestedMin: 0,
-                        suggestedMax: 100
+    <!-- 6. EXPERIENCE TIMELINE -->
+    <section id="experience" class="container">
+        <h2 class="section-title reveal">Experience</h2>
+        <p class="section-subtitle reveal">Building at the intersection of capital, strategy, and scale.</p>
+
+        <div class="timeline">
+            
+            <div class="timeline-item reveal">
+                <div class="timeline-logo proflex">
+                    <img src="https://48102387.fs1.hubspotusercontent-na1.net/hubfs/48102387/Proflex_Square200xLogo_TransparentBlack.png" alt="Proflex">
+                </div>
+                <div class="timeline-role mono">Investment Research · Product · CRM · Marketing</div>
+                <div class="timeline-header">
+                    <h3 class="timeline-company">Proflex by Blockstart LLC</h3>
+                    <span class="timeline-location">Los Gatos, CA (Silicon Valley) · Remote</span>
+                </div>
+                <p class="timeline-desc">Multi-strategy investment firm across enterprise blockchain, digital assets, DeFi, and US markets. Running institutional-grade research, product development, CRM infrastructure, and marketing.</p>
+                <ul class="timeline-bullets">
+                    <li>weekly market intelligence (SPX, options, Fed, AI, BTC); managing ~$25Mn AUM portfolios; building CRM, growth funnels, and product infrastructure</li>
+                </ul>
+                <div class="impact-badge">↗ ~$25Mn AUM · US PE Fund · Institutional Research</div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-logo">GC</div>
+                <div class="timeline-role mono">Founder · Financial Market Research</div>
+                <div class="timeline-header">
+                    <h3 class="timeline-company">Goldfib Capital</h3>
+                    <span class="timeline-location">India · Remote</span>
+                </div>
+                <p class="timeline-desc">Founded and leads a financial market research team with members from University of Virginia, IIT Bombay, IIT KGP, St. Stephen's College, and SSCBS.</p>
+                <div class="impact-badge">↗ UVA · IIT Bombay · IIT KGP · Stephens · SSCBS</div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-logo">1.5°</div>
+                <div class="timeline-role mono">Generalist Intern</div>
+                <div class="timeline-header">
+                    <h3 class="timeline-company">1.5 Degree</h3>
+                    <span class="timeline-location">India · <a href="https://1.5degree.co/" target="_blank">1.5degree.co</a></span>
+                </div>
+                <p class="timeline-desc">Joined as a generalist building Product, Sales, Marketing, and Research verticals from the ground up. Led cross-functional teams from SRCC, BITS Pilani, and IIT KGP.</p>
+                <div class="impact-badge">↗ $1Mn Series-A from 35 North Ventures</div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-logo">AMZ</div>
+                <div class="timeline-role mono">Live Project Lead · Market Research</div>
+                <div class="timeline-header">
+                    <h3 class="timeline-company">Amazon India</h3>
+                    <span class="timeline-location">India</span>
+                </div>
+                <p class="timeline-desc">Led a team of 25+ associates in a comprehensive market research project on Amazon's e-commerce platform in India, with strong emphasis on Tier-2 and Tier-3 city reach, consumer behavior, and competitive dynamics.</p>
+                <div class="impact-badge">↗ 25+ Team · Tier-2 & 3 Market Analysis</div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-logo">CC</div>
+                <div class="timeline-role mono">Strategy & Analytics Intern</div>
+                <div class="timeline-header">
+                    <h3 class="timeline-company">Costa Coffee India</h3>
+                    <span class="timeline-location">Delhi NCR · Mumbai</span>
+                </div>
+                <p class="timeline-desc">Enhanced e-commerce presence on Swiggy and Zomato using data mining across 10+ spreadsheets.</p>
+                <ul class="timeline-bullets">
+                    <li>Identified 8/50 high-performance outlets & 4+ priority circles via geo-spatial KPI mapping (KPT, ADT, RDC) across Delhi NCR & Mumbai</li>
+                    <li>Built a BI dashboard benchmarking 6+ competitors including Starbucks and Third Wave Coffee</li>
+                    <li>Used Python (Pandas) + Excel macros for data mining and visualization</li>
+                </ul>
+                <div class="impact-badge">↗ Python · Geo-spatial Mapping · Competitive BI</div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-logo">OBR</div>
+                <div class="timeline-role mono">Strategy Consulting · Live Project Lead</div>
+                <div class="timeline-header">
+                    <h3 class="timeline-company">Oberoi Group</h3>
+                    <span class="timeline-location">India · Hospitality</span>
+                </div>
+                <p class="timeline-desc">Spearheaded a team of 30+ to devise strategies for enhanced student onboarding for the STEP hotel management program.</p>
+                <ul class="timeline-bullets">
+                    <li>Collaborated with 160+ schools and 70+ counsellors to foster partnerships and boost program visibility</li>
+                    <li>Built foundational outreach framework and revamped 2+ pitch decks used in board-level meetings</li>
+                </ul>
+                <div class="impact-badge">↗ 30+ Team · 160 Schools · Board-Level Decks</div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-logo">RT</div>
+                <div class="timeline-role mono">Internship · Angel Fund Operations</div>
+                <div class="timeline-header">
+                    <h3 class="timeline-company">Real Time Angel Fund (RTAF)</h3>
+                    <span class="timeline-location">India · $62Mn AUM</span>
+                </div>
+                <p class="timeline-desc">Worked with a 510 Cr sector-agnostic angel fund with investments in 10 early-stage startups — MyMandi, Punt Partners, FreshoKartz, TransportSimple, MeraTractor, O2Nails, LarkAI, and CapitalSetu — backed by 300+ investors.</p>
+                <div class="impact-badge">↗ $62Mn AUM · 10 Portfolio Startups · 300 Investors</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 7. ACHIEVEMENTS SLIDER -->
+    <section id="wins" class="achievements-section reveal">
+        <div class="container">
+            <div class="carousel-header">
+                <div>
+                    <h2 class="section-title">Competing globally. Winning nationally.</h2>
+                    <p class="section-subtitle" style="margin-bottom: 0;">15+ podium finishes — recognized by Kearney, BlackRock, Bain, Canada Pension Fund, Cornell, SBI Securities, and IIM Ahmedabad judges.</p>
+                </div>
+                <div class="carousel-controls">
+                    <button class="btn-icon carousel-prev" aria-label="Previous Slide">←</button>
+                    <button class="btn-icon carousel-next" aria-label="Next Slide">→</button>
+                </div>
+            </div>
+
+            <div class="carousel-container">
+                <div class="carousel-track">
+                    <!-- Slide 1 -->
+                    <div class="slide">
+                        <span class="slide-meta">International</span>
+                        <div class="slide-rank gold-text">Top 5</div>
+                        <h4 class="slide-title">Cornell University Case Competition</h4>
+                        <p class="slide-desc">Sole undergraduate team invited to finals in New York City.</p>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="slide">
+                        <span class="slide-meta">International</span>
+                        <div class="slide-rank gold-text">Top 8</div>
+                        <h4 class="slide-title">Global Microfinance Case Competition</h4>
+                        <p class="slide-desc">MMI in Association with Kearney.</p>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="slide">
+                        <span class="slide-meta">International</span>
+                        <div class="slide-rank gold-text">Semi-Finalist</div>
+                        <h4 class="slide-title">McGill International Portfolio Challenge</h4>
+                        <p class="slide-desc">In association with BlackRock & CPP Investments.</p>
+                    </div>
+                    <!-- Slide 4 -->
+                    <div class="slide">
+                        <span class="slide-meta">International</span>
+                        <div class="slide-rank gold-text">Top 10</div>
+                        <h4 class="slide-title">Bain & Company Consulting Competition</h4>
+                        <p class="slide-desc">5+ eliminative rounds · Management Consulting.</p>
+                    </div>
+                    <!-- Slide 5 -->
+                    <div class="slide">
+                        <span class="slide-meta">National</span>
+                        <div class="slide-rank blue-text">Winner</div>
+                        <h4 class="slide-title">IIM Ahmedabad Flagship Case Competition</h4>
+                        <p class="slide-desc">India's premier management institute.</p>
+                        <span class="slide-prize">₹50,000 + Internship Offer</span>
+                    </div>
+                    <!-- Slide 6 -->
+                    <div class="slide">
+                        <span class="slide-meta">National</span>
+                        <div class="slide-rank blue-text">Winner</div>
+                        <h4 class="slide-title">IIM Bangalore B-Plan Competition</h4>
+                        <p class="slide-desc">Business Plan & Venture Challenge.</p>
+                        <span class="slide-prize">₹25,000 Cash Prize</span>
+                    </div>
+                    <!-- Slide 7 -->
+                    <div class="slide">
+                        <span class="slide-meta">National</span>
+                        <div class="slide-rank blue-text">Rank 2</div>
+                        <h4 class="slide-title">IIM Indore Equity Research Competition</h4>
+                        <p class="slide-desc">Extensive equity valuation challenge.</p>
+                        <span class="slide-prize">₹25,000 Cash Prize</span>
+                    </div>
+                    <!-- Slide 8 -->
+                    <div class="slide">
+                        <span class="slide-meta">National</span>
+                        <div class="slide-rank blue-text">5× Win</div>
+                        <h4 class="slide-title">National Case Competition Circuit</h4>
+                        <p class="slide-desc">3× Runner-Up. Across LSR, SRCC, SSCBS & more premier institutes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-dots">
+                <!-- Dots generated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. WRITING / NEWSLETTER -->
+    <section id="writing" class="container reveal">
+        <div class="writing-card">
+            <div class="writing-left">
+                <span class="writing-tag">Free Weekly Newsletter</span>
+                <h3 class="writing-h3">Proflex Weekly by Blockstart Research</h3>
+                <p class="writing-desc">Institutional-grade market intelligence delivered free, every week. Covering US macro signals, AI sector valuations, Bitcoin on-chain data, Fed policy, and options flow — the same research that informs $25Mn in managed assets.</p>
+                
+                <div class="topic-pills">
+                    <span class="topic-pill">US Macro</span>
+                    <span class="topic-pill">AI & Tech</span>
+                    <span class="topic-pill">Bitcoin</span>
+                    <span class="topic-pill">Options Flow</span>
+                    <span class="topic-pill">Fed Policy</span>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="https://blockstart.kit.com" target="_blank" class="btn btn-primary">Subscribe Free →</a>
+                    <a href="https://proflexfinance.com" target="_blank" class="btn btn-outline">Proflex Platform</a>
+                </div>
+
+                <!-- LLM Feature 1: AI Market Pulse -->
+                <div class="ai-widget reveal">
+                    <h4 class="mono gold" style="margin-bottom: 0.5rem; font-size: 0.9rem;">Generate Market Pulse 📈</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Enter a ticker or macro topic to generate a quick, institutional-grade thesis.</p>
+                    <div class="ai-input-group">
+                        <input type="text" id="market-topic" class="ai-input" placeholder="e.g. S&P 500 options flow, NVDA multiples..." onkeypress="if(event.key === 'Enter') document.getElementById('btn-market-insight').click()">
+                        <button id="btn-market-insight" class="btn btn-primary" style="white-space: nowrap;">Get Insight ✨</button>
+                    </div>
+                    <div id="market-result" class="ai-result"></div>
+                </div>
+            </div>
+
+            <div class="writing-right">
+                <div class="issue-cards">
+                    <div class="issue-card">
+                        <div class="issue-label">Latest Issue</div>
+                        <h4 class="issue-title">Fed Pivot Watch: What the data says right now</h4>
+                    </div>
+                    <div class="issue-card">
+                        <div class="issue-label">Recent</div>
+                        <h4 class="issue-title">NVDA Valuation Reset: Multiple compression playbook</h4>
+                    </div>
+                    <div class="issue-card">
+                        <div class="issue-label">Most Read</div>
+                        <h4 class="issue-title">Bitcoin On-Chain Signals vs Macro Headwinds</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. TOOLBOX -->
+    <section class="container reveal">
+        <h2 class="section-title">Toolbox</h2>
+        <p class="section-subtitle">The technical and analytical stack.</p>
+
+        <div class="toolbox-grid">
+            <div class="tool-col">
+                <h4 class="mono gold">Finance</h4>
+                <div class="tool-list">
+                    <div class="tool-item">Investment Research <span class="tool-badge badge-core">Core</span></div>
+                    <div class="tool-item">Equity Research & Valuation</div>
+                    <div class="tool-item">Options Flow & Derivatives</div>
+                    <div class="tool-item">Financial Modelling & FP&A</div>
+                    <div class="tool-item">Portfolio Construction</div>
+                    <div class="tool-item">Macro & Fed Policy Analysis</div>
+                </div>
+            </div>
+            <div class="tool-col">
+                <h4 class="mono gold">Technology</h4>
+                <div class="tool-list">
+                    <div class="tool-item">Python / Pandas <span class="tool-badge badge-active">Active</span></div>
+                    <div class="tool-item">HTML · CSS · JavaScript</div>
+                    <div class="tool-item">Claude Code & AI Tools</div>
+                    <div class="tool-item">TradingView</div>
+                    <div class="tool-item">Blockchain & DeFi</div>
+                    <div class="tool-item">Web3 & Digital Assets</div>
+                </div>
+            </div>
+            <div class="tool-col">
+                <h4 class="mono gold">CRM & Growth</h4>
+                <div class="tool-list">
+                    <div class="tool-item">HubSpot <span class="tool-badge badge-active">Active</span></div>
+                    <div class="tool-item">Apollo.io</div>
+                    <div class="tool-item">Funnel Management</div>
+                    <div class="tool-item">Newsletter Growth</div>
+                    <div class="tool-item">Startup Advisory</div>
+                    <div class="tool-item">Product Development</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. BEYOND THE NUMBERS -->
+    <section class="container reveal">
+        <h2 class="section-title">What keeps me sharp.</h2>
+        <p class="section-subtitle">Finance is the profession. These are the disciplines.</p>
+
+        <div class="beyond-grid">
+            <div class="beyond-card">
+                <div class="beyond-icon">✍️</div>
+                <h3 class="beyond-title">LinkedIn Creator</h3>
+                <p class="beyond-desc">Writing on finance, markets, and career insights. Built a genuine audience through consistent, high-signal content — not noise.</p>
+                <div class="beyond-stat">0.5MN IMPRESSIONS · LAST YEAR</div>
+            </div>
+            <div class="beyond-card">
+                <div class="beyond-icon">🏋️</div>
+                <h3 class="beyond-title">Daily Discipline</h3>
+                <p class="beyond-desc">Lifting and running 4km every single day. Consistency in fitness translates directly to consistency in everything else.</p>
+                <div class="beyond-stat">4KM RUN · EVERYDAY</div>
+            </div>
+            <div class="beyond-card">
+                <div class="beyond-icon">✈️</div>
+                <h3 class="beyond-title">Solo Traveler</h3>
+                <p class="beyond-desc">9 solo trips last year. No better way to build judgment, adaptability, and the habit of making good decisions with incomplete information.</p>
+                <div class="beyond-stat">9 SOLO TRIPS · 2024</div>
+            </div>
+            <div class="beyond-card">
+                <div class="beyond-icon">🏔️</div>
+                <h3 class="beyond-title">Himalayan Trekker</h3>
+                <p class="beyond-desc">Planning 2 week-long treks in the Himalayas every year. At altitude, the only thing that matters is the next step.</p>
+                <div class="beyond-stat">2× WEEK-LONG TREKS · ANNUALLY</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. CTA / CONNECT -->
+    <section id="connect" class="cta-section reveal">
+        <div class="container">
+            <h2 class="cta-title serif">Ready to build something <span class="italic gold">together?</span></h2>
+            <p class="cta-subtitle">Whether it's venture capital, investment research, startup advisory, or growth strategy — I'm always open to meaningful conversations.</p>
+            
+            <div class="cta-buttons">
+                <a href="https://calendly.com/parthbusinessofficialid/catchup-with-parth" target="_blank" class="btn btn-primary">Book a Catchup</a>
+                <a href="https://bit.ly/ParthProofofWork" target="_blank" class="btn btn-outline">Proof of Work</a>
+                <a href="https://www.linkedin.com/in/parthkhanna1/" target="_blank" class="btn btn-outline">LinkedIn</a>
+                <a href="mailto:parth@proflexfinance.com" class="btn btn-outline">Email</a>
+            </div>
+
+            <!-- LLM Feature 2: AI Email Drafter -->
+            <div class="ai-widget reveal" style="max-width: 600px; margin: 3rem auto 0 auto; text-align: left;">
+                <h4 class="mono gold" style="margin-bottom: 0.5rem; font-size: 0.9rem;">AI Email Drafter ✉️</h4>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Have a proposal? Let the Gemini API draft a personalized outreach email to me.</p>
+                <div class="ai-input-group">
+                    <input type="text" id="email-purpose" class="ai-input" placeholder="e.g. Discussing an investment research role at a NY fund..." onkeypress="if(event.key === 'Enter') document.getElementById('btn-draft-email').click()">
+                    <button id="btn-draft-email" class="btn btn-primary" style="white-space: nowrap;">Draft Email ✨</button>
+                </div>
+                <div id="email-result" class="ai-result"></div>
+                <button id="btn-copy-email" class="btn btn-outline" style="margin-top: 1rem; display: none; width: 100%; font-size: 0.85rem; padding: 0.5rem; border-color: var(--border);">Copy to Clipboard</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. FOOTER -->
+    <footer>
+        <div class="container footer-inner">
+            <div>© 2026 Parth Khanna · Built with precision.</div>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/parthkhanna1/" target="_blank">LinkedIn</a>
+                <a href="https://proflexfinance.com" target="_blank">Proflex</a>
+                <a href="https://blockstart.kit.com" target="_blank">Newsletter</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // --- GEMINI API INTEGRATION ---
+        const apiKey = ""; // The execution environment provides the key at runtime
+
+        async function fetchGeminiResponse(promptText, systemInstructionText) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: promptText }] }],
+                systemInstruction: { parts: [{ text: systemInstructionText }] }
+            };
+
+            let retries = 5;
+            let delay = 1000;
+
+            while (retries > 0) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
                     }
-                },
-                plugins: {
-                    legend: { display: false }
-                },
-                responsive: true,
-                maintainAspectRatio: false
+                    
+                    const result = await response.json();
+                    return result.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
+                } catch (error) {
+                    retries--;
+                    if (retries === 0) {
+                        return "Service is temporarily unavailable. Please try again later.";
+                    }
+                    await new Promise(res => setTimeout(res, delay));
+                    delay *= 2; // Exponential backoff (1s, 2s, 4s, 8s, 16s)
+                }
             }
+        }
+
+        // Widget 1: Market Insight Generator
+        document.getElementById('btn-market-insight').addEventListener('click', async () => {
+            const inputEl = document.getElementById('market-topic');
+            const resultEl = document.getElementById('market-result');
+            const topic = inputEl.value.trim();
+            
+            if (!topic) {
+                inputEl.focus();
+                return;
+            }
+
+            resultEl.style.display = 'block';
+            resultEl.classList.add('loading-shimmer');
+            resultEl.textContent = 'Analyzing...';
+
+            const systemPrompt = "You are Parth Khanna, an institutional investment researcher working at a multi-strategy firm. Provide a punchy, 2-sentence institutional-grade macro or structural thesis on the given topic. Use professional finance terminology. Do not use hashtags or overly enthusiastic tone. Be concise, sharp, and data-driven.";
+            
+            const response = await fetchGeminiResponse(`Topic: ${topic}`, systemPrompt);
+            
+            resultEl.classList.remove('loading-shimmer');
+            resultEl.textContent = response;
+        });
+
+        // Widget 2: AI Email Drafter
+        document.getElementById('btn-draft-email').addEventListener('click', async () => {
+            const inputEl = document.getElementById('email-purpose');
+            const resultEl = document.getElementById('email-result');
+            const copyBtn = document.getElementById('btn-copy-email');
+            const purpose = inputEl.value.trim();
+            
+            if (!purpose) {
+                inputEl.focus();
+                return;
+            }
+
+            resultEl.style.display = 'block';
+            copyBtn.style.display = 'none';
+            resultEl.classList.add('loading-shimmer');
+            resultEl.textContent = 'Drafting...';
+
+            const systemPrompt = "You are a professional networking assistant helping the user draft a short, highly-professional cold outreach email to Parth Khanna. Parth works in Investment Research, Product Dev, and Venture Capital. The user wants to reach out about the provided purpose. Keep the email under 5 sentences. Use a clean, professional tone. Include a subject line.";
+            
+            const response = await fetchGeminiResponse(`Purpose of email: ${purpose}`, systemPrompt);
+            
+            resultEl.classList.remove('loading-shimmer');
+            resultEl.textContent = response;
+            copyBtn.style.display = 'block';
+        });
+
+        // Copy Email functionality
+        document.getElementById('btn-copy-email').addEventListener('click', () => {
+            const resultText = document.getElementById('email-result').textContent;
+            navigator.clipboard.writeText(resultText).then(() => {
+                const btn = document.getElementById('btn-copy-email');
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied! ✓';
+                btn.style.color = 'var(--gold)';
+                btn.style.borderColor = 'var(--gold)';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.color = '';
+                    btn.style.borderColor = 'var(--border)';
+                }, 2000);
+            }).catch(err => {
+                // Fallback for iFrames
+                const textarea = document.createElement('textarea');
+                textarea.value = resultText;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                const btn = document.getElementById('btn-copy-email');
+                btn.textContent = 'Copied! ✓';
+                setTimeout(() => { btn.textContent = 'Copy to Clipboard'; }, 2000);
+            });
+        });
+
+
+        // --- EXISTING UI LOGIC ---
+
+        // 1. Scroll Reveal (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 2. Achievements Carousel Logic
+        const track = document.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const nextButton = document.querySelector('.carousel-next');
+        const prevButton = document.querySelector('.carousel-prev');
+        const dotsContainer = document.querySelector('.carousel-dots');
+        
+        let currentIndex = 0;
+        let visibleSlides = window.innerWidth <= 768 ? 1 : 3;
+        let maxIndex = slides.length - visibleSlides;
+
+        // Initialize dots
+        function createDots() {
+            dotsContainer.innerHTML = '';
+            const numDots = slides.length - visibleSlides + 1;
+            for (let i = 0; i < numDots; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === currentIndex) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateCarousel() {
+            visibleSlides = window.innerWidth <= 768 ? 1 : 3;
+            maxIndex = slides.length - visibleSlides;
+            
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+            
+            const slideWidth = slides[0].getBoundingClientRect().width;
+            const gap = parseFloat(window.getComputedStyle(track).gap) || 0;
+            const moveAmount = currentIndex * (slideWidth + gap);
+            
+            track.style.transform = `translateX(-${moveAmount}px)`;
+            createDots();
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        nextButton.addEventListener('click', () => {
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            updateCarousel();
+        });
+
+        // Touch / Swipe support for carousel
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none';
+        }, {passive: true});
+
+        track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            currentX = e.touches[0].clientX;
+            const diff = startX - currentX;
+            
+            if ((currentIndex === 0 && diff < 0) || (currentIndex === maxIndex && diff > 0)) {
+                return; 
+            }
+            
+            const slideWidth = slides[0].getBoundingClientRect().width;
+            const gap = parseFloat(window.getComputedStyle(track).gap) || 0;
+            const baseMove = currentIndex * (slideWidth + gap);
+            
+            track.style.transform = `translateX(-${baseMove + diff}px)`;
+        }, {passive: true});
+
+        track.addEventListener('touchend', (e) => {
+            isDragging = false;
+            track.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)';
+            
+            if (currentX === 0) return;
+            
+            const diff = startX - currentX;
+            const threshold = 50;
+            
+            if (diff > threshold && currentIndex < maxIndex) {
+                currentIndex++;
+            } else if (diff < -threshold && currentIndex > 0) {
+                currentIndex--;
+            }
+            
+            currentX = 0;
+            updateCarousel();
+        });
+
+        createDots();
+        updateCarousel();
+
+        // 3. Smooth Nav Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerOffset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
         });
     </script>
 </body>
