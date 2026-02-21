@@ -39,7 +39,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ── Noise Overlay ── */
         body::before {
             content: '';
             position: fixed;
@@ -49,28 +48,44 @@
             z-index: 9999;
         }
 
-        /* ── Navigation ── */
-        nav {
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── NAV ── */
+        .nav {
             position: fixed;
             top: 0;
-            width: 100%;
-            z-index: 100;
-            padding: 20px 40px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 11, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 64px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(20px);
-            background: rgba(10, 10, 11, 0.7);
-            border-bottom: 1px solid rgba(42, 42, 45, 0.3);
+            justify-content: space-between;
         }
 
         .nav-logo {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 2px;
+            font-size: 1.25rem;
+            font-weight: 700;
             color: var(--accent);
-            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .nav-links {
@@ -80,545 +95,120 @@
         }
 
         .nav-links a {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+            font-size: 0.85rem;
+            font-weight: 400;
             color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s;
-            position: relative;
+            transition: color 0.25s;
+            letter-spacing: 0.3px;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--accent);
-            transition: width 0.3s;
-        }
+        .nav-links a:hover { color: var(--text-primary); }
 
-        .nav-links a:hover { color: var(--accent); }
-        .nav-links a:hover::after { width: 100%; }
-
-        /* ── Hero ── */
+        /* ── HERO ── */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 120px 80px 80px;
-            position: relative;
-            overflow: hidden;
+            padding: 140px 0 80px;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -200px;
-            right: -200px;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            pointer-events: none;
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 60px;
+            align-items: center;
         }
 
         .hero-eyebrow {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            letter-spacing: 4px;
+            font-size: 0.72rem;
+            color: var(--accent);
             text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 24px;
-            opacity: 0;
-            animation: fadeUp 0.8s ease forwards;
-            animation-delay: 0.2s;
-        }
-
-        .hero-name {
-            font-size: clamp(48px, 8vw, 100px);
-            font-weight: 800;
-            line-height: 0.95;
-            letter-spacing: -3px;
-            margin-bottom: 32px;
-            opacity: 0;
-            animation: fadeUp 0.8s ease forwards;
-            animation-delay: 0.4s;
-        }
-
-        .hero-name .accent {
-            color: var(--accent);
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
             font-weight: 400;
         }
 
+        .hero-name {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 5rem;
+            color: var(--accent);
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
+
         .hero-tagline {
-            font-size: clamp(18px, 2.2vw, 26px);
-            font-weight: 300;
+            font-size: 1.05rem;
             color: var(--text-secondary);
-            max-width: 640px;
-            line-height: 1.6;
-            margin-bottom: 48px;
-            opacity: 0;
-            animation: fadeUp 0.8s ease forwards;
-            animation-delay: 0.6s;
+            line-height: 1.7;
+            max-width: 540px;
+            margin-bottom: 36px;
+            font-weight: 300;
         }
 
         .hero-meta {
-            display: flex;
-            gap: 40px;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeUp 0.8s ease forwards;
-            animation-delay: 0.8s;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 36px;
         }
 
         .hero-meta-item {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+            padding: 12px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
         }
 
         .hero-meta-label {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-size: 0.65rem;
             color: var(--text-muted);
-        }
-
-        .hero-meta-value {
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .hero-scroll-cue {
-            position: absolute;
-            bottom: 40px;
-            left: 80px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--text-muted);
-            opacity: 0;
-            animation: fadeUp 0.8s ease forwards;
-            animation-delay: 1.2s;
-        }
-
-        .scroll-line {
-            width: 40px;
-            height: 1px;
-            background: var(--text-muted);
-            animation: scrollPulse 2s ease infinite;
-        }
-
-        /* ── Sections ── */
-        section {
-            padding: 100px 80px;
-        }
-
-        .section-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 12px;
-        }
-
-        .section-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: var(--text-muted);
-            margin-bottom: 48px;
-        }
-
-        .section-title {
-            font-size: clamp(28px, 4vw, 44px);
-            font-weight: 700;
-            letter-spacing: -1.5px;
-            margin-bottom: 16px;
-        }
-
-        .section-subtitle {
-            font-size: 17px;
-            font-weight: 300;
-            color: var(--text-secondary);
-            max-width: 560px;
-            line-height: 1.7;
-            margin-bottom: 56px;
-        }
-
-        /* ── Spike Cards ── */
-        .spikes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .spike-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 36px 32px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .spike-card:hover {
-            border-color: var(--accent-dim);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
-
-        .spike-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .spike-card:hover::before { opacity: 1; }
-
-        .spike-icon {
-            font-size: 28px;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .spike-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            letter-spacing: -0.3px;
-        }
-
-        .spike-desc {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .spike-tag {
-            display: inline-block;
-            margin-top: 16px;
-            padding: 4px 12px;
-            border-radius: 100px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            background: var(--accent-glow);
-            color: var(--accent);
-            border: 1px solid rgba(200, 164, 78, 0.2);
-        }
-
-        /* ── Experience Timeline ── */
-        .timeline {
-            position: relative;
-            padding-left: 40px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 1px;
-            background: linear-gradient(180deg, var(--accent), var(--border), transparent);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 48px;
-            padding-bottom: 48px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .timeline-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -44px;
-            top: 8px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 12px var(--accent-glow);
-        }
-
-        .timeline-company {
-            font-size: 22px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
+            letter-spacing: 1.5px;
             margin-bottom: 4px;
         }
 
-        .timeline-role {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            color: var(--accent);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-
-        .timeline-location {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-        }
-
-        .timeline-desc {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            max-width: 600px;
-        }
-
-        .timeline-impact {
-            margin-top: 16px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            background: rgba(52, 211, 153, 0.08);
-            border: 1px solid rgba(52, 211, 153, 0.15);
-            border-radius: 100px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: var(--green);
-        }
-
-        /* ── Achievements Marquee ── */
-        .achievements-section {
-            background: var(--bg-elevated);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 2px;
-        }
-
-        .achievement-card {
-            padding: 32px;
-            background: var(--bg);
-            position: relative;
-            transition: background 0.3s;
-        }
-
-        .achievement-card:hover {
-            background: var(--bg-card);
-        }
-
-        .achievement-tier {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .tier-global { color: var(--accent); }
-        .tier-national { color: var(--blue); }
-
-        .achievement-title {
-            font-size: 16px;
+        .hero-meta-value {
+            font-size: 0.88rem;
+            color: var(--text-primary);
             font-weight: 500;
-            margin-bottom: 6px;
-            line-height: 1.4;
         }
 
-        .achievement-org {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        /* ── Toolbox ── */
-        .toolbox-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-        }
-
-        .toolbox-category {
-            background: var(--bg-card);
-            padding: 40px 32px;
-            transition: background 0.3s;
-        }
-
-        .toolbox-category:hover {
-            background: var(--surface);
-        }
-
-        .toolbox-cat-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 20px;
-        }
-
-        .toolbox-items {
+        .hero-ctas {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .toolbox-item {
-            font-size: 15px;
-            font-weight: 400;
-            color: var(--text-secondary);
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(42, 42, 45, 0.4);
-            transition: color 0.2s;
-        }
-
-        .toolbox-item:last-child { border-bottom: none; }
-        .toolbox-item:hover { color: var(--text-primary); }
-
-        /* ── Stats Bar ── */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            background: var(--bg-elevated);
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 48px 24px;
-            border-right: 1px solid var(--border);
-            transition: background 0.3s;
-        }
-
-        .stat-item:last-child { border-right: none; }
-        .stat-item:hover { background: var(--bg-card); }
-
-        .stat-number {
-            font-size: clamp(32px, 4vw, 52px);
-            font-weight: 700;
-            letter-spacing: -2px;
-            color: var(--accent);
-            font-family: 'Outfit', sans-serif;
-        }
-
-        .stat-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-top: 8px;
-        }
-
-        /* ── CTA / Contact ── */
-        .cta-section {
-            text-align: center;
-            padding: 120px 80px;
-            position: relative;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .cta-title {
-            font-size: clamp(32px, 5vw, 56px);
-            font-weight: 700;
-            letter-spacing: -2px;
-            margin-bottom: 20px;
-        }
-
-        .cta-subtitle {
-            font-size: 17px;
-            color: var(--text-secondary);
-            font-weight: 300;
-            margin-bottom: 40px;
-            max-width: 480px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.7;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            padding: 14px 32px;
-            border-radius: 100px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.3s;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 500;
             cursor: pointer;
-            border: none;
+            transition: all 0.25s;
+            border: 1px solid transparent;
+            text-decoration: none;
         }
 
         .btn-primary {
             background: var(--accent);
             color: var(--bg);
-            font-weight: 500;
+            border-color: var(--accent);
         }
 
         .btn-primary:hover {
-            background: #d4b15a;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(200, 164, 78, 0.3);
+            background: var(--accent-dim);
+            border-color: var(--accent-dim);
         }
 
         .btn-outline {
             background: transparent;
             color: var(--text-primary);
-            border: 1px solid var(--border);
+            border-color: var(--border);
         }
 
         .btn-outline:hover {
@@ -626,20 +216,748 @@
             color: var(--accent);
         }
 
-        /* ── Footer ── */
-        footer {
-            padding: 40px 80px;
-            border-top: 1px solid var(--border);
+        .hero-photo-wrap {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            align-items: center;
+            animation: heroFadeIn 1s ease-out both;
+        }
+
+        @keyframes heroFadeIn {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-photo-frame {
+            width: 320px;
+            height: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--accent-dim);
+            box-shadow: 0 0 60px var(--accent-glow), 0 0 120px rgba(200, 164, 78, 0.06);
+            position: relative;
+        }
+
+        .hero-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        .hero-photo-frame::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(10,10,11,0.5) 100%);
+            pointer-events: none;
+        }
+
+        .hero-available-tag {
+            margin-top: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--green);
+            background: rgba(52, 211, 153, 0.08);
+            border: 1px solid rgba(52, 211, 153, 0.2);
+            padding: 6px 14px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ── LOGO WALL ── */
+        .logo-wall {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: var(--bg);
+            overflow: hidden;
+        }
+
+        .logo-wall-label {
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 28px;
+        }
+
+        .marquee-outer {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-outer::before,
+        .marquee-outer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .marquee-outer::before {
+            left: 0;
+            background: linear-gradient(90deg, var(--bg) 0%, transparent 100%);
+        }
+
+        .marquee-outer::after {
+            right: 0;
+            background: linear-gradient(270deg, var(--bg) 0%, transparent 100%);
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeScroll 40s linear infinite;
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            padding: 0 28px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            white-space: nowrap;
+            border-right: 1px solid var(--border);
+            line-height: 40px;
+            transition: color 0.25s;
+        }
+
+        .marquee-item:hover {
+            color: var(--text-primary);
+        }
+
+        /* ── SECTION COMMON ── */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.6;
+            font-weight: 300;
+            margin-bottom: 48px;
+        }
+
+        /* ── THE SPIKE ── */
+        .spike-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .spike-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .spike-card:hover {
+            border-color: var(--accent-dim);
+            transform: translateY(-2px);
+        }
+
+        .spike-card-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .spike-card-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 16px;
+            font-weight: 300;
+        }
+
+        .spike-card-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+
+        /* ── STATS BAR ── */
+        .stats-bar {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 48px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            text-align: center;
+        }
+
+        .stat-item {}
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── TIMELINE ── */
+        .timeline {
+            position: relative;
+            padding-left: 48px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 17px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent) 0%, var(--border) 100%);
+        }
+
+        .timeline-entry {
+            position: relative;
+            margin-bottom: 48px;
+            padding: 28px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: border-color 0.3s;
+        }
+
+        .timeline-entry:hover {
+            border-color: var(--accent-dim);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -44px;
+            top: 28px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 2px solid var(--accent-dim);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            overflow: hidden;
+        }
+
+        .timeline-dot img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .timeline-company {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .timeline-role {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-location {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 12px;
+            font-weight: 300;
+        }
+
+        .timeline-bullets {
+            list-style: none;
+            margin-bottom: 16px;
+        }
+
+        .timeline-bullets li {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            padding-left: 16px;
+            position: relative;
+            margin-bottom: 6px;
+            font-weight: 300;
+        }
+
+        .timeline-bullets li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-dim);
+        }
+
+        .timeline-impact {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--green);
+            background: rgba(52, 211, 153, 0.08);
+            border: 1px solid rgba(52, 211, 153, 0.18);
+            padding: 5px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── ACHIEVEMENTS SLIDER ── */
+        .achievements {
+            background: var(--bg-elevated);
+            padding: 100px 0;
+        }
+
+        .slider-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .slider-slide {
+            flex: 0 0 calc(100% / 3);
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .slide-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: border-color 0.3s;
+        }
+
+        .slide-card:hover {
+            border-color: var(--accent-dim);
+        }
+
+        .slide-scope {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+        }
+
+        .slide-rank {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 14px;
+            line-height: 1.1;
+        }
+
+        .slide-rank.blue { color: var(--blue); }
+
+        .slide-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .slide-desc {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+            margin-bottom: 14px;
+            font-weight: 300;
+            flex: 1;
+        }
+
+        .slide-prize {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--green);
+            background: rgba(52, 211, 153, 0.08);
+            border: 1px solid rgba(52, 211, 153, 0.18);
+            padding: 4px 10px;
+            border-radius: 16px;
+        }
+
+        .slider-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 36px;
+        }
+
+        .slider-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .slider-dots {
+            display: flex;
+            gap: 8px;
             align-items: center;
         }
 
-        .footer-left {
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--border);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 0;
+        }
+
+        .slider-dot.active {
+            width: 24px;
+            background: var(--accent);
+        }
+
+        /* ── WRITING / NEWSLETTER ── */
+        .newsletter-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            overflow: hidden;
+        }
+
+        .newsletter-main {
+            padding: 40px;
+        }
+
+        .newsletter-tag {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
+            font-size: 0.68rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+            display: inline-block;
+            background: var(--accent-glow);
+            padding: 4px 12px;
+            border-radius: 4px;
+        }
+
+        .newsletter-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 14px;
+        }
+
+        .newsletter-desc {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .newsletter-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .newsletter-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--text-secondary);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+
+        .newsletter-ctas {
+            display: flex;
+            gap: 12px;
+        }
+
+        .newsletter-sidebar {
+            background: var(--surface);
+            padding: 28px;
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .issue-card {
+            padding: 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: border-color 0.25s;
+        }
+
+        .issue-card:hover {
+            border-color: var(--accent-dim);
+        }
+
+        .issue-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+        }
+
+        .issue-title {
+            font-size: 0.82rem;
+            color: var(--text-primary);
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        /* ── TOOLBOX ── */
+        .toolbox-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .toolbox-col {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+        }
+
+        .toolbox-col-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toolbox-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid rgba(42, 42, 45, 0.4);
+        }
+
+        .toolbox-item:last-child {
+            border-bottom: none;
+        }
+
+        .toolbox-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .toolbox-badge.core {
+            color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        .toolbox-badge.active {
+            color: var(--green);
+            background: rgba(52, 211, 153, 0.08);
+        }
+
+        /* ── BEYOND ── */
+        .beyond-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .beyond-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .beyond-card:hover {
+            border-color: var(--accent-dim);
+            transform: translateY(-2px);
+        }
+
+        .beyond-emoji {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+        }
+
+        .beyond-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .beyond-card-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 16px;
+            font-weight: 300;
+        }
+
+        .beyond-stat {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* ── CTA ── */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .cta-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .cta-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-copy {
+            font-size: 0.82rem;
             color: var(--text-muted);
-            letter-spacing: 1px;
         }
 
         .footer-links {
@@ -648,31 +966,18 @@
         }
 
         .footer-links a {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
+            font-size: 0.82rem;
             color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.3s;
-            letter-spacing: 1px;
+            transition: color 0.25s;
         }
 
-        .footer-links a:hover { color: var(--accent); }
+        .footer-links a:hover { color: var(--text-primary); }
 
-        /* ── Animations ── */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes scrollPulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-
+        /* ── REVEAL ── */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(32px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
         }
 
         .reveal.visible {
@@ -680,324 +985,1204 @@
             transform: translateY(0);
         }
 
-        /* ── Responsive ── */
-        @media (max-width: 768px) {
-            nav { padding: 16px 24px; }
-            .nav-links { gap: 20px; }
-            .nav-links a { font-size: 10px; }
-            .hero { padding: 100px 24px 60px; }
-            section { padding: 64px 24px; }
-            .hero-meta { gap: 24px; }
-            .hero-scroll-cue { left: 24px; bottom: 24px; }
-            .stats-bar { grid-template-columns: repeat(2, 1fr); }
-            .stat-item:nth-child(2) { border-right: none; }
-            .toolbox-grid { grid-template-columns: 1fr; }
-            .cta-section { padding: 80px 24px; }
-            footer { flex-direction: column; gap: 16px; padding: 32px 24px; }
-            .achievements-grid { grid-template-columns: 1fr; }
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero {
+                padding: 120px 0 60px;
+            }
+
+            .hero-grid {
+                display: flex;
+                flex-direction: column-reverse;
+            }
+
+            .hero-name {
+                font-size: 3.5rem;
+            }
+
+            .hero-photo-frame {
+                width: 240px;
+                height: 300px;
+            }
+
+            .spike-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-card {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-sidebar {
+                border-left: none;
+                border-top: 1px solid var(--border);
+            }
+
+            .slider-slide {
+                flex: 0 0 100%;
+            }
         }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-name {
+                font-size: 2.8rem;
+            }
+
+            .hero-meta {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+            }
+
+            .hero-ctas .btn {
+                text-align: center;
+                justify-content: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+
+            .toolbox-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .beyond-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .cta-title {
+                font-size: 1.8rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .timeline {
+                padding-left: 40px;
+            }
+
+            .timeline::before {
+                left: 13px;
+            }
+
+            .timeline-dot {
+                left: -36px;
+                width: 28px;
+                height: 28px;
+                font-size: 0.5rem;
+            }
+
+            .slider-slide {
+                flex: 0 0 100%;
+            }
+        }
+
+        /* ── SILICON VALLEY PHOTO UI ── */
+        .hero-photo-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px 48px 20px 0;
+            animation: heroFadeIn 1s ease-out both;
+        }
+
+        .hero-photo-scene {
+            position: relative;
+            width: 340px;
+            flex-shrink: 0;
+        }
+
+        .photo-grid-bg {
+            position: absolute;
+            inset: -8px;
+            background-image:
+                radial-gradient(circle, rgba(200,164,78,0.14) 1px, transparent 1px);
+            background-size: 24px 24px;
+            border-radius: 28px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-photo-frame {
+            position: relative !important;
+            width: 270px !important;
+            height: 350px !important;
+            margin: 24px auto 0 !important;
+            border-radius: 16px !important;
+            overflow: hidden !important;
+            border: 1px solid rgba(200,164,78,0.22) !important;
+            box-shadow: 0 0 80px rgba(200,164,78,0.09), 0 20px 60px rgba(0,0,0,0.55) !important;
+            z-index: 1 !important;
+        }
+
+        .hero-photo-frame img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            object-position: top center !important;
+        }
+
+        .hero-photo-frame::after {
+            content: '' !important;
+            position: absolute !important;
+            inset: 0 !important;
+            background: linear-gradient(180deg, transparent 50%, rgba(10,10,11,0.6) 100%) !important;
+            pointer-events: none !important;
+        }
+
+        .photo-float {
+            position: absolute;
+            background: rgba(13, 13, 15, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(200,164,78,0.14);
+            border-radius: 10px;
+            padding: 10px 14px;
+            z-index: 10;
+            cursor: default;
+            transition: border-color 0.3s;
+        }
+
+        .photo-float:hover { border-color: rgba(200,164,78,0.35); }
+
+        .photo-float-stat {
+            top: 48px;
+            right: -4px;
+            animation: floatBob 4s ease-in-out infinite;
+        }
+
+        .photo-float-wins {
+            bottom: 108px;
+            left: -4px;
+            animation: floatBob 4s ease-in-out infinite;
+            animation-delay: 1.3s;
+        }
+
+        .photo-float-status {
+            bottom: 26px;
+            right: -4px;
+            animation: floatBob 4s ease-in-out infinite;
+            animation-delay: 2.2s;
+        }
+
+        @keyframes floatBob {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .float-label-top {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+        }
+
+        .float-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .float-sublabel {
+            font-size: 0.67rem;
+            color: var(--text-secondary);
+            margin-top: 3px;
+            white-space: nowrap;
+        }
+
+        .float-wins-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: 3px;
+        }
+
+        .float-status-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .float-ping {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--green);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .float-ping::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: rgba(52,211,153,0.3);
+            animation: pingPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pingPulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            60% { transform: scale(2.2); opacity: 0; }
+        }
+
+        .float-status-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        /* ── LOGO WALL IMAGE ITEMS ── */
+        .marquee-item {
+            flex-shrink: 0;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-right: 1px solid var(--border);
+            height: 56px;
+            line-height: normal;
+        }
+
+        .marquee-logo {
+            height: 26px;
+            width: auto;
+            max-width: 110px;
+            object-fit: contain;
+            filter: brightness(0.9) saturate(0.85);
+            transition: filter 0.35s;
+            display: block;
+        }
+
+        .marquee-item:hover .marquee-logo {
+            filter: brightness(1) saturate(1);
+        }
+
+        .marquee-text {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            white-space: nowrap;
+            transition: color 0.3s;
+        }
+
+        .marquee-item:hover .marquee-text { color: var(--text-secondary); }
+
+        /* ── TOOLBOX LOGO WALL ── */
+        .toolbox-logo-wall {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .toolbox-logo-section {
+            padding: 28px 32px;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        .toolbox-logo-section:last-child { border-bottom: none; }
+
+        .toolbox-category-header {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toolbox-logos-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .tool-logo-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 18px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            transition: border-color 0.3s, background 0.3s;
+            cursor: default;
+            min-width: 80px;
+        }
+
+        .tool-logo-item:hover {
+            border-color: rgba(200,164,78,0.3);
+            background: var(--bg-elevated);
+        }
+
+        .tool-logo-img {
+            height: 30px;
+            width: auto;
+            max-width: 72px;
+            object-fit: contain;
+            filter: grayscale(0.2) brightness(0.85);
+            transition: filter 0.3s;
+        }
+
+        .tool-logo-item:hover .tool-logo-img { filter: grayscale(0) brightness(1); }
+
+        .tool-logo-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .tool-skill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            transition: border-color 0.3s, color 0.3s;
+            cursor: default;
+        }
+
+        .tool-skill-tag:hover {
+            border-color: rgba(200,164,78,0.3);
+            color: var(--text-primary);
+        }
+
+        .tool-skill-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.5;
+            flex-shrink: 0;
+        }
+
+        /* ── TOOLBOX SOFTWARE MARQUEE ── */
+        .tbx-marquee-outer {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .tbx-marquee-outer::before,
+        .tbx-marquee-outer::after {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 48px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .tbx-marquee-outer::before {
+            left: 0;
+            background: linear-gradient(90deg, var(--bg-card) 0%, transparent 100%);
+        }
+
+        .tbx-marquee-outer::after {
+            right: 0;
+            background: linear-gradient(270deg, var(--bg-card) 0%, transparent 100%);
+        }
+
+        .tbx-marquee-track {
+            display: flex;
+            width: max-content;
+            animation: tbxScroll 18s linear infinite;
+        }
+
+        .tbx-marquee-track:hover { animation-play-state: paused; }
+
+        @keyframes tbxScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .tbx-mq-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-right: 1px solid var(--border);
+            cursor: default;
+            transition: background 0.3s;
+            flex-shrink: 0;
+        }
+
+        .tbx-mq-item:hover { background: rgba(200,164,78,0.04); }
+
+        .tbx-mq-logo {
+            height: 32px;
+            width: auto;
+            max-width: 80px;
+            object-fit: contain;
+            filter: brightness(0.88) saturate(0.85);
+            transition: filter 0.3s;
+        }
+
+        .tbx-mq-item:hover .tbx-mq-logo { filter: brightness(1) saturate(1); }
+
+        .tbx-mq-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        /* ── MOBILE: PHOTO SCENE ── */
+        @media (max-width: 900px) {
+            .hero-photo-wrap { padding: 0; justify-content: center; }
+            .hero-photo-scene { width: 280px; }
+            .hero-photo-frame { width: 220px !important; height: 285px !important; }
+            .photo-float-stat { right: -2px; top: 30px; }
+            .photo-float-wins { left: -2px; bottom: 90px; }
+            .photo-float-status { right: -2px; bottom: 14px; }
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-logo">PK</div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#achievements">Wins</a></li>
-            <li><a href="#toolbox">Toolbox</a></li>
-            <li><a href="#connect">Connect</a></li>
-        </ul>
+    <!-- ═══════════ NAV ═══════════ -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">PK</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#wins">Wins</a></li>
+                <li><a href="#writing">Writing</a></li>
+                <li><a href="#connect">Connect</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-eyebrow">Finance × Technology × Venture Capital</div>
-        <h1 class="hero-name">
-            Parth<br>
-            <span class="accent">Khanna</span>
-        </h1>
-        <p class="hero-tagline">
-            Building at the intersection of Silicon Valley venture capital, institutional-grade investment research, and emerging technology — from credit models impacting 800K+ farmers to advising R&D startups across continents.
-        </p>
-        <div class="hero-meta">
-            <div class="hero-meta-item">
-                <span class="hero-meta-label">Current</span>
-                <span class="hero-meta-value">Blockstart LLC · Investments</span>
-            </div>
-            <div class="hero-meta-item">
-                <span class="hero-meta-label">Base</span>
-                <span class="hero-meta-value">Silicon Valley ↔ Mumbai</span>
-            </div>
-            <div class="hero-meta-item">
-                <span class="hero-meta-label">Education</span>
-                <span class="hero-meta-value">SSCBS, Delhi</span>
-            </div>
-            <div class="hero-meta-item">
-                <span class="hero-meta-label">Global Wins</span>
-                <span class="hero-meta-value">13+ Podium Finishes</span>
-            </div>
-        </div>
-        <div class="hero-scroll-cue">
-            <div class="scroll-line"></div>
-            Scroll to explore
-        </div>
-    </section>
-
-    <!-- The Spike — Core Pillars -->
-    <section id="about">
-        <div class="section-label">The Spike</div>
-        <div class="section-number">01</div>
-        <h2 class="section-title reveal">What I bring to the table.</h2>
-        <p class="section-subtitle reveal">A rare combination of Silicon Valley VC exposure, deep financial acumen, startup DNA, and a technical toolkit that bridges finance, tech, and operations.</p>
-
-        <div class="spikes-grid">
-            <div class="spike-card reveal">
-                <span class="spike-icon">◆</span>
-                <h3 class="spike-title">Silicon Valley Experience</h3>
-                <p class="spike-desc">Working with Blockstart LLC — a Silicon Valley-based (Los Gatos, CA) multi-strategy investment firm operating across enterprise blockchain, digital assets, DeFi, and Web3. Institutional-grade research covering equities, options, and crypto markets.</p>
-                <span class="spike-tag">Venture Capital</span>
-            </div>
-            <div class="spike-card reveal">
-                <span class="spike-icon">◇</span>
-                <h3 class="spike-title">Finance Acumen</h3>
-                <p class="spike-desc">From equity research competitions (National Rank 2) to building credit-scoring models impacting 800K+ farmers, to FP&A for deep-tech startups — a finance brain that operates across the full spectrum from micro to macro.</p>
-                <span class="spike-tag">Institutional Research</span>
-            </div>
-            <div class="spike-card reveal">
-                <span class="spike-icon">△</span>
-                <h3 class="spike-title">Entrepreneurship</h3>
-                <p class="spike-desc">Founded FinOak to democratize financial literacy. Advised Nanolabs Philippines on their smart packaging launch. Led BfE's first India chapter, providing pro-bono advisory to social enterprises globally.</p>
-                <span class="spike-tag">Builder Mindset</span>
-            </div>
-            <div class="spike-card reveal">
-                <span class="spike-icon">○</span>
-                <h3 class="spike-title">Tech × Finance × CRM</h3>
-                <p class="spike-desc">Pioneered OCEN network integration in microfinance institutions. Built credit-scoring models from scratch. The toolkit spans investment platforms, financial modelling, CRM systems, and emerging tech infrastructure.</p>
-                <span class="spike-tag">Full-Stack Finance</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats -->
-    <div class="stats-bar">
-        <div class="stat-item reveal">
-            <div class="stat-number">800K+</div>
-            <div class="stat-label">Farmers Impacted</div>
-        </div>
-        <div class="stat-item reveal">
-            <div class="stat-number">₹512M</div>
-            <div class="stat-label">Aggregate Savings</div>
-        </div>
-        <div class="stat-item reveal">
-            <div class="stat-number">13+</div>
-            <div class="stat-label">Podium Finishes</div>
-        </div>
-        <div class="stat-item reveal">
-            <div class="stat-number">4</div>
-            <div class="stat-label">Countries Worked In</div>
-        </div>
-    </div>
-
-    <!-- Experience -->
-    <section id="experience">
-        <div class="section-label">Experience</div>
-        <div class="section-number">02</div>
-        <h2 class="section-title reveal">Where I've built.</h2>
-        <p class="section-subtitle reveal">A cross-continental track record spanning venture capital, R&D startups, fintech infrastructure, and financial advisory.</p>
-
-        <div class="timeline">
-            <div class="timeline-item reveal">
-                <div class="timeline-company">Proflex by Blockstart Research</div>
-                <div class="timeline-role">Investments — Blockstart LLC</div>
-                <div class="timeline-location">Los Gatos, CA (Silicon Valley) · Remote</div>
-                <p class="timeline-desc">Institutional-grade investment research and advisory at a Silicon Valley-based multi-strategy firm focused on enterprise blockchain, digital assets, DeFi, and emerging markets. Publishing weekly market analysis covering SPX, options flow, Fed policy, AI valuations, and crypto macro.</p>
-                <div class="timeline-impact">↗ US-based VC firm · Institutional Research</div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-company">OCEN Network Integration</div>
-                <div class="timeline-role">Fintech · Microfinance</div>
-                <div class="timeline-location">Indonesia / India</div>
-                <p class="timeline-desc">Pioneered the integration of the OCEN (Open Credit Enablement Network) into microfinance institutions — generating aggregate savings of IDR 512 million. Designed and deployed a credit-scoring model that directly impacted over 800,000 farmers.</p>
-                <div class="timeline-impact">↗ 800K+ farmers · IDR 512Mn savings</div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-company">Nanolabs Philippines</div>
-                <div class="timeline-role">FP&A · Startup Advisory</div>
-                <div class="timeline-location">Philippines</div>
-                <p class="timeline-desc">Worked directly with the founder of this R&D nanotechnology startup on financial planning & analysis for the launch of their Smart Packaging Solution. Applications spanning EV and CPG industries.</p>
-                <div class="timeline-impact">↗ Deep-tech · Pre-launch FP&A</div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-company">Bridges for Enterprise (BfE)</div>
-                <div class="timeline-role">Chapter Lead · Pro-Bono Advisory</div>
-                <div class="timeline-location">SSCBS, New Delhi · Global</div>
-                <p class="timeline-desc">Established BfE's first and only India chapter at SSCBS. Provided pro-bono advisory services in business, finance, and sustainability to social enterprises around the world.</p>
-                <div class="timeline-impact">↗ First India chapter · Global impact</div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-company">FinOak</div>
-                <div class="timeline-role">Founder · Financial Literacy</div>
-                <div class="timeline-location">India</div>
-                <p class="timeline-desc">Built FinOak — an initiative to democratize financial knowledge irrespective of educational background, age, or qualifications. Making finance accessible to everyone.</p>
-                <div class="timeline-impact">↗ Entrepreneurship · Financial Inclusion</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Achievements -->
-    <section id="achievements" class="achievements-section">
-        <div style="padding: 0 0 48px 0;">
-            <div class="section-label">Achievements</div>
-            <div class="section-number">03</div>
-            <h2 class="section-title reveal">Competing globally. Winning nationally.</h2>
-            <p class="section-subtitle reveal">From Cornell to IIM Ahmedabad — a track record of outperforming at the highest levels of case competitions, portfolio challenges, and consulting contests.</p>
-        </div>
-
-        <div class="achievements-grid">
-            <div class="achievement-card reveal">
-                <div class="achievement-tier tier-global">⬥ Global Top 5</div>
-                <div class="achievement-title">Cornell University Case Competition</div>
-                <div class="achievement-org">Sole undergraduate team invited to finals in New York City</div>
-            </div>
-            <div class="achievement-card reveal">
-                <div class="achievement-tier tier-global">⬥ Global Top 8</div>
-                <div class="achievement-title">Global Microfinance Case Competition</div>
-                <div class="achievement-org">MMI in association with Kearney</div>
-            </div>
-            <div class="achievement-card reveal">
-                <div class="achievement-tier tier-global">⬥ Global Semi-Finalist</div>
-                <div class="achievement-title">McGill International Portfolio Challenge</div>
-                <div class="achievement-org">In association with BlackRock & CPP</div>
-            </div>
-            <div class="achievement-card reveal">
-                <div class="achievement-tier tier-global">⬥ Top 10 Finalist</div>
-                <div class="achievement-title">Bain & Company Consulting Competition</div>
-                <div class="achievement-org">5+ eliminative rounds</div>
-            </div>
-            <div class="achievement-card reveal">
-                <div class="achievement-tier tier-national">◈ National Winner</div>
-                <div class="achievement-title">IIM Ahmedabad Flagship Case Competition</div>
-                <div class="achievement-org">₹50,000 + Internship Offer</div>
-            </div>
-            <div class="achievement-card reveal">
-                <div class="achievement-tier tier-national">◈ National Winner</div>
-                <div class="achievement-title">IIM Bangalore B-Plan Competition</div>
-                <div class="achievement-org">₹25,000 Cash Prize</div>
-            </div>
-            <div class="achievement-card reveal">
-                <div class="achievement-tier tier-national">◈ National Rank 2</div>
-                <div class="achievement-title">IIM Indore Equity Research Competition</div>
-                <div class="achievement-org">₹25,000 Cash Prize</div>
-            </div>
-            <div class="achievement-card reveal">
-                <div class="achievement-tier tier-national">◈ 13+ Podium Finishes</div>
-                <div class="achievement-title">National Case Competitions</div>
-                <div class="achievement-org">5× Winner · 3× Runner-Up · Across LSR, SRCC, SSCBS & more</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Toolbox -->
-    <section id="toolbox">
-        <div class="section-label">Toolbox</div>
-        <div class="section-number">04</div>
-        <h2 class="section-title reveal">How I operate.</h2>
-        <p class="section-subtitle reveal">A multidisciplinary toolkit across finance, technology, and client management systems.</p>
-
-        <div class="toolbox-grid reveal">
-            <div class="toolbox-category">
-                <div class="toolbox-cat-label">Finance</div>
-                <div class="toolbox-items">
-                    <div class="toolbox-item">Equity Research & Valuation</div>
-                    <div class="toolbox-item">Options Flow & Derivatives</div>
-                    <div class="toolbox-item">FP&A & Financial Modelling</div>
-                    <div class="toolbox-item">Credit Scoring Models</div>
-                    <div class="toolbox-item">Portfolio Construction</div>
-                    <div class="toolbox-item">Macro & Fed Policy Analysis</div>
+    <!-- ═══════════ HERO ═══════════ -->
+    <section class="hero" id="about">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-left">
+                    <div class="hero-eyebrow">Finance × Technology × Venture Capital</div>
+                    <h1 class="hero-name">Parth<br>Khanna</h1>
+                    <p class="hero-tagline">Generalist working on Investment Research, Product Dev, CRM & Marketing for an Institutional Newsletter, Managed Portfolios (~$25Mn AUM), and a US Private Equity Fund.</p>
+                    <div class="hero-meta">
+                        <div class="hero-meta-item">
+                            <div class="hero-meta-label">Current</div>
+                            <div class="hero-meta-value">Proflex by Blockstart LLC</div>
+                        </div>
+                        <div class="hero-meta-item">
+                            <div class="hero-meta-label">Base</div>
+                            <div class="hero-meta-value">Silicon Valley ↔ Mumbai</div>
+                        </div>
+                        <div class="hero-meta-item">
+                            <div class="hero-meta-label">Education</div>
+                            <div class="hero-meta-value">SSCBS, Delhi · CS Graduate</div>
+                        </div>
+                        <div class="hero-meta-item">
+                            <div class="hero-meta-label">Certifications</div>
+                            <div class="hero-meta-value">CFA L2 Candidate · NISM VIII & XV</div>
+                        </div>
+                    </div>
+                    <div class="hero-ctas">
+                        <a href="https://bit.ly/ParthProofofWork" target="_blank" class="btn btn-primary">Proof of Work</a>
+                        <a href="https://calendly.com/parthbusinessofficialid/catchup-with-parth" target="_blank" class="btn btn-outline">Book a Call</a>
+                        <a href="mailto:parth@proflexfinance.com" class="btn btn-outline">Email</a>
+                    </div>
                 </div>
-            </div>
-            <div class="toolbox-category">
-                <div class="toolbox-cat-label">Technology</div>
-                <div class="toolbox-items">
-                    <div class="toolbox-item">OCEN / Open Credit Networks</div>
-                    <div class="toolbox-item">Blockchain & DeFi Infrastructure</div>
-                    <div class="toolbox-item">Data-Driven Risk Models</div>
-                    <div class="toolbox-item">Fintech APIs & Integration</div>
-                    <div class="toolbox-item">Web3 & Digital Assets</div>
-                    <div class="toolbox-item">Smart Packaging / Deep-tech</div>
-                </div>
-            </div>
-            <div class="toolbox-category">
-                <div class="toolbox-cat-label">CRM & Operations</div>
-                <div class="toolbox-items">
-                    <div class="toolbox-item">Investment Advisory & Research</div>
-                    <div class="toolbox-item">Client Portfolio Management</div>
-                    <div class="toolbox-item">Startup Advisory & FP&A</div>
-                    <div class="toolbox-item">Community Building (Proflex)</div>
-                    <div class="toolbox-item">Non-Profit Advisory (BfE)</div>
-                    <div class="toolbox-item">Financial Literacy Programs</div>
+                <div class="hero-photo-wrap">
+                    <div class="hero-photo-scene">
+                        <!-- Dot grid backdrop -->
+                        <div class="photo-grid-bg"></div>
+                        <!-- Photo -->
+                        <div class="hero-photo-frame">
+                            <img src="https://i.ibb.co/HpG4Q7XB/1697743215256.jpg" alt="Parth Khanna">
+                        </div>
+                        <!-- Floating UI cards -->
+                        <div class="photo-float photo-float-stat">
+                            <div class="float-label-top">AUM Journey</div>
+                            <div class="float-number">0 → $25Mn</div>
+                            <div class="float-sublabel">Proflex · Blockstart LLC</div>
+                        </div>
+                        <div class="photo-float photo-float-wins">
+                            <div class="float-wins-num">15+</div>
+                            <div class="float-sublabel">Global & National Wins</div>
+                        </div>
+                        <div class="photo-float photo-float-status">
+                            <div class="float-status-row">
+                                <div class="float-ping"></div>
+                                <span class="float-status-text">Available for Opportunities</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section id="connect" class="cta-section">
-        <div class="section-label">Let's Talk</div>
-        <div class="section-number" style="margin-bottom: 32px;">05</div>
-        <h2 class="cta-title reveal">Ready to build<br>something <span style="color: var(--accent); font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400;">together</span>?</h2>
-        <p class="cta-subtitle reveal">Whether it's venture capital, investment research, startup advisory, or fintech infrastructure — I'm always open to meaningful conversations.</p>
-        <div class="cta-buttons reveal">
-            <a href="https://www.linkedin.com/in/parthkhanna1/" target="_blank" class="btn btn-primary">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                LinkedIn
-            </a>
-            <a href="mailto:parth@blockstart.com" class="btn btn-outline">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                Email
-            </a>
-            <a href="https://blockstart.kit.com" target="_blank" class="btn btn-outline">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                Proflex Research
-            </a>
+    <!-- ═══════════ LOGO WALL ═══════════ -->
+    <section class="logo-wall">
+        <div class="logo-wall-label">Investment Research × Technology × Entrepreneurship</div>
+        <div class="marquee-outer">
+            <div class="marquee-track">
+                <!-- Set 1 -->
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Corn.png" alt="Cornell University" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Bain.png" alt="Bain & Company" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/BlackRock_wordmark.svg.png" alt="BlackRock" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Kearney_Logo.svg.png" alt="Kearney" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Amazon_India_Logo.svg" alt="Amazon India" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/iima.svg" alt="IIM Ahmedabad" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/iiimb.svg" alt="IIM Bangalore" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/The_Oberoi_Group_-_Logo.png" alt="Oberoi Group" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Costa_Coffee-logo-DC0FF384B3-seeklogo.com-3-1.png" alt="Costa Coffee" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Mcgill_univ_ca_logo.png" alt="McGill University" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/realtime-logo.png" alt="Real Time Angel Fund" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/1.5_degree_logo.avif" alt="1.5 Degree" class="marquee-logo"></div>
+                <!-- Set 2 (duplicate for infinite loop) -->
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Corn.png" alt="Cornell University" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Bain.png" alt="Bain & Company" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/BlackRock_wordmark.svg.png" alt="BlackRock" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Kearney_Logo.svg.png" alt="Kearney" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Amazon_India_Logo.svg" alt="Amazon India" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/iima.svg" alt="IIM Ahmedabad" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/iiimb.svg" alt="IIM Bangalore" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/The_Oberoi_Group_-_Logo.png" alt="Oberoi Group" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Costa_Coffee-logo-DC0FF384B3-seeklogo.com-3-1.png" alt="Costa Coffee" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Mcgill_univ_ca_logo.png" alt="McGill University" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/realtime-logo.png" alt="Real Time Angel Fund" class="marquee-logo"></div>
+                <div class="marquee-item"><img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/1.5_degree_logo.avif" alt="1.5 Degree" class="marquee-logo"></div>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-left">© 2025 Parth Khanna · Built with precision.</div>
-        <div class="footer-links">
-            <a href="https://www.linkedin.com/in/parthkhanna1/" target="_blank">LinkedIn</a>
-            <a href="https://blockstart.kit.com" target="_blank">Proflex</a>
+    <!-- ═══════════ THE SPIKE ═══════════ -->
+    <section class="section" id="spike">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">Section 01</div>
+                <h2 class="section-title">The Spike</h2>
+                <p class="section-subtitle">What I bring to the table — across finance, competition, enterprise, and building.</p>
+            </div>
+            <div class="spike-grid">
+                <div class="spike-card reveal">
+                    <h3 class="spike-card-title">Institutional Finance</h3>
+                    <p class="spike-card-desc">Running investment research, managed portfolios (~$25Mn AUM), and advisory for a Silicon Valley multi-strategy firm. Covering SPX, options flow, Fed policy, AI valuations, BTC macro, and DeFi.</p>
+                    <div class="spike-card-tag">Proflex · Blockstart LLC</div>
+                </div>
+                <div class="spike-card reveal">
+                    <h3 class="spike-card-title">Competition Pedigree</h3>
+                    <p class="spike-card-desc">15+ podium finishes across global and national arenas. Recognized by Bain, Kearney, BlackRock, CPP, Cornell, and IIM Ahmedabad judges at the highest competitive levels.</p>
+                    <div class="spike-card-tag">Global · National</div>
+                </div>
+                <div class="spike-card reveal">
+                    <h3 class="spike-card-title">Enterprise Live Projects</h3>
+                    <p class="spike-card-desc">5+ live projects for billion-dollar conglomerates during graduation: Amazon, Oberoi Group, Vodafone Idea, Vedantu, and a $62Mn AUM angel fund. Real stakes, real outputs.</p>
+                    <div class="spike-card-tag">Amazon · Oberoi · RTAF</div>
+                </div>
+                <div class="spike-card reveal">
+                    <h3 class="spike-card-title">Founder & Builder</h3>
+                    <p class="spike-card-desc">Founded Goldfib Capital with a research team from UVA, IIT Bombay, IIT KGP, Stephens, and SSCBS. Previously founded FinOak to democratize financial literacy.</p>
+                    <div class="spike-card-tag">Goldfib · FinOak</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ STATS BAR ═══════════ -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid reveal">
+                <div class="stat-item">
+                    <div class="stat-number" style="font-size:clamp(1.4rem,3vw,2.2rem);letter-spacing:-1px;">0→$25Mn</div>
+                    <div class="stat-label">AUM Growth Journey</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Podium Finishes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">0.5Mn</div>
+                    <div class="stat-label">LinkedIn Impressions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Live Projects, Billion-Dollar Cos.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ EXPERIENCE TIMELINE ═══════════ -->
+    <section class="section" id="experience">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">Section 02</div>
+                <h2 class="section-title">Experience</h2>
+                <p class="section-subtitle">From Silicon Valley firms to billion-dollar conglomerates and early-stage startups.</p>
+            </div>
+            <div class="timeline">
+
+                <!-- Proflex -->
+                <div class="timeline-entry reveal">
+                    <div class="timeline-dot">
+                        <img src="https://48102387.fs1.hubspotusercontent-na1.net/hubfs/48102387/Proflex_Square200xLogo_TransparentBlack.png" alt="Proflex" style="background:white;border-radius:4px;padding:2px;">
+                    </div>
+                    <div class="timeline-company">Proflex by Blockstart LLC</div>
+                    <div class="timeline-role">Investment Research · Product · CRM · Marketing</div>
+                    <div class="timeline-location">Los Gatos, CA (Silicon Valley) · Remote</div>
+                    <p class="timeline-desc">Multi-strategy investment firm across enterprise blockchain, digital assets, DeFi, and US markets. Running institutional-grade research, product development, CRM infrastructure, and marketing.</p>
+                    <ul class="timeline-bullets">
+                        <li>Weekly market intelligence covering SPX, options flow, Fed policy, AI valuations, and BTC macro</li>
+                        <li>Managing ~$25Mn AUM portfolios across multiple asset classes</li>
+                        <li>Building CRM, growth funnels, and product infrastructure from the ground up</li>
+                    </ul>
+                    <span class="timeline-impact">↗ ~$25Mn AUM · US PE Fund · Institutional Research</span>
+                </div>
+
+                <!-- Goldfib -->
+                <div class="timeline-entry reveal">
+                    <div class="timeline-dot">GC</div>
+                    <div class="timeline-company">Goldfib Capital</div>
+                    <div class="timeline-role">Founder · Financial Market Research</div>
+                    <div class="timeline-location">India · Remote</div>
+                    <p class="timeline-desc">Founded and leads a financial market research team with members from University of Virginia, IIT Bombay, IIT KGP, St. Stephen's College, and SSCBS.</p>
+                    <span class="timeline-impact">↗ UVA · IIT Bombay · IIT KGP · Stephens · SSCBS</span>
+                    <div style="margin-top:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                        <span style="font-size:0.82rem;color:var(--text-muted);">Interested in our research?</span>
+                        <a href="mailto:partners@goldfibcapital.in" class="btn btn-outline" style="padding:7px 18px;font-size:0.78rem;border-radius:6px;">Write to Us →</a>
+                    </div>
+                </div>
+
+                <!-- 1.5 Degree -->
+                <div class="timeline-entry reveal">
+                    <div class="timeline-dot">1.5°</div>
+                    <div class="timeline-company">1.5 Degree</div>
+                    <div class="timeline-role">Generalist Intern</div>
+                    <div class="timeline-location">India · <a href="https://1.5degree.co/" target="_blank" style="color:var(--accent);text-decoration:underline;">1.5degree.co</a></div>
+                    <p class="timeline-desc">Joined as a generalist building Product, Sales, Marketing, and Research verticals from the ground up. Led cross-functional teams from SRCC, BITS Pilani, and IIT KGP.</p>
+                    <span class="timeline-impact">↗ $1Mn Series-A from 35 North Ventures</span>
+                </div>
+
+                <!-- Amazon -->
+                <div class="timeline-entry reveal">
+                    <div class="timeline-dot">AMZ</div>
+                    <div class="timeline-company">Amazon India</div>
+                    <div class="timeline-role">Live Project Lead · Market Research</div>
+                    <div class="timeline-location">India</div>
+                    <p class="timeline-desc">Led a team of 25+ associates in a comprehensive market research project on Amazon's e-commerce platform in India, with strong emphasis on Tier-2 and Tier-3 city reach, consumer behavior, and competitive dynamics.</p>
+                    <span class="timeline-impact">↗ 25+ Team · Tier-2 & 3 Market Analysis</span>
+                </div>
+
+                <!-- Costa Coffee -->
+                <div class="timeline-entry reveal">
+                    <div class="timeline-dot">CC</div>
+                    <div class="timeline-company">Costa Coffee India</div>
+                    <div class="timeline-role">Strategy & Analytics Intern</div>
+                    <div class="timeline-location">Delhi NCR · Mumbai</div>
+                    <p class="timeline-desc">Enhanced e-commerce presence on Swiggy and Zomato using data mining across 10+ spreadsheets.</p>
+                    <ul class="timeline-bullets">
+                        <li>Identified 8/50 high-performance outlets & 4+ priority circles via geo-spatial KPI mapping (KPT, ADT, RDC) across Delhi NCR & Mumbai</li>
+                        <li>Built a BI dashboard benchmarking 6+ competitors including Starbucks and Third Wave Coffee</li>
+                        <li>Used Python (Pandas) + Excel macros for data mining and visualization</li>
+                    </ul>
+                    <span class="timeline-impact">↗ Python · Geo-spatial Mapping · Competitive BI</span>
+                </div>
+
+                <!-- Oberoi -->
+                <div class="timeline-entry reveal">
+                    <div class="timeline-dot">OBR</div>
+                    <div class="timeline-company">Oberoi Group</div>
+                    <div class="timeline-role">Strategy Consulting · Live Project Lead</div>
+                    <div class="timeline-location">India · Hospitality</div>
+                    <p class="timeline-desc">Spearheaded a team of 30+ to devise strategies for enhanced student onboarding for the STEP hotel management program.</p>
+                    <ul class="timeline-bullets">
+                        <li>Collaborated with 160+ schools and 70+ counsellors to foster partnerships and boost program visibility</li>
+                        <li>Built foundational outreach framework and revamped 2+ pitch decks used in board-level meetings</li>
+                    </ul>
+                    <span class="timeline-impact">↗ 30+ Team · 160 Schools · Board-Level Decks</span>
+                </div>
+
+                <!-- RTAF -->
+                <div class="timeline-entry reveal">
+                    <div class="timeline-dot">RT</div>
+                    <div class="timeline-company">Real Time Angel Fund (RTAF)</div>
+                    <div class="timeline-role">Internship · Angel Fund Operations</div>
+                    <div class="timeline-location">India · $62Mn AUM</div>
+                    <p class="timeline-desc">Worked with a 510 Cr sector-agnostic angel fund with investments in 10 early-stage startups — MyMandi, Punt Partners, FreshoKartz, TransportSimple, MeraTractor, O2Nails, LarkAI, and CapitalSetu — backed by 300+ investors.</p>
+                    <span class="timeline-impact">↗ $62Mn AUM · 10 Portfolio Startups · 300 Investors</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ ACHIEVEMENTS SLIDER ═══════════ -->
+    <section class="achievements" id="wins">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">Section 03</div>
+                <h2 class="section-title">Competing globally. Winning nationally.</h2>
+                <p class="section-subtitle">15+ podium finishes — recognized by Kearney, BlackRock, Bain, Canada Pension Fund, Cornell, SBI Securities, and IIM Ahmedabad judges.</p>
+            </div>
+            <div class="slider-container reveal">
+                <div class="slider-track" id="sliderTrack">
+                    <!-- Slide 1 -->
+                    <div class="slider-slide">
+                        <div class="slide-card">
+                            <div class="slide-scope">International</div>
+                            <div class="slide-rank">Top 5</div>
+                            <div class="slide-title">Cornell University Case Competition</div>
+                            <p class="slide-desc">Sole undergraduate team invited to finals in New York City</p>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="slider-slide">
+                        <div class="slide-card">
+                            <div class="slide-scope">International</div>
+                            <div class="slide-rank">Top 8</div>
+                            <div class="slide-title">Global Microfinance Case Competition</div>
+                            <p class="slide-desc">MMI in Association with Kearney</p>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="slider-slide">
+                        <div class="slide-card">
+                            <div class="slide-scope">International</div>
+                            <div class="slide-rank">Semi-Finalist</div>
+                            <div class="slide-title">McGill International Portfolio Challenge</div>
+                            <p class="slide-desc">In association with BlackRock & CPP Investments</p>
+                        </div>
+                    </div>
+                    <!-- Slide 4 -->
+                    <div class="slider-slide">
+                        <div class="slide-card">
+                            <div class="slide-scope">International</div>
+                            <div class="slide-rank">Top 10</div>
+                            <div class="slide-title">Bain & Company Consulting Competition</div>
+                            <p class="slide-desc">5+ eliminative rounds · Management Consulting</p>
+                        </div>
+                    </div>
+                    <!-- Slide 5 -->
+                    <div class="slider-slide">
+                        <div class="slide-card">
+                            <div class="slide-scope">National</div>
+                            <div class="slide-rank blue">Winner</div>
+                            <div class="slide-title">IIM Ahmedabad Flagship Case Competition</div>
+                            <p class="slide-desc">India's premier management institute</p>
+                            <span class="slide-prize">₹50,000 + Internship Offer</span>
+                        </div>
+                    </div>
+                    <!-- Slide 6 -->
+                    <div class="slider-slide">
+                        <div class="slide-card">
+                            <div class="slide-scope">National</div>
+                            <div class="slide-rank blue">Winner</div>
+                            <div class="slide-title">IIM Bangalore B-Plan Competition</div>
+                            <p class="slide-desc">Business Plan & Venture Challenge</p>
+                            <span class="slide-prize">₹25,000 Cash Prize</span>
+                        </div>
+                    </div>
+                    <!-- Slide 7 -->
+                    <div class="slider-slide">
+                        <div class="slide-card">
+                            <div class="slide-scope">National</div>
+                            <div class="slide-rank blue">Rank 2</div>
+                            <div class="slide-title">IIM Indore Equity Research Competition</div>
+                            <p class="slide-desc">Equity Research & Valuation</p>
+                            <span class="slide-prize">₹25,000 Cash Prize</span>
+                        </div>
+                    </div>
+                    <!-- Slide 8 -->
+                    <div class="slider-slide">
+                        <div class="slide-card">
+                            <div class="slide-scope">National</div>
+                            <div class="slide-rank blue">5× Win / 3× R-Up</div>
+                            <div class="slide-title">National Case Competition Circuit</div>
+                            <p class="slide-desc">Across LSR, SRCC, SSCBS & more premier institutes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-btn" id="sliderPrev" aria-label="Previous slide">&#8592;</button>
+                    <div class="slider-dots" id="sliderDots"></div>
+                    <button class="slider-btn" id="sliderNext" aria-label="Next slide">&#8594;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ WRITING / NEWSLETTER ═══════════ -->
+    <section class="section" id="writing">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">Section 04</div>
+                <h2 class="section-title">Writing & Newsletter</h2>
+                <p class="section-subtitle">Institutional-grade market intelligence, delivered free every week.</p>
+            </div>
+            <div class="newsletter-card reveal">
+                <div class="newsletter-main">
+                    <div class="newsletter-tag">Free Weekly Newsletter</div>
+                    <h3 class="newsletter-title">Proflex Weekly by Blockstart Research</h3>
+                    <p class="newsletter-desc">Institutional-grade market intelligence delivered free, every week. Covering US macro signals, AI sector valuations, Bitcoin on-chain data, Fed policy, and options flow — the same research that informs $25Mn in managed assets.</p>
+                    <div class="newsletter-pills">
+                        <span class="newsletter-pill">US Macro</span>
+                        <span class="newsletter-pill">AI & Tech</span>
+                        <span class="newsletter-pill">Bitcoin</span>
+                        <span class="newsletter-pill">Options Flow</span>
+                        <span class="newsletter-pill">Fed Policy</span>
+                    </div>
+                    <div class="newsletter-ctas">
+                        <a href="https://blockstart.kit.com" target="_blank" class="btn btn-primary">Subscribe Free →</a>
+                        <a href="https://proflexfinance.com" target="_blank" class="btn btn-outline">Proflex Platform</a>
+                    </div>
+                </div>
+                <div class="newsletter-sidebar">
+                    <div class="issue-card">
+                        <div class="issue-label">Latest Issue</div>
+                        <div class="issue-title">Fed Pivot Watch: What the data says right now</div>
+                    </div>
+                    <div class="issue-card">
+                        <div class="issue-label">Recent</div>
+                        <div class="issue-title">NVDA Valuation Reset: Multiple compression playbook</div>
+                    </div>
+                    <div class="issue-card">
+                        <div class="issue-label">Most Read</div>
+                        <div class="issue-title">Bitcoin On-Chain Signals vs Macro Headwinds</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ TOOLBOX ═══════════ -->
+    <section class="section" id="toolbox">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">Section 05</div>
+                <h2 class="section-title">Toolbox</h2>
+                <p class="section-subtitle">The stack I operate across — from financial modeling to product infrastructure.</p>
+            </div>
+            <div class="toolbox-logo-wall reveal">
+                <!-- Software & Platforms — infinite sliding marquee -->
+                <div class="toolbox-logo-section" style="padding:28px 0;">
+                    <div style="padding:0 32px 18px;"><div class="toolbox-category-header" style="margin-bottom:0;border-bottom:none;">Software & Platforms</div></div>
+                    <div class="tbx-marquee-outer">
+                        <div class="tbx-marquee-track">
+                            <!-- Set 1 -->
+                            <div class="tbx-mq-item">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/HubSpot_Logo.svg.png" alt="HubSpot" class="tbx-mq-logo" style="background:#fff;border-radius:5px;padding:3px;">
+                                <span class="tbx-mq-name">HubSpot</span>
+                            </div>
+                            <div class="tbx-mq-item">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/tradingview-logo-vector.png" alt="TradingView" class="tbx-mq-logo">
+                                <span class="tbx-mq-name">TradingView</span>
+                            </div>
+                            <div class="tbx-mq-item">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Python-logo-notext.svg.png" alt="Python" class="tbx-mq-logo" style="background:#fff;border-radius:5px;padding:3px;">
+                                <span class="tbx-mq-name">Python</span>
+                            </div>
+                            <div class="tbx-mq-item">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/HTML5_logo_and_wordmark.svg.png" alt="HTML/CSS/JS" class="tbx-mq-logo">
+                                <span class="tbx-mq-name">HTML/CSS/JS</span>
+                            </div>
+                            <div class="tbx-mq-item">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/claudecode.png" alt="Claude Code" class="tbx-mq-logo">
+                                <span class="tbx-mq-name">Claude Code</span>
+                            </div>
+                            <div class="tbx-mq-item">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Apollo_logotype_OnWhite_Logo.jpg" alt="Apollo.io" class="tbx-mq-logo" style="background:#fff;border-radius:5px;padding:3px;">
+                                <span class="tbx-mq-name">Apollo.io</span>
+                            </div>
+                            <!-- Set 2 (duplicate for loop) -->
+                            <div class="tbx-mq-item">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/HubSpot_Logo.svg.png" alt="HubSpot" class="tbx-mq-logo" style="background:#fff;border-radius:5px;padding:3px;">
+                                <span class="tbx-mq-name">HubSpot</span>
+                            </div>
+                            <div class="tbx-mq-item">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/tradingview-logo-vector.png" alt="TradingView" class="tbx-mq-logo">
+                                <span class="tbx-mq-name">TradingView</span>
+                            </div>
+                            <div class="tbx-mq-item">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Python-logo-notext.svg.png" alt="Python" class="tbx-mq-logo" style="background:#fff;border-radius:5px;padding:3px;">
+                                <span class="tbx-mq-name">Python</span>
+                            </div>
+                            <div class="tbx-mq-item">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/HTML5_logo_and_wordmark.svg.png" alt="HTML/CSS/JS" class="tbx-mq-logo">
+                                <span class="tbx-mq-name">HTML/CSS/JS</span>
+                            </div>
+                            <div class="tbx-mq-item">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/claudecode.png" alt="Claude Code" class="tbx-mq-logo">
+                                <span class="tbx-mq-name">Claude Code</span>
+                            </div>
+                            <div class="tbx-mq-item">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Apollo_logotype_OnWhite_Logo.jpg" alt="Apollo.io" class="tbx-mq-logo" style="background:#fff;border-radius:5px;padding:3px;">
+                                <span class="tbx-mq-name">Apollo.io</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Finance & Research -->
+                <div class="toolbox-logo-section">
+                    <div class="toolbox-category-header">Finance & Research</div>
+                    <div class="toolbox-logos-row">
+                        <div class="tool-skill-tag"><div class="tool-skill-dot"></div>Investment Research</div>
+                        <div class="tool-skill-tag"><div class="tool-skill-dot"></div>Equity Research & Valuation</div>
+                        <div class="tool-skill-tag"><div class="tool-skill-dot"></div>Options Flow & Derivatives</div>
+                        <div class="tool-skill-tag"><div class="tool-skill-dot"></div>Financial Modelling & FP&A</div>
+                        <div class="tool-skill-tag"><div class="tool-skill-dot"></div>Portfolio Construction</div>
+                        <div class="tool-skill-tag"><div class="tool-skill-dot"></div>Macro & Fed Policy Analysis</div>
+                        <div class="tool-skill-tag"><div class="tool-skill-dot"></div>DeFi & Digital Assets</div>
+                    </div>
+                </div>
+                <!-- Growth & Operations -->
+                <div class="toolbox-logo-section">
+                    <div class="toolbox-category-header">Growth & Operations</div>
+                    <div class="toolbox-logos-row">
+                        <div class="tool-skill-tag"><div class="tool-skill-dot"></div>CRM & Funnel Management</div>
+                        <div class="tool-skill-tag"><div class="tool-skill-dot"></div>Newsletter Growth</div>
+                        <div class="tool-skill-tag"><div class="tool-skill-dot"></div>Product Development</div>
+                        <div class="tool-skill-tag"><div class="tool-skill-dot"></div>Startup Advisory</div>
+                        <div class="tool-skill-tag"><div class="tool-skill-dot"></div>Market Research</div>
+                        <div class="tool-skill-tag"><div class="tool-skill-dot"></div>Competitive Intelligence</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ BEYOND THE NUMBERS ═══════════ -->
+    <section class="section" id="beyond">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">Section 06</div>
+                <h2 class="section-title">What keeps me sharp.</h2>
+                <p class="section-subtitle">Finance is the profession. These are the disciplines.</p>
+            </div>
+            <div class="beyond-grid">
+                <div class="beyond-card reveal">
+                    <div class="beyond-emoji">&#9997;&#65039;</div>
+                    <h3 class="beyond-card-title">LinkedIn Creator</h3>
+                    <p class="beyond-card-desc">Writing on finance, markets, and career insights. Built a genuine audience through consistent, high-signal content — not noise.</p>
+                    <div class="beyond-stat">0.5MN Impressions · Last Year</div>
+                </div>
+                <div class="beyond-card reveal">
+                    <div class="beyond-emoji">&#127947;&#65039;</div>
+                    <h3 class="beyond-card-title">Daily Discipline</h3>
+                    <p class="beyond-card-desc">Lifting and running 4km every single day. Consistency in fitness translates directly to consistency in everything else.</p>
+                    <div class="beyond-stat">4KM Run · Everyday</div>
+                </div>
+                <div class="beyond-card reveal">
+                    <div class="beyond-emoji">&#9992;&#65039;</div>
+                    <h3 class="beyond-card-title">Solo Traveler</h3>
+                    <p class="beyond-card-desc">9 solo trips last year. No better way to build judgment, adaptability, and the habit of making good decisions with incomplete information.</p>
+                    <div class="beyond-stat">9 Solo Trips · 2024</div>
+                </div>
+                <div class="beyond-card reveal">
+                    <div class="beyond-emoji">&#127956;&#65039;</div>
+                    <h3 class="beyond-card-title">Himalayan Trekker</h3>
+                    <p class="beyond-card-desc">Planning 2 week-long treks in the Himalayas every year. At altitude, the only thing that matters is the next step.</p>
+                    <div class="beyond-stat">2x Week-Long Treks · Annually</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ CTA / CONNECT ═══════════ -->
+    <section class="cta-section" id="connect">
+        <div class="container reveal">
+            <h2 class="cta-title">Ready to build something <em>together?</em></h2>
+            <p class="cta-subtitle">Whether it's venture capital, investment research, startup advisory, or growth strategy — I'm always open to meaningful conversations.</p>
+            <div class="cta-buttons">
+                <a href="https://calendly.com/parthbusinessofficialid/catchup-with-parth" target="_blank" class="btn btn-primary">Book a Catchup</a>
+                <a href="https://bit.ly/ParthProofofWork" target="_blank" class="btn btn-outline">Proof of Work</a>
+                <a href="https://www.linkedin.com/in/parthkhanna1/" target="_blank" class="btn btn-outline">LinkedIn</a>
+                <a href="mailto:parth@proflexfinance.com" class="btn btn-outline">Email</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-copy">&copy; 2026 Parth Khanna · Built with precision.</div>
+                <div class="footer-links">
+                    <a href="https://www.linkedin.com/in/parthkhanna1/" target="_blank">LinkedIn</a>
+                    <a href="https://proflexfinance.com" target="_blank">Proflex</a>
+                    <a href="https://blockstart.kit.com" target="_blank">Newsletter</a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Scroll reveal
-        const revealElements = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
+        /* ── Scroll Reveal ── */
+        (function() {
+            var reveals = document.querySelectorAll('.reveal');
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                    }, index * 80);
-                    observer.unobserve(entry.target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+            reveals.forEach(function(el) {
+                observer.observe(el);
+            });
+        })();
+
+        /* ── Smooth Nav Scroll ── */
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-        revealElements.forEach(el => observer.observe(el));
-
-        // Smooth nav
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-            });
         });
+
+        /* ── Achievements Slider ── */
+        (function() {
+            var track = document.getElementById('sliderTrack');
+            var slides = track.querySelectorAll('.slider-slide');
+            var prevBtn = document.getElementById('sliderPrev');
+            var nextBtn = document.getElementById('sliderNext');
+            var dotsContainer = document.getElementById('sliderDots');
+            var totalSlides = slides.length;
+            var currentIndex = 0;
+            var visibleCount = 3;
+            var touchStartX = 0;
+            var touchEndX = 0;
+
+            function getVisibleCount() {
+                return window.innerWidth <= 900 ? 1 : 3;
+            }
+
+            function getMaxIndex() {
+                return Math.max(0, totalSlides - visibleCount);
+            }
+
+            function buildDots() {
+                dotsContainer.innerHTML = '';
+                var maxIdx = getMaxIndex();
+                for (var i = 0; i <= maxIdx; i++) {
+                    var dot = document.createElement('button');
+                    dot.className = 'slider-dot' + (i === currentIndex ? ' active' : '');
+                    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                    dot.dataset.index = i;
+                    dot.addEventListener('click', function() {
+                        goTo(parseInt(this.dataset.index));
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
+            function goTo(index) {
+                var maxIdx = getMaxIndex();
+                if (index < 0) index = 0;
+                if (index > maxIdx) index = maxIdx;
+                currentIndex = index;
+                var slideWidth = 100 / visibleCount;
+                track.style.transform = 'translateX(-' + (currentIndex * slideWidth) + '%)';
+                updateDots();
+            }
+
+            function updateDots() {
+                var dots = dotsContainer.querySelectorAll('.slider-dot');
+                dots.forEach(function(dot, i) {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            function updateLayout() {
+                visibleCount = getVisibleCount();
+                slides.forEach(function(slide) {
+                    slide.style.flex = '0 0 ' + (100 / visibleCount) + '%';
+                });
+                if (currentIndex > getMaxIndex()) {
+                    currentIndex = getMaxIndex();
+                }
+                buildDots();
+                goTo(currentIndex);
+            }
+
+            prevBtn.addEventListener('click', function() {
+                goTo(currentIndex - 1);
+            });
+
+            nextBtn.addEventListener('click', function() {
+                goTo(currentIndex + 1);
+            });
+
+            /* Touch / Swipe */
+            track.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            track.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                var diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        goTo(currentIndex + 1);
+                    } else {
+                        goTo(currentIndex - 1);
+                    }
+                }
+            }, { passive: true });
+
+            window.addEventListener('resize', updateLayout);
+            updateLayout();
+        })();
     </script>
 
 </body>
