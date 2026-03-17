@@ -1660,6 +1660,223 @@
         }
 
         /* ══════════════════════════════════════════
+           NEWSLETTER READER MODAL
+           ══════════════════════════════════════════ */
+        .nl-reader-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s, visibility 0.25s;
+        }
+
+        .nl-reader-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nl-reader {
+            width: 760px;
+            max-width: 92vw;
+            max-height: 88vh;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+            transform: scale(0.96) translateY(10px);
+            transition: transform 0.25s;
+        }
+
+        .nl-reader-overlay.open .nl-reader {
+            transform: scale(1) translateY(0);
+        }
+
+        .nl-reader-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .nl-reader-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .nl-reader-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--text-muted);
+            margin-left: 12px;
+        }
+
+        .nl-reader-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+            flex-shrink: 0;
+        }
+
+        .nl-reader-close:hover {
+            border-color: var(--border-hover);
+            color: var(--text-primary);
+        }
+
+        .nl-reader-body {
+            overflow-y: auto;
+            padding: 28px 32px;
+            flex: 1;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+
+        /* Newsletter content styling */
+        .nl-reader-body h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 32px 0 14px;
+            letter-spacing: -0.3px;
+        }
+
+        .nl-reader-body p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+            margin-bottom: 14px;
+            font-weight: 300;
+        }
+
+        .nl-reader-body strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .nl-reader-body u {
+            text-decoration-color: var(--accent);
+            text-underline-offset: 2px;
+        }
+
+        .nl-reader-body hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0.2;
+            margin: 36px 0;
+        }
+
+        .nl-reader-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 16px 0;
+            border: 1px solid var(--border);
+        }
+
+        .nl-reader-body .blockquotes {
+            border-left: 3px solid var(--accent);
+            padding: 14px 20px;
+            margin: 18px 0;
+            background: var(--accent-glow);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .nl-reader-body .blockquotes .blockquotes-line {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .nl-reader-body ul {
+            padding-left: 20px;
+            margin: 14px 0;
+        }
+
+        .nl-reader-body li {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 8px;
+            font-weight: 300;
+        }
+
+        .nl-reader-body a {
+            color: var(--accent);
+            text-decoration: underline;
+            text-decoration-color: rgba(184,150,90,0.3);
+            text-underline-offset: 2px;
+            transition: text-decoration-color var(--transition);
+        }
+
+        .nl-reader-body a:hover {
+            text-decoration-color: var(--accent);
+        }
+
+        .nl-reader-body .email-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--accent);
+            color: #0c1220;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin: 8px 4px;
+            transition: all var(--transition);
+        }
+
+        .nl-reader-body .email-button:hover {
+            background: var(--accent-dim);
+        }
+
+        .nl-reader-footer {
+            border-top: 1px solid var(--border);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .nl-reader-footer span {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .nl-reader {
+                max-width: 100vw;
+                max-height: 100vh;
+                border-radius: 0;
+            }
+            .nl-reader-body { padding: 20px 18px; }
+        }
+
+        /* ══════════════════════════════════════════
            SCROLL REVEAL
            ══════════════════════════════════════════ */
         .reveal {
@@ -2202,7 +2419,7 @@
                     <div style="font-size:0.74rem;color:var(--text-muted);margin-bottom:14px;">Join <strong style="color:var(--accent);">250+ Silicon Valley executives</strong> who read this every week.</div>
                     <div style="display:flex;gap:12px;flex-wrap:wrap;">
                         <a href="https://blockstart.kit.com" target="_blank" class="btn btn-primary">Subscribe Free</a>
-                        <a href="https://kit.com/broadcasts/22409649" target="_blank" class="btn btn-outline">Read Latest Issue</a>
+                        <button class="btn btn-outline" id="openNlReader">Read Latest Issue</button>
                     </div>
                 </div>
             </div>
@@ -2333,6 +2550,144 @@
         <div class="float-msg-hint">Opens your email client — no sign-up needed</div>
     </div>
 
+    <!-- ═══════════ NEWSLETTER READER MODAL ═══════════ -->
+    <div class="nl-reader-overlay" id="nlReaderOverlay">
+        <div class="nl-reader">
+            <div class="nl-reader-header">
+                <div>
+                    <span class="nl-reader-title">Proflex Wk 11 — War Jitters, NVDA GTC, Options Expiry</span>
+                    <span class="nl-reader-date">Mar 16, 2026</span>
+                </div>
+                <button class="nl-reader-close" id="nlReaderClose">&times;</button>
+            </div>
+            <div class="nl-reader-body">
+
+                <p><strong>War Jitters | Triple Witching | GTC Conference | Bitcoin Resilience</strong></p>
+
+                <div class="blockquotes"><div class="blockquotes-line">"This week, everything reacts to oil &amp; derivatives expiry as the primary market drivers. It is currently the barometer for the entire market."<br><strong>— Proflex Panel</strong></div></div>
+
+                <p>The Iran-Israel-US conflict has entered its third week with Brent nearing $100 &amp; a <strong>market trending upwards, reclaiming the crucial support of $6700.</strong></p>
+
+                <p>With the Strait of Hormuz effectively closed, oil has surged past $100, and every asset class — equities, bonds, gold, crypto — is now being priced through the lens of energy disruption.</p>
+
+                <img src="https://datawrapper.dwcdn.net/SVxER/full.png" alt="Hormuz shipping disruption chart" loading="lazy">
+
+                <p>This is not a garden-variety geopolitical scare. This is a structural supply shock, and the market knows it. <strong>The S&amp;P 500 sits near four-month lows</strong>, bonds are failing their "safe haven" test as inflation fears override flight-to-quality flows, and the Fed is walking into its <strong>March 18 decision</strong> with almost no rate cut priced in till July.</p>
+
+                <p>At the same time, a massive <strong>triple-witching options expiry looms</strong> on March 20, <strong>NVIDIA's GTC conference</strong> kicks off with Jensen Huang on stage, and Bitcoin is quietly outperforming risk assets despite the chaos.</p>
+
+                <p>The signal-to-noise ratio has never been lower. Here's where the signal actually is.</p>
+
+                <hr>
+
+                <h3>Insights from the Proflex Macro Call</h3>
+
+                <p>One of the key conversations from this week's call centers on a simple but powerful idea: <strong>oil is the most important signal that truly matters right now.</strong></p>
+
+                <p>Proflex believes in ignoring biased news headlines and instead tracking crude prices as the <strong>real-time scoreboard</strong> for both the war's trajectory and the global economy.</p>
+
+                <p><strong>Thumbrule is Simple:</strong> If oil begins to cool, it means the market is betting on a resolution — and the NASDAQ and S&amp;P have shown they can snap back fast once energy concerns lift.</p>
+
+                <p><strong>We went deeper into the call than just crude.</strong> A major "unknown" was flagged around <strong>supply chain fragility beyond oil.</strong> While most investors fixate on barrels per day, the Strait of Hormuz is also a vital chokepoint for <strong>helium</strong> — <strong><u>an input the semiconductor and silicon industries cannot operate without.</u></strong></p>
+
+                <img src="https://www.reuters.com/graphics/HELIUM-USAGE/HELIUM-USAGE/gdpzawrykvw/chart_eikon.jpg" alt="Helium supply chain chart" loading="lazy">
+
+                <p>A prolonged helium disruption could create multimonth pressure on the tech sector that "you cannot defend with any technicals."</p>
+
+                <p>Investors were also warned about the <strong>triple-witching options expiry on March 20</strong>, involving roughly $5 trillion in positions. Market makers have been "protecting" the market at the <strong>6700 level</strong>, but this structural support could "unroll" after Friday's close.</p>
+
+                <p><strong><u>If a geopolitical resolution isn't reached by then, the removal of that hedging floor could trigger a sharper leg lower.</u></strong></p>
+
+                <p>Watch the complete recording:</p>
+                <a href="https://www.youtube.com/watch?v=ejv7N42ozFk&t=81s" target="_blank"><img alt="Proflex Macro Call video" src="https://functions-js.kit.com/playbutton?play=%233197e0&accent=%23ffffff&thumbnailof=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dejv7N42ozFk%26t%3D81s&width=480&height=270&fit=contain" loading="lazy" style="max-width:480px;"></a>
+
+                <hr>
+
+                <h3>NVIDIA GTC: Can AI Cut Through the Noise?</h3>
+
+                <p>Jensen Huang took the stage at the SAP Center in San Jose, and in a market dominated by war headlines and oil charts, the AI trade needs its own catalyst.</p>
+
+                <p>NVIDIA needs a narrative refresh. The stock has been <strong><u>grinding lower through the year's broader tech reset, weighed down by sector rotation into defensives.</u></strong> Energy, utilities, and consumer staples have led the S&amp;P 500 year-to-date while tech and consumer discretionary have lagged badly.</p>
+
+                <img src="https://scontent.fixc4-2.fna.fbcdn.net/v/t39.30808-6/651320804_1354252296722998_6876350978268471237_n.jpg?stp=dst-jpg_s1080x2048_tt6&_nc_cat=107&ccb=1-7&_nc_sid=13d280&_nc_ohc=DPxC81EuKtAQ7kNvwF7JzXX&_nc_oc=AdlRfH6Z6J6yjqMpJtU8z4wjoPisQmgxewOdct9zDOuH5VO1JFJkvYtzrwPLiohl38TY7ygJXtKNbNg02IBgLkQC&_nc_zt=23&_nc_ht=scontent.fixc4-2.fna&_nc_gid=PnRmUFXVZPyx1onYWxsfzw&_nc_ss=8&oh=00_AfyJJkgLA1NRXH-6K6aMslUETw0TGXlSj4n2XqtalFDvTA&oe=69BDD5A3" alt="S&P 500 sector performance" loading="lazy">
+
+                <p>The narrative refresh is <strong>inference</strong>: the process where trained AI models do useful work at scale. Rumored announcements include a dedicated inference chip, the open-source NemoClaw enterprise AI agent platform, and the next-gen Vera Rubin GPU architecture.</p>
+
+                <p>This week also brings <strong>Micron earnings</strong>, where analysts raised estimates significantly on memory pricing strength. The semiconductor complex is attempting a bottom, but the <strong>helium supply risk from the Hormuz closure</strong> adds a wrinkle that wasn't in anyone's model two weeks ago.</p>
+
+                <div class="blockquotes"><div class="blockquotes-line"><strong>Proflex View:</strong> GTC is a conviction test for AI leadership, arriving at the exact moment the market needs something beyond oil to talk about. If Huang delivers on inference economics and product timelines, it could put a floor under the tech complex even as the broader market stays volatile. <strong><u>The secular AI theme still has a multi-year runway.</u></strong></div></div>
+
+                <hr>
+
+                <h3>Triple-Witching Friday: The Floor Could Drop</h3>
+
+                <p>Trillions of dollars in stock options, index options, and index futures all expire this Friday, March 20.</p>
+
+                <p>Market makers have been <strong>defending current support levels</strong> with hedging activity that keeps selling orderly. Think of it as scaffolding holding a building in place. After Friday, the scaffolding can come down.</p>
+
+                <img src="https://embed.filekitcdn.com/e/wvGw2xxCKr3Hp3vNQdhxcz/k6bn7PP8RaU4RUrTy8oZFr/email" alt="Options expiry chart" loading="lazy">
+
+                <p>The Fed's decision on Wednesday (96% odds of a hold) matters less for the rate itself and more for the <strong>updated dot plot</strong>, which tells the market how many cuts are still on the table.</p>
+
+                <p>The sequencing creates the trap. <strong>Fed Wednesday, then Witching Friday.</strong> If the dots signal fewer cuts, that repricing hits right before structural hedging protection vanishes.</p>
+
+                <div class="blockquotes"><div class="blockquotes-line"><strong>Proflex View:</strong> This is a test week for commentary &amp; volatility. The protection from options positioning unrolls after Friday. Don't chase any rally until you see how the market trades early the following week, once the structural floor has cleared.</div></div>
+
+                <hr>
+
+                <h3>Proflex Macro Watch: The Stagflation Bind</h3>
+
+                <p>Last week, Q4 GDP was <strong>revised down to 0.7%, half the initial estimate.</strong> At the same time, core PCE re-accelerated to 3.1%. Growth slowing while inflation rises. That's a stagflation setup, and oil is making it worse.</p>
+
+                <img src="https://www.bea.gov/system/files/gdp4q25-2nd-chart-02.png" alt="GDP chart" loading="lazy">
+
+                <p>February payrolls fell by 92,000. Unemployment ticked to 4.4%. The <strong><u>Fed faces a dual mandate conflict</u></strong>: cut to support jobs or hold to fight inflation. <strong><u>For now, the answer is hold.</u></strong></p>
+
+                <p>The 10-year yield jumped 13 bps on the week to 4.28%, with the 30-year approaching 4.90%. Bonds are failing their traditional safe-haven role because this shock is coming through energy prices, not a demand collapse.</p>
+
+                <div class="blockquotes"><div class="blockquotes-line"><strong>Proflex View:</strong> The macro is fragile but not broken. The real risk is sequencing. If oil stays elevated through Q1 earnings season, margin compression becomes real and stagflation goes from Wall Street debate to Main Street reality.</div></div>
+
+                <hr>
+
+                <h3>Bitcoin's Resilience and Gold's Speculative Reset</h3>
+
+                <p><strong>Bitcoin is doing something different this time.</strong> It rallied from the low $67,000s to ~$74k, up over 3% on the day alone. Unlike previous risk-off environments where BTC got crushed alongside equities, <strong><u>it appears to have bottomed in the $60,000-67,000 accumulation zone.</u></strong></p>
+
+                <p>Long-term holder selling has collapsed, down 87% from February peaks. <strong>Strategy continues buying</strong> thousands of BTC weekly. <strong>ETF outflows are stabilizing</strong> after four consecutive months of redemptions.</p>
+
+                <img src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb20261a3-0dee-49d9-b23e-16881f6672d3_3543x3543.png" alt="Bitcoin accumulation chart" loading="lazy" style="max-width:420px;">
+
+                <p><strong>Gold, meanwhile, is under surprising pressure.</strong> It slid from above $5,200 to the $5,000-5,040 range by Friday. <strong>High volatility is driving up margin costs</strong> and option premiums, flushing out leveraged players.</p>
+
+                <div class="blockquotes"><div class="blockquotes-line"><strong>Proflex View:</strong> Bitcoin's bottoming looks genuine, with strong-hand accumulation replacing weak-hand liquidation. Gold's pullback is speculative currently due to excessive volatility but as per our thesis, the structural bull-cycle remains intact.</div></div>
+
+                <hr>
+
+                <h3>Proflex Playbook — Discipline Over Direction</h3>
+
+                <p>The market is caught between a geopolitical crisis it can't model and a structural expiry event it can time to the hour. This is a week for tactical discipline.</p>
+
+                <ul>
+                    <li><strong>Focus on Structural Growth:</strong> Continue to overweight the secular AI theme, recognizing its multi-year runway.</li>
+                    <li><strong>Anticipate Shallow Corrections:</strong> Use dips as accumulation opportunities, not reasons for fear.</li>
+                    <li><strong>Diversify Thoughtfully:</strong> Recognize the "decorrelation" across asset classes; consider gold, silver and Bitcoin for portfolio resilience.</li>
+                    <li><strong>Develop Mental Models:</strong> Prioritize long-term planning (6-12 months out) over short-term news.</li>
+                </ul>
+
+                <p>If you're an <strong>All-Access or Managed Portfolio subscriber</strong>, our positioning has already shifted ahead of this moment — scaling up asymmetric hard asset plays while hedging for earnings volatility and geopolitical tail risks.</p>
+
+                <hr>
+
+                <p style="text-align:center;font-size:0.82rem;color:var(--text-muted);margin-top:24px;">Until next week,<br><strong>— The Proflex Team</strong><br><em>Trusted Macro Insights. Calm Investing. Tactical Trades.</em></p>
+
+            </div>
+            <div class="nl-reader-footer">
+                <span>Proflex Weekly by Blockstart Research</span>
+                <a href="https://blockstart.kit.com" target="_blank" class="btn btn-primary" style="padding:7px 16px;font-size:0.76rem;">Subscribe Free</a>
+            </div>
+        </div>
+    </div>
+
     <!-- ═══════════ FOOTER ═══════════ -->
     <footer class="footer">
         <div class="container">
@@ -2442,7 +2797,7 @@
         var actions = {
             resume: 'https://bit.ly/ParthProofofWork',
             call: 'https://calendly.com/parthbusinessofficialid/catchup-with-parth',
-            newsletter: 'https://blockstart.kit.com',
+            newsletter: 'inline:nlReader',
             email: 'mailto:parth@proflexfinance.com',
             linkedin: 'https://www.linkedin.com/in/parthkhanna1/',
             proflex: 'https://proflexfinance.com'
@@ -2479,7 +2834,11 @@
             if (items[activeIndex]) {
                 var action = items[activeIndex].dataset.action;
                 if (actions[action]) {
-                    if (action === 'email') {
+                    if (actions[action] === 'inline:nlReader') {
+                        closePalette();
+                        document.getElementById('nlReaderOverlay').classList.add('open');
+                        document.body.style.overflow = 'hidden';
+                    } else if (action === 'email') {
                         window.location.href = actions[action];
                     } else {
                         window.open(actions[action], '_blank');
@@ -2673,6 +3032,35 @@
             if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
                 localStorage.setItem('pk-cmd-seen', '1');
                 cmdTooltip.style.display = 'none';
+            }
+        });
+
+        /* ── Newsletter Reader Modal ── */
+        var nlOverlay = document.getElementById('nlReaderOverlay');
+        var nlClose = document.getElementById('nlReaderClose');
+        var nlOpen = document.getElementById('openNlReader');
+
+        nlOpen.addEventListener('click', function() {
+            nlOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+
+        nlClose.addEventListener('click', function() {
+            nlOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+
+        nlOverlay.addEventListener('click', function(e) {
+            if (e.target === nlOverlay) {
+                nlOverlay.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && nlOverlay.classList.contains('open')) {
+                nlOverlay.classList.remove('open');
+                document.body.style.overflow = '';
             }
         });
 
