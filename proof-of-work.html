@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parth Khanna — Proof of Work</title>
+    <meta name="description" content="Competition decks, research reports, and strategic deliverables by Parth Khanna.">
+    <link rel="icon" href="https://i.ibb.co/HpG4Q7XB/1697743215256.jpg" type="image/jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ══════════════════════════════════════════
+           DESIGN SYSTEM — matched to opus6portfolio
+           ══════════════════════════════════════════ */
+        :root {
+            --bg: #0c1220;
+            --bg-elevated: #111827;
+            --bg-card: #151d2e;
+            --surface: #1a2332;
+            --border: rgba(255,255,255,0.06);
+            --border-hover: rgba(255,255,255,0.12);
+            --text-primary: #e8e4dc;
+            --text-secondary: #8b919e;
+            --text-muted: #555d6e;
+            --accent: #b8965a;
+            --accent-dim: #96783f;
+            --accent-glow: rgba(184,150,90,0.08);
+            --blue: #4a6fa5;
+            --green: #34d399;
+            --paper: #f8f5ed;
+            --paper-text: #1a1a1a;
+            --radius: 10px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="light"] {
+            --bg: #f4f1ea;
+            --bg-elevated: #ebe7df;
+            --bg-card: #ffffff;
+            --surface: #f0ece4;
+            --border: rgba(0,0,0,0.07);
+            --border-hover: rgba(0,0,0,0.14);
+            --text-primary: #1a1a1a;
+            --text-secondary: #5a5a5a;
+            --text-muted: #8a8a8a;
+            --accent: #96783f;
+            --accent-dim: #7a6232;
+            --accent-glow: rgba(150,120,63,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--border) var(--bg); }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text-primary); overflow-x: hidden; -webkit-font-smoothing: antialiased; transition: background var(--transition), color var(--transition); }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; max-width: 100%; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* ══════════════════════════════════════════
+           NAV
+           ══════════════════════════════════════════ */
+        .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: background var(--transition); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px; }
+        .nav-links { display: flex; list-style: none; gap: 28px; }
+        .nav-links a { font-size: 0.78rem; color: var(--text-secondary); transition: color var(--transition); letter-spacing: 0.2px; font-weight: 400; }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-right { display: flex; align-items: center; gap: 8px; }
+        .theme-toggle { background: none; border: 1px solid var(--border); border-radius: 8px; width: 36px; height: 36px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 1rem; transition: all var(--transition); }
+        .theme-toggle:hover { border-color: var(--border-hover); color: var(--text-primary); }
+        .back-btn { font-size: 0.78rem; color: var(--text-secondary); background: var(--surface); border: 1px solid var(--border); padding: 6px 16px; border-radius: 8px; cursor: pointer; transition: all var(--transition); font-family: 'Outfit', sans-serif; }
+        .back-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* ══════════════════════════════════════════
+           HERO — compact
+           ══════════════════════════════════════════ */
+        .hero { padding: 140px 0 80px; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -300px; right: -200px; width: 800px; height: 800px; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%); pointer-events: none; }
+        .hero-overline { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+        .hero-overline::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+        .hero-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 700; letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; }
+        .hero-title span { color: var(--accent); }
+        .hero-desc { font-size: 1.05rem; color: var(--text-secondary); max-width: 580px; line-height: 1.7; font-weight: 300; margin-bottom: 36px; }
+
+        /* Stats strip */
+        .hero-stats { display: flex; gap: 40px; padding-top: 32px; border-top: 1px solid var(--border); }
+        .hero-stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--accent); letter-spacing: -1px; }
+        .hero-stat-label { font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; letter-spacing: 0.5px; }
+
+        /* ══════════════════════════════════════════
+           FILTER TABS
+           ══════════════════════════════════════════ */
+        .filter-bar { padding: 0 0 48px; position: sticky; top: 56px; z-index: 50; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(12px); padding-top: 20px; }
+        .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+        .filter-tab { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.8px; padding: 8px 18px; border-radius: 6px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); cursor: pointer; transition: all var(--transition); text-transform: uppercase; }
+        .filter-tab:hover { border-color: var(--border-hover); color: var(--text-secondary); }
+        .filter-tab.active { background: var(--accent); border-color: var(--accent); color: #0c1220; font-weight: 500; }
+        .filter-count { font-size: 0.78rem; color: var(--text-muted); margin-left: auto; align-self: center; }
+
+        /* ══════════════════════════════════════════
+           DECK GRID
+           ══════════════════════════════════════════ */
+        .deck-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; padding-bottom: 100px; }
+
+        .deck-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all var(--transition); cursor: pointer; position: relative; }
+        .deck-card:hover { border-color: var(--border-hover); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .deck-card[data-featured="true"] { grid-column: span 2; }
+        .deck-card[data-featured="true"] .deck-preview { height: 280px; }
+
+        /* Preview area — visual */
+        .deck-preview { height: 200px; position: relative; overflow: hidden; background: var(--surface); display: flex; align-items: center; justify-content: center; }
+        .deck-preview-bg { position: absolute; inset: 0; opacity: 0.12; background-size: cover; background-position: center; filter: blur(1px); transition: all 0.5s; }
+        .deck-card:hover .deck-preview-bg { opacity: 0.2; transform: scale(1.05); }
+
+        /* Geometric pattern overlays per category */
+        .deck-preview-pattern { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+        .pattern-lines { position: absolute; inset: 0; overflow: hidden; opacity: 0.06; }
+        .pattern-lines span { position: absolute; background: var(--accent); }
+
+        /* Document icon */
+        .deck-icon { position: relative; z-index: 2; width: 64px; height: 80px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 8px 32px rgba(0,0,0,0.3); transition: all var(--transition); }
+        .deck-card:hover .deck-icon { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); border-color: var(--accent); }
+        .deck-icon-type { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; color: var(--accent); letter-spacing: 1px; font-weight: 500; }
+        .deck-icon-ext { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+        .deck-icon-lines { display: flex; flex-direction: column; gap: 3px; align-items: center; margin-bottom: 6px; }
+        .deck-icon-lines span { width: 28px; height: 2px; background: var(--border-hover); border-radius: 1px; }
+        .deck-icon-lines span:last-child { width: 18px; }
+
+        /* Category accent stripe */
+        .deck-stripe { position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+        .deck-stripe.competition { background: var(--accent); }
+        .deck-stripe.research { background: var(--blue); }
+        .deck-stripe.strategy { background: var(--green); }
+        .deck-stripe.venture { background: #e879a0; }
+
+        /* Meta area */
+        .deck-meta { padding: 20px 24px 24px; }
+        .deck-tags { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+        .deck-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; letter-spacing: 0.8px; padding: 3px 10px; border-radius: 4px; text-transform: uppercase; font-weight: 500; }
+        .deck-tag.competition { background: var(--accent-glow); color: var(--accent); border: 1px solid rgba(184,150,90,0.15); }
+        .deck-tag.research { background: rgba(74,111,165,0.08); color: var(--blue); border: 1px solid rgba(74,111,165,0.15); }
+        .deck-tag.strategy { background: rgba(52,211,153,0.08); color: var(--green); border: 1px solid rgba(52,211,153,0.15); }
+        .deck-tag.venture { background: rgba(232,121,160,0.08); color: #e879a0; border: 1px solid rgba(232,121,160,0.15); }
+        .deck-tag.featured-tag { background: var(--accent); color: #0c1220; border: none; }
+
+        .deck-title { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: var(--text-primary); letter-spacing: -0.3px; margin-bottom: 6px; line-height: 1.35; }
+        .deck-desc { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.6; font-weight: 300; margin-bottom: 16px; }
+
+        .deck-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--border); }
+        .deck-date { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--text-muted); letter-spacing: 0.5px; }
+        .deck-org { font-size: 0.72rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+        .deck-org img { height: 14px; width: auto; opacity: 0.5; border-radius: 2px; }
+
+        .deck-cta { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: var(--accent); font-weight: 500; opacity: 0; transform: translateX(-8px); transition: all var(--transition); }
+        .deck-card:hover .deck-cta { opacity: 1; transform: translateX(0); }
+
+        /* ══════════════════════════════════════════
+           LIGHTBOX / VIEWER
+           ══════════════════════════════════════════ */
+        .viewer-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.92); backdrop-filter: blur(20px); display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+        .viewer-overlay.active { display: flex; opacity: 1; }
+        .viewer-close { position: absolute; top: 20px; right: 24px; background: none; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; width: 40px; height: 40px; color: #fff; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 10; }
+        .viewer-close:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); }
+        .viewer-content { width: 90vw; height: 85vh; border-radius: 12px; overflow: hidden; background: #fff; position: relative; }
+        .viewer-content iframe { width: 100%; height: 100%; border: none; }
+        .viewer-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px 28px; background: linear-gradient(transparent, rgba(0,0,0,0.85)); display: flex; justify-content: space-between; align-items: flex-end; }
+        .viewer-title { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: #fff; }
+        .viewer-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
+
+        /* ══════════════════════════════════════════
+           FOOTER
+           ══════════════════════════════════════════ */
+        .footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; }
+        .footer-text { font-size: 0.75rem; color: var(--text-muted); font-weight: 300; }
+        .footer-text a { color: var(--accent); }
+
+        /* ══════════════════════════════════════════
+           REVEAL ANIMATION
+           ══════════════════════════════════════════ */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ══════════════════════════════════════════
+           RESPONSIVE
+           ══════════════════════════════════════════ */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2rem; }
+            .hero-stats { flex-wrap: wrap; gap: 24px; }
+            .deck-grid { grid-template-columns: 1fr; }
+            .deck-card[data-featured="true"] { grid-column: span 1; }
+            .filter-tabs { gap: 4px; }
+            .filter-tab { padding: 6px 12px; font-size: 0.62rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════ NAV ═══════════ -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <div style="display:flex;align-items:center;gap:28px;">
+                <a href="#" class="nav-logo">Parth Khanna</a>
+                <ul class="nav-links">
+                    <li><a href="#decks">All Work</a></li>
+                    <li><a href="#" onclick="filterDecks('competition')">Competitions</a></li>
+                    <li><a href="#" onclick="filterDecks('research')">Research</a></li>
+                    <li><a href="#" onclick="filterDecks('strategy')">Strategy</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <a href="opus6portfolio.html" class="back-btn">&larr; Portfolio</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span id="themeIcon">&#9790;</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-overline reveal">Proof of Work</div>
+            <h1 class="hero-title reveal">The <span>Decks</span> That<br>Won the Room.</h1>
+            <p class="hero-desc reveal">Competition presentations, research reports, and strategic deliverables — each one judged by panels from BlackRock, Bain, Kearney, and more. Browse, read, and verify.</p>
+
+            <div class="hero-stats reveal">
+                <div>
+                    <div class="hero-stat-num" id="deckCount">7</div>
+                    <div class="hero-stat-label">Deliverables</div>
+                </div>
+                <div>
+                    <div class="hero-stat-num">15+</div>
+                    <div class="hero-stat-label">Competition Wins</div>
+                </div>
+                <div>
+                    <div class="hero-stat-num">6</div>
+                    <div class="hero-stat-label">Countries</div>
+                </div>
+                <div>
+                    <div class="hero-stat-num">$25Mn</div>
+                    <div class="hero-stat-label">AUM Managed</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ FILTER + GRID ═══════════ -->
+    <section class="container" id="decks">
+        <div class="filter-bar">
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" onclick="filterDecks('all')">All</button>
+                    <button class="filter-tab" onclick="filterDecks('competition')">Competitions</button>
+                    <button class="filter-tab" onclick="filterDecks('research')">Research</button>
+                    <button class="filter-tab" onclick="filterDecks('strategy')">Strategy</button>
+                    <button class="filter-tab" onclick="filterDecks('venture')">Venture</button>
+                </div>
+                <span class="filter-count"><span id="visibleCount">7</span> items</span>
+            </div>
+        </div>
+
+        <div class="deck-grid" id="deckGrid">
+
+            <!-- ═══ COMPETITION DECKS ═══ -->
+
+            <!-- IIM Ahmedabad — Winner (Featured) -->
+            <div class="deck-card reveal" data-category="competition" data-featured="true" onclick="openViewer(this)" data-pdf="decks/iima-winning.pdf">
+                <div class="deck-stripe competition"></div>
+                <div class="deck-preview">
+                    <div class="deck-preview-bg" style="background-image:url('decks/previews/iima-winning.png')"></div>
+                    <div class="deck-icon">
+                        <div class="deck-icon-lines"><span></span><span></span><span></span></div>
+                        <div class="deck-icon-ext">PDF</div>
+                        <div class="deck-icon-type">27 SLIDES</div>
+                    </div>
+                </div>
+                <div class="deck-meta">
+                    <div class="deck-tags">
+                        <span class="deck-tag featured-tag">Winner</span>
+                        <span class="deck-tag competition">Case Competition</span>
+                    </div>
+                    <div class="deck-title">IIM Ahmedabad — Armageddon Case Competition 2023</div>
+                    <div class="deck-desc">Revamping Costa Coffee for the youth segment using the Value Discipline Framework. Presented to IIMA faculty panel as Tri-Umphant Consulting.</div>
+                    <div class="deck-footer">
+                        <span class="deck-date">Nov 2023</span>
+                        <span class="deck-cta">View Deck &rarr;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IIM Bangalore — Winner -->
+            <div class="deck-card reveal" data-category="competition" onclick="openViewer(this)" data-pdf="decks/iimb-winning.pdf">
+                <div class="deck-stripe competition"></div>
+                <div class="deck-preview">
+                    <div class="deck-preview-bg" style="background-image:url('decks/previews/iimb-winning.png')"></div>
+                    <div class="deck-icon">
+                        <div class="deck-icon-lines"><span></span><span></span><span></span></div>
+                        <div class="deck-icon-ext">PDF</div>
+                        <div class="deck-icon-type">20 SLIDES</div>
+                    </div>
+                </div>
+                <div class="deck-meta">
+                    <div class="deck-tags">
+                        <span class="deck-tag featured-tag">Winner</span>
+                        <span class="deck-tag competition">Case Competition</span>
+                    </div>
+                    <div class="deck-title">IIM Bangalore — Eximius Creative Commerce 2023</div>
+                    <div class="deck-desc">Expansion strategy into sustainable corporate gifting for Craftopia. Winning deck as Four-Sight Consulting at IIMB.</div>
+                    <div class="deck-footer">
+                        <span class="deck-date">Nov 2023</span>
+                        <span class="deck-cta">View Deck &rarr;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bain — Finalist -->
+            <div class="deck-card reveal" data-category="competition" onclick="openViewer(this)" data-pdf="decks/bain-finalist.pdf">
+                <div class="deck-stripe competition"></div>
+                <div class="deck-preview">
+                    <div class="deck-preview-bg" style="background-image:url('decks/previews/bain-finalist.png')"></div>
+                    <div class="deck-icon">
+                        <div class="deck-icon-lines"><span></span><span></span><span></span></div>
+                        <div class="deck-icon-ext">PDF</div>
+                        <div class="deck-icon-type">30 SLIDES</div>
+                    </div>
+                </div>
+                <div class="deck-meta">
+                    <div class="deck-tags">
+                        <span class="deck-tag competition">Finalist</span>
+                        <span class="deck-tag strategy">Consulting</span>
+                    </div>
+                    <div class="deck-title">Bain & Company — BrAINWARS 2024 (Round 3)</div>
+                    <div class="deck-desc">Cloud migration and AI adoption strategy ("CODE") for ZenSoft. Multi-round competition finalist as J(RIP) Consulting, judged by Bain partners.</div>
+                    <div class="deck-footer">
+                        <span class="deck-date">Jul 2024</span>
+                        <span class="deck-cta">View Deck &rarr;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kearney — Microfinance -->
+            <div class="deck-card reveal" data-category="strategy" onclick="openViewer(this)" data-pdf="decks/kearney-microfinance.pdf">
+                <div class="deck-stripe strategy"></div>
+                <div class="deck-preview">
+                    <div class="deck-preview-bg" style="background-image:url('decks/previews/kearney-microfinance.png')"></div>
+                    <div class="deck-icon">
+                        <div class="deck-icon-lines"><span></span><span></span><span></span></div>
+                        <div class="deck-icon-ext">PDF</div>
+                        <div class="deck-icon-type">37 SLIDES</div>
+                    </div>
+                </div>
+                <div class="deck-meta">
+                    <div class="deck-tags"><span class="deck-tag strategy">Strategy</span></div>
+                    <div class="deck-title">Global Microfinance Case — Melbourne Initiative 2023</div>
+                    <div class="deck-desc">Building an inclusive and sustainable financial network (UFH). Presented as The Big Four, sponsored by Kearney.</div>
+                    <div class="deck-footer">
+                        <span class="deck-date">Feb 2024</span>
+                        <span class="deck-cta">View Deck &rarr;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- McGill Portfolio Challenge -->
+            <div class="deck-card reveal" data-category="research" onclick="openViewer(this)" data-pdf="decks/mcgill-portfolio.pdf">
+                <div class="deck-stripe research"></div>
+                <div class="deck-preview">
+                    <div class="deck-preview-bg" style="background-image:url('decks/previews/mcgill-portfolio.png')"></div>
+                    <div class="deck-icon">
+                        <div class="deck-icon-lines"><span></span><span></span><span></span></div>
+                        <div class="deck-icon-ext">PDF</div>
+                        <div class="deck-icon-type">46 SLIDES</div>
+                    </div>
+                </div>
+                <div class="deck-meta">
+                    <div class="deck-tags"><span class="deck-tag research">Portfolio</span></div>
+                    <div class="deck-title">McGill International Portfolio Challenge 2023</div>
+                    <div class="deck-desc">Inflationary-resilient decumulation strategy for Maple Leaf Pension Plan. Investment consulting as KIPS Consulting — the most comprehensive deck at 46 slides.</div>
+                    <div class="deck-footer">
+                        <span class="deck-date">2023</span>
+                        <span class="deck-cta">View Deck &rarr;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cornell Case -->
+            <div class="deck-card reveal" data-category="strategy" onclick="openViewer(this)" data-pdf="decks/cornell-case.pdf">
+                <div class="deck-stripe strategy"></div>
+                <div class="deck-preview">
+                    <div class="deck-preview-bg" style="background-image:url('decks/previews/cornell-case.png')"></div>
+                    <div class="deck-icon">
+                        <div class="deck-icon-lines"><span></span><span></span><span></span></div>
+                        <div class="deck-icon-ext">PDF</div>
+                        <div class="deck-icon-type">17 SLIDES</div>
+                    </div>
+                </div>
+                <div class="deck-meta">
+                    <div class="deck-tags"><span class="deck-tag strategy">Strategy</span></div>
+                    <div class="deck-title">Cornell University — Semiconductor Strategy Case</div>
+                    <div class="deck-desc">7-fold strategy to revive Brazil's semiconductor industry — fabless model, outsourcing, sectoral diversification, and policy reforms.</div>
+                    <div class="deck-footer">
+                        <span class="deck-date">Jan 2024</span>
+                        <span class="deck-cta">View Deck &rarr;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- IIM A — Finalist (Venture) -->
+            <div class="deck-card reveal" data-category="venture" onclick="openViewer(this)" data-pdf="decks/iima-finalist.pdf">
+                <div class="deck-stripe venture"></div>
+                <div class="deck-preview">
+                    <div class="deck-preview-bg" style="background-image:url('decks/previews/iima-finalist.png')"></div>
+                    <div class="deck-icon">
+                        <div class="deck-icon-lines"><span></span><span></span><span></span></div>
+                        <div class="deck-icon-ext">PDF</div>
+                        <div class="deck-icon-type">16 SLIDES</div>
+                    </div>
+                </div>
+                <div class="deck-meta">
+                    <div class="deck-tags">
+                        <span class="deck-tag competition">Finalist</span>
+                        <span class="deck-tag venture">Venture</span>
+                    </div>
+                    <div class="deck-title">IIM Ahmedabad — Aagaaz Entrepreneurship 2023</div>
+                    <div class="deck-desc">PLASTIFY — a plastic credit platform for sustainability. Business plan finalist at IIM Ahmedabad's flagship entrepreneurship competition.</div>
+                    <div class="deck-footer">
+                        <span class="deck-date">2023</span>
+                        <span class="deck-cta">View Deck &rarr;</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════ VIEWER LIGHTBOX ═══════════ -->
+    <div class="viewer-overlay" id="viewerOverlay" onclick="closeViewer(event)">
+        <button class="viewer-close" onclick="closeViewer(event)">&times;</button>
+        <div class="viewer-content" onclick="event.stopPropagation()">
+            <iframe id="viewerFrame" src=""></iframe>
+        </div>
+    </div>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">Parth Khanna &mdash; <a href="opus6portfolio.html">Back to Portfolio</a> &mdash; All deliverables are original work.</p>
+        </div>
+    </footer>
+
+    <!-- ═══════════ SCRIPTS ═══════════ -->
+    <script>
+        // Reveal on scroll
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+        // Theme toggle
+        var themeToggle = document.getElementById('themeToggle');
+        var themeIcon = document.getElementById('themeIcon');
+        themeToggle.addEventListener('click', function() {
+            var html = document.documentElement;
+            var isDark = html.getAttribute('data-theme') === 'dark';
+            html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            themeIcon.textContent = isDark ? '\u2600' : '\u263E';
+        });
+
+        // Filter
+        function filterDecks(category) {
+            var cards = document.querySelectorAll('.deck-card');
+            var tabs = document.querySelectorAll('.filter-tab');
+            var count = 0;
+
+            tabs.forEach(function(tab) {
+                tab.classList.remove('active');
+                if (tab.textContent.toLowerCase().includes(category) || (category === 'all' && tab.textContent === 'All')) {
+                    tab.classList.add('active');
+                }
+            });
+
+            cards.forEach(function(card) {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = '';
+                    count++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            document.getElementById('visibleCount').textContent = count;
+        }
+
+        // Viewer
+        function openViewer(card) {
+            var pdf = card.getAttribute('data-pdf');
+            if (!pdf) {
+                alert('PDF not yet linked. Add the Google Drive or Issuu embed URL to data-pdf attribute.');
+                return;
+            }
+            document.getElementById('viewerFrame').src = pdf;
+            document.getElementById('viewerOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeViewer(e) {
+            if (e) e.stopPropagation();
+            document.getElementById('viewerOverlay').classList.remove('active');
+            document.getElementById('viewerFrame').src = '';
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeViewer();
+        });
+    </script>
+
+</body>
+</html>
