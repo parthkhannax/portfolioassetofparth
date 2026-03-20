@@ -160,7 +160,13 @@
         .viewer-close { position: absolute; top: 20px; right: 24px; background: none; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; width: 40px; height: 40px; color: #fff; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 10; }
         .viewer-close:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); }
         .viewer-content { width: 90vw; height: 85vh; border-radius: 12px; overflow: hidden; background: #fff; position: relative; }
-        .viewer-content iframe { width: 100%; height: 100%; border: none; }
+        .viewer-content iframe, .viewer-content object { width: 100%; height: 100%; border: none; }
+        .viewer-download { display: none; position: absolute; inset: 0; flex-direction: column; align-items: center; justify-content: center; gap: 20px; background: #fff; text-align: center; padding: 40px; }
+        .viewer-download.active { display: flex; }
+        .viewer-download-icon { font-size: 3rem; opacity: 0.3; }
+        .viewer-download-text { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; color: #333; max-width: 280px; line-height: 1.6; }
+        .viewer-download-btn { font-family: 'Space Grotesk', sans-serif; padding: 14px 32px; background: #0c1220; color: #b8965a; font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; border-radius: 8px; transition: all 0.2s; }
+        .viewer-download-btn:hover { background: #b8965a; color: #0c1220; }
         .viewer-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px 28px; background: linear-gradient(transparent, rgba(0,0,0,0.85)); display: flex; justify-content: space-between; align-items: flex-end; }
         .viewer-title { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: #fff; }
         .viewer-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
@@ -189,6 +195,8 @@
             .filter-tabs { gap: 4px; }
             .filter-tab { padding: 6px 12px; font-size: 0.62rem; }
             .nav-links { display: none; }
+            .viewer-content { width: 100vw; height: 100vh; border-radius: 0; }
+            .viewer-close { top: 12px; right: 12px; }
         }
     </style>
 </head>
@@ -436,6 +444,11 @@
         <button class="viewer-close" onclick="closeViewer(event)">&times;</button>
         <div class="viewer-content" onclick="event.stopPropagation()">
             <iframe id="viewerFrame" src=""></iframe>
+            <div class="viewer-download" id="viewerDownload">
+                <div class="viewer-download-icon">&#128196;</div>
+                <div class="viewer-download-text">PDF viewer isn't supported on this device. Tap below to open the document directly.</div>
+                <a class="viewer-download-btn" id="viewerDirectLink" href="#" target="_blank">Open PDF</a>
+            </div>
         </div>
     </div>
 
@@ -494,15 +507,33 @@
         }
 
         // Viewer
+        var isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+
         function openViewer(card) {
             var pdf = card.getAttribute('data-pdf');
             if (!pdf) {
-                alert('PDF not yet linked. Add the Google Drive or Issuu embed URL to data-pdf attribute.');
+                alert('PDF not yet linked.');
                 return;
             }
+
+            if (isMobile) {
+                // Mobile: open PDF directly in new tab (iframes don't render PDFs on mobile)
+                window.open(pdf, '_blank');
+                return;
+            }
+
             document.getElementById('viewerFrame').src = pdf;
+            document.getElementById('viewerFrame').style.display = '';
+            document.getElementById('viewerDownload').classList.remove('active');
             document.getElementById('viewerOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            // Fallback: if iframe fails to load, show download button
+            document.getElementById('viewerFrame').onerror = function() {
+                document.getElementById('viewerFrame').style.display = 'none';
+                document.getElementById('viewerDirectLink').href = pdf;
+                document.getElementById('viewerDownload').classList.add('active');
+            };
         }
 
         function closeViewer(e) {
