@@ -799,13 +799,19 @@
             border-radius: 10px;
             cursor: pointer;
             transition: background var(--transition), color var(--transition);
+            background: transparent;
             border: 1px solid transparent;
+            -webkit-appearance: none;
+            appearance: none;
+            color: inherit;
+            text-align: left;
+            font: inherit;
         }
 
         .thesis-nav-item.active {
-            background: var(--bg-card);
-            border-color: var(--border);
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+            background: var(--surface);
+            border-color: var(--border-hover);
+            box-shadow: inset 0 0 0 1px rgba(184, 150, 90, 0.08);
         }
 
         .thesis-nav-number {
@@ -850,6 +856,7 @@
             min-height: 380px;
             display: flex;
             align-items: center;
+            background: var(--bg-card);
         }
 
         .thesis-panel {
@@ -858,12 +865,29 @@
             transform: translateY(8px);
             transition: opacity 0.3s ease, transform 0.3s ease;
             width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: color-mix(in srgb, var(--bg-card) 84%, var(--surface) 16%);
+            padding: 30px 30px 26px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .thesis-panel.active {
             display: block;
             opacity: 1;
             transform: translateY(0);
+        }
+
+        #panel-finance {
+            background: color-mix(in srgb, var(--bg-card) 80%, var(--surface) 20%);
+        }
+
+        #panel-competitions {
+            background: color-mix(in srgb, var(--bg-card) 86%, var(--surface) 14%);
+        }
+
+        #panel-builder {
+            background: color-mix(in srgb, var(--bg-card) 82%, var(--surface) 18%);
         }
 
         .thesis-panel-eyebrow {
@@ -1153,6 +1177,330 @@
         }
 
         /* ══════════════════════════════════════════
+           EXPERIENCE SHOWCASE — Editorial Spotlight
+           ══════════════════════════════════════════ */
+        .experience-showcase {
+            display: grid;
+            gap: 20px;
+        }
+
+        .exp-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .exp-feature-card {
+            background: linear-gradient(180deg,
+                    color-mix(in srgb, var(--bg-elevated) 42%, transparent) 0%,
+                    var(--bg-card) 100%);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 24px;
+            display: grid;
+            gap: 18px;
+            min-width: 0;
+            transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 14px 36px rgba(8, 14, 25, 0.16);
+        }
+
+        .exp-feature-card--proflex {
+            grid-column: span 7;
+        }
+
+        .exp-feature-card--goldfib {
+            grid-column: span 5;
+        }
+
+        .exp-feature-card:hover {
+            border-color: rgba(184, 150, 90, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 18px 40px rgba(8, 14, 25, 0.18);
+        }
+
+        .exp-feature-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .exp-feature-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1 1 280px;
+            min-width: 0;
+        }
+
+        .exp-feature-brand > div {
+            min-width: 0;
+        }
+
+        .exp-feature-logo-wrap {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.96);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .exp-feature-logo-wrap--dark {
+            background: #ffffff;
+        }
+
+        .exp-feature-logo {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+
+        .exp-feature-logo--goldfib {
+            width: 32px;
+            height: 32px;
+        }
+
+        .exp-feature-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
+            line-height: 1.25;
+        }
+
+        .exp-feature-location {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            line-height: 1.45;
+        }
+
+        .exp-feature-role-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid rgba(184, 150, 90, 0.22);
+            background: rgba(184, 150, 90, 0.07);
+            border-radius: 999px;
+            padding: 7px 11px;
+            flex-shrink: 0;
+            align-self: flex-start;
+            line-height: 1.4;
+        }
+
+        .exp-feature-copy {
+            display: grid;
+            gap: 10px;
+        }
+
+        .exp-feature-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.64rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .exp-feature-headline {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -1px;
+            color: var(--text-primary);
+            max-width: 12ch;
+        }
+
+        .exp-feature-card--goldfib .exp-feature-headline {
+            font-size: 1.55rem;
+            max-width: 14ch;
+        }
+
+        .exp-feature-blurb {
+            font-size: 0.94rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            max-width: 58ch;
+        }
+
+        .exp-feature-focus {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: -2px;
+        }
+
+        .exp-feature-focus-chip {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            background: color-mix(in srgb, var(--surface) 62%, transparent);
+            border-radius: 999px;
+            padding: 6px 10px;
+        }
+
+        .exp-feature-highlights {
+            display: grid;
+            gap: 10px;
+            list-style: none;
+        }
+
+        .exp-feature-highlight {
+            position: relative;
+            font-size: 0.86rem;
+            color: var(--text-secondary);
+            line-height: 1.62;
+            padding-left: 16px;
+        }
+
+        .exp-feature-highlight::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.62em;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .exp-feature-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+
+        .exp-feature-metric {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: color-mix(in srgb, var(--surface) 58%, transparent);
+            padding: 12px 12px 11px;
+            min-width: 0;
+        }
+
+        .exp-feature-metric-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.4px;
+            font-variant-numeric: tabular-nums;
+            line-height: 1.05;
+        }
+
+        .exp-feature-metric-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.56rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: 5px;
+            line-height: 1.45;
+        }
+
+        .exp-slider-shell {
+            display: grid;
+            gap: 12px;
+        }
+
+        .exp-rail {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px;
+        }
+
+        .exp-rail-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 0 2px;
+        }
+
+        .exp-rail-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .exp-rail-note {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .exp-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(170px, 1fr));
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 2px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+
+        .exp-mini-card {
+            min-width: 170px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: color-mix(in srgb, var(--surface) 64%, transparent);
+            padding: 10px;
+            display: grid;
+            gap: 6px;
+        }
+
+        .exp-mini-top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .exp-mini-logo {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .exp-mini-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.76rem;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .exp-mini-role {
+            font-size: 0.68rem;
+            color: var(--accent);
+            line-height: 1.3;
+        }
+
+        .exp-mini-impact {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            line-height: 1.35;
+        }
+
+        /* ══════════════════════════════════════════
            EXPERIENCE — Compact Cards
            ══════════════════════════════════════════ */
         .exp-compact-grid {
@@ -1164,26 +1512,30 @@
         .exp-compact-card {
             display: flex;
             align-items: flex-start;
-            gap: 14px;
+            gap: 13px;
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 18px 20px;
-            transition: border-color var(--transition);
+            border-radius: 12px;
+            padding: 16px 18px;
+            transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+            min-width: 0;
         }
 
         .exp-compact-card:hover {
-            border-color: var(--border-hover);
+            border-color: rgba(184, 150, 90, 0.28);
+            background: color-mix(in srgb, var(--bg-card) 85%, rgba(184,150,90,0.06));
+            transform: translateY(-1px);
         }
 
         .exp-compact-logo {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             object-fit: contain;
             flex-shrink: 0;
             margin-top: 2px;
-            opacity: 0.7;
-            transition: opacity var(--transition);
+            opacity: 0.65;
+            transition: opacity 0.18s ease;
+            border-radius: 6px;
         }
 
         [data-theme="light"] .exp-compact-logo {
@@ -1196,22 +1548,29 @@
 
         .exp-compact-name {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.88rem;
+            font-size: 0.86rem;
             font-weight: 600;
             color: var(--text-primary);
             letter-spacing: -0.3px;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .exp-compact-role {
-            font-size: 0.76rem;
+            font-size: 0.73rem;
             color: var(--accent);
-            margin-bottom: 4px;
+            margin-bottom: 5px;
+            line-height: 1.4;
         }
 
         .exp-compact-impact {
-            font-size: 0.72rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
             color: var(--text-muted);
+            letter-spacing: 0.03em;
+            line-height: 1.4;
         }
 
         /* ══ Hero Social Icons ══ */
@@ -1380,13 +1739,18 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             padding: 40px;
-            display: flex;
-            align-items: center;
-            gap: 40px;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 420px;
+            grid-template-areas:
+                "content image"
+                "actions image";
+            align-items: start;
+            column-gap: 40px;
+            row-gap: 20px;
         }
 
         .newsletter-content {
-            flex: 1;
+            grid-area: content;
         }
 
         .newsletter-tag {
@@ -1434,14 +1798,16 @@
         }
 
         .newsletter-image {
-            flex: 1;
-            max-width: 450px;
+            grid-area: image;
+            width: 100%;
+            max-width: 420px;
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--border);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transform: perspective(1000px) rotateY(-5deg) rotateX(2deg) scale(0.95);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
+            justify-self: end;
         }
 
         .newsletter-image img {
@@ -1461,86 +1827,254 @@
             opacity: 1;
         }
 
-        /* ══════════════════════════════════════════
-           TOOLBOX — Compact
-           ══════════════════════════════════════════ */
-        .toolbox-sections {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
+        .newsletter-actions {
+            grid-area: actions;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
-        .toolbox-block {
+        /* ══════════════════════════════════════════
+           TOOLBOX — Alternating Slider
+           ══════════════════════════════════════════ */
+        .toolbox-slider-shell {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 24px;
+            border-radius: 18px;
+            padding: 20px;
         }
 
-        .toolbox-block-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.62rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .toolbox-slider-head {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 16px;
             margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border);
         }
 
-        .toolbox-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tool-tag {
-            font-size: 0.78rem;
+        .toolbox-slider-subtitle {
             color: var(--text-secondary);
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 5px 12px;
-            border-radius: 6px;
-            transition: all var(--transition);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-width: 640px;
         }
 
-        .tool-tag:hover {
-            border-color: var(--border-hover);
-            color: var(--text-primary);
-        }
-
-        .toolbox-marquee {
-            margin-top: 16px;
-            overflow: hidden;
-            mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
-            -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
-        }
-
-        .toolbox-marquee-track {
-            display: flex;
-            width: max-content;
-            animation: marqueeScroll 20s linear infinite;
-            gap: 24px;
-            padding: 8px 0;
-        }
-
-        .toolbox-marquee-item {
+        .toolbox-controls {
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .toolbox-control {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: color-mix(in srgb, var(--surface) 82%, transparent);
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toolbox-control:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-1px);
+        }
+
+        .toolbox-slider {
+            display: flex;
+            gap: 16px;
+            overflow: hidden;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .toolbox-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .toolbox-slide {
+            min-width: 100%;
+            scroll-snap-align: start;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .toolbox-slide::after {
+            content: '';
+            position: absolute;
+            right: -30px;
+            top: -40px;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            opacity: 0.22;
+            pointer-events: none;
+        }
+
+        .toolbox-slide--a {
+            background: color-mix(in srgb, var(--bg-card) 76%, var(--surface) 24%);
+        }
+
+        .toolbox-slide--a::after {
+            background: radial-gradient(circle, rgba(184, 150, 90, 0.8), transparent 65%);
+        }
+
+        .toolbox-slide--b {
+            background: color-mix(in srgb, var(--bg-card) 80%, var(--surface) 20%);
+        }
+
+        .toolbox-slide--b::after {
+            background: radial-gradient(circle, rgba(52, 211, 153, 0.7), transparent 65%);
+        }
+
+        .toolbox-slide--c {
+            background: color-mix(in srgb, var(--bg-card) 78%, var(--surface) 22%);
+        }
+
+        .toolbox-slide--c::after {
+            background: radial-gradient(circle, rgba(74, 111, 165, 0.75), transparent 65%);
+        }
+
+        .toolbox-slide-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .toolbox-slide-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toolbox-slide-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .toolbox-slide-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.12rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.4px;
+        }
+
+        .toolbox-slide-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.64rem;
+            color: var(--accent);
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+        }
+
+        .toolbox-slide-desc {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            max-width: 860px;
+        }
+
+        .toolbox-chip-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+        }
+
+        .toolbox-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: color-mix(in srgb, var(--surface) 65%, transparent);
+            color: var(--text-primary);
+            font-size: 0.8rem;
+        }
+
+        .toolbox-chip-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
             flex-shrink: 0;
         }
 
-        .toolbox-marquee-item img {
-            height: 20px;
-            width: auto;
-            opacity: 0.5;
+        .toolbox-logo-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 4px;
         }
 
-        .toolbox-marquee-item span {
+        .toolbox-logo-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 11px;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--surface) 72%, transparent);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
             font-size: 0.72rem;
-            color: var(--text-muted);
-            white-space: nowrap;
+        }
+
+        .toolbox-logo-pill img {
+            width: 14px;
+            height: 14px;
+            object-fit: contain;
+            opacity: 0.9;
+        }
+
+        .toolbox-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .toolbox-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: transform var(--transition), background var(--transition);
+            padding: 0;
+        }
+
+        .toolbox-dot.active {
+            background: var(--accent);
+            transform: scale(1.25);
         }
 
         /* ══════════════════════════════════════════
@@ -1762,7 +2296,9 @@
             align-items: center;
         }
 
-        .cta-left {}
+        .cta-left {
+            min-width: 0;
+        }
 
         .cta-title {
             font-family: 'Space Grotesk', sans-serif;
@@ -2727,12 +3263,31 @@
                 gap: 32px;
             }
 
-            .toolbox-sections {
+            .services-grid {
                 grid-template-columns: 1fr;
             }
 
-            .services-grid {
+            .exp-feature-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .exp-feature-card--proflex,
+            .exp-feature-card--goldfib {
+                grid-column: auto;
+            }
+
+            .exp-feature-headline {
+                max-width: none;
+                font-size: 1.65rem;
+            }
+
+            .exp-feature-card--goldfib .exp-feature-headline {
+                font-size: 1.45rem;
+                max-width: none;
+            }
+
+            .exp-mini-grid {
+                grid-template-columns: repeat(5, minmax(150px, 1fr));
             }
         }
 
@@ -2850,8 +3405,19 @@
             }
 
             .newsletter-card {
-                flex-direction: column;
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "content"
+                    "image"
+                    "actions";
                 padding: 28px;
+                row-gap: 16px;
+            }
+
+            .newsletter-image {
+                justify-self: stretch;
+                max-width: none;
+                transform: none;
             }
 
             .beyond-stats {
@@ -2866,6 +3432,101 @@
 
             .cta-links {
                 justify-content: center;
+            }
+
+            .hero-grid {
+                gap: 24px;
+            }
+
+            .hero-left {
+                display: flex;
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .hero-photo-col {
+                width: auto;
+                padding: 0;
+                border-radius: 0;
+                border: none;
+                background: transparent;
+            }
+
+            .hero-video-wrap {
+                width: 100%;
+                max-width: 460px;
+                margin: 0 auto;
+            }
+
+            .hero-video-card {
+                height: clamp(420px, 70vw, 540px);
+                transform: none;
+            }
+
+            .hero-video-hook {
+                right: 14px;
+                top: 14px;
+                padding: 8px 12px;
+            }
+
+            .hero-video-hook span {
+                font-size: 0.68rem;
+            }
+
+            .toolbox-slider-head {
+                align-items: center;
+            }
+
+            .toolbox-slider-subtitle {
+                font-size: 0.82rem;
+            }
+
+            .toolbox-chip-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .exp-feature-head {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .exp-feature-role-pill {
+                align-self: flex-start;
+                max-width: 100%;
+                white-space: normal;
+            }
+
+            .exp-feature-brand {
+                width: 100%;
+                flex: 1 1 auto;
+            }
+
+            .exp-feature-card {
+                padding: 20px;
+            }
+
+            .exp-feature-headline {
+                font-size: 1.45rem;
+                line-height: 1.12;
+            }
+
+            .exp-feature-card--goldfib .exp-feature-headline {
+                font-size: 1.28rem;
+            }
+
+            .exp-feature-metrics {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .exp-feature-metric:last-child {
+                grid-column: 1 / -1;
+            }
+
+            .exp-rail-head {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
             }
         }
     </style>
@@ -2994,7 +3655,7 @@
                         <div class="hero-proof-item"><strong>CFA</strong> L2 Candidate</div>
                     </div>
                     <div class="hero-ctas">
-                        <button class="btn btn-primary" id="heroLetsTalk">Send a Quick Brief</button>
+                        <button class="btn btn-primary" id="heroLetsTalk">Say Hi</button>
                         <a href="https://calendly.com/parthbusinessofficialid/catchup-with-parth" target="_blank"
                             class="btn btn-outline">Book 20-Min Call</a>
                         <a href="proof-of-work.html" target="_blank" class="btn btn-outline">Proof of Work</a>
@@ -3283,152 +3944,193 @@
                 <h2 class="section-title">Experience</h2>
                 <p class="section-subtitle">From Silicon Valley firms to billion-dollar conglomerates.</p>
             </div>
-            <div class="timeline">
-
-                <div class="timeline-entry reveal">
-                    <div class="timeline-dot">
-                        <img src="https://48102387.fs1.hubspotusercontent-na1.net/hubfs/48102387/Proflex_Square200xLogo_TransparentBlack.png"
-                            alt="Proflex" style="background:#fff;border-radius:3px;padding:1px;">
-                    </div>
-                    <div class="timeline-header">
-                        <div class="timeline-company">Proflex by Blockstart LLC</div>
-                        <div class="timeline-role">Investment Research &middot; Product &middot; CRM &middot; Marketing
+            <div class="experience-showcase reveal">
+                <div class="exp-feature-grid">
+                    <article class="exp-feature-card exp-feature-card--proflex">
+                        <div class="exp-feature-head">
+                            <div class="exp-feature-brand">
+                                <div class="exp-feature-logo-wrap">
+                                    <img src="https://48102387.fs1.hubspotusercontent-na1.net/hubfs/48102387/Proflex_Square200xLogo_TransparentBlack.png"
+                                        alt="Proflex" class="exp-feature-logo">
+                                </div>
+                                <div>
+                                    <h3 class="exp-feature-title">Proflex by Blockstart LLC</h3>
+                                    <p class="exp-feature-location">Los Gatos, CA (Silicon Valley) · Remote</p>
+                                </div>
+                            </div>
+                            <span class="exp-feature-role-pill">Research · Product · Distribution</span>
                         </div>
-                    </div>
-                    <div class="timeline-location">Los Gatos, CA (Silicon Valley) &middot; Remote</div>
-                    <p class="timeline-desc">Multi-strategy investment firm across enterprise blockchain, digital
-                        assets, DeFi, and US markets. Running institutional-grade research, product development, CRM
-                        infrastructure, and marketing.</p>
-                    <ul class="timeline-bullets">
-                        <li>Weekly market intelligence covering SPX, options flow, Fed policy, AI valuations, and BTC
-                            macro</li>
-                        <li>Managing ~$25Mn AUM portfolios across multiple asset classes</li>
-                        <li>Building CRM, growth funnels, and product infrastructure from the ground up</li>
-                    </ul>
-                    <span class="timeline-impact">~$25Mn AUM &middot; US PE Fund &middot; Institutional Research</span>
+                        <div class="exp-feature-copy">
+                            <p class="exp-feature-eyebrow">Current Role · Institutional Finance</p>
+                            <h4 class="exp-feature-headline">Owning the research, product, and distribution loop for a Silicon Valley multi-strategy platform.</h4>
+                            <p class="exp-feature-blurb">I operate the full stack behind institutional-grade market intelligence, portfolio communication, and the systems that turn research into repeatable distribution.</p>
+                        </div>
+                        <div class="exp-feature-focus">
+                            <span class="exp-feature-focus-chip">Market Intelligence</span>
+                            <span class="exp-feature-focus-chip">Portfolio Views</span>
+                            <span class="exp-feature-focus-chip">Growth Systems</span>
+                        </div>
+                        <ul class="exp-feature-highlights">
+                            <li class="exp-feature-highlight">Publish weekly work across SPX, options flow, Fed policy, AI valuation, and BTC macro with an institutional lens.</li>
+                            <li class="exp-feature-highlight">Translate portfolio research into clear views, internal workflows, and investor-facing communication across the desk.</li>
+                            <li class="exp-feature-highlight">Built newsletter, CRM, and acquisition systems end-to-end so distribution compounds alongside the research itself.</li>
+                        </ul>
+                        <div class="exp-feature-metrics">
+                            <div class="exp-feature-metric">
+                                <div class="exp-feature-metric-value">~$25Mn</div>
+                                <div class="exp-feature-metric-label">Managed AUM context</div>
+                            </div>
+                            <div class="exp-feature-metric">
+                                <div class="exp-feature-metric-value">250+</div>
+                                <div class="exp-feature-metric-label">SV executive readers</div>
+                            </div>
+                            <div class="exp-feature-metric">
+                                <div class="exp-feature-metric-value">Multi-Strategy</div>
+                                <div class="exp-feature-metric-label">Institutional scope</div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="exp-feature-card exp-feature-card--goldfib">
+                        <div class="exp-feature-head">
+                            <div class="exp-feature-brand">
+                                <div class="exp-feature-logo-wrap exp-feature-logo-wrap--dark">
+                                    <img src="assets/logos/goldfib-capital.svg" alt="Goldfib Capital" class="exp-feature-logo exp-feature-logo--goldfib">
+                                </div>
+                                <div>
+                                    <h3 class="exp-feature-title">Goldfib Capital</h3>
+                                    <p class="exp-feature-location">Founder · India + US · Remote-first</p>
+                                </div>
+                            </div>
+                            <span class="exp-feature-role-pill">Founder · Built from scratch</span>
+                        </div>
+                        <div class="exp-feature-copy">
+                            <p class="exp-feature-eyebrow">Founder Story · Cross-Border Build</p>
+                            <h4 class="exp-feature-headline">Built a remote-first research team across India and the US.</h4>
+                            <p class="exp-feature-blurb">Goldfib was built as a founder-led research collective: tight execution, strong writing standards, and a talent base sourced from elite institutions across both markets.</p>
+                        </div>
+                        <div class="exp-feature-focus">
+                            <span class="exp-feature-focus-chip">Research Team</span>
+                            <span class="exp-feature-focus-chip">Founder-Led Ops</span>
+                            <span class="exp-feature-focus-chip">Cross-Border Talent</span>
+                        </div>
+                        <ul class="exp-feature-highlights">
+                            <li class="exp-feature-highlight">Brought together contributors from UVA, IIT Bombay, IIT Kharagpur, and St. Stephen's into one operating cadence.</li>
+                            <li class="exp-feature-highlight">Combined fundamental research, macro thinking, and technical tooling without overcomplicating the workflow.</li>
+                            <li class="exp-feature-highlight">Designed the team to stay lean, remote, and quality-first instead of bloated or process-heavy.</li>
+                        </ul>
+                        <div class="exp-feature-metrics">
+                            <div class="exp-feature-metric">
+                                <div class="exp-feature-metric-value">5+</div>
+                                <div class="exp-feature-metric-label">Institutions represented</div>
+                            </div>
+                            <div class="exp-feature-metric">
+                                <div class="exp-feature-metric-value">US + IN</div>
+                                <div class="exp-feature-metric-label">Cross-border</div>
+                            </div>
+                            <div class="exp-feature-metric">
+                                <div class="exp-feature-metric-value">2023</div>
+                                <div class="exp-feature-metric-label">Founded</div>
+                            </div>
+                        </div>
+                    </article>
                 </div>
 
-                <div class="timeline-entry reveal">
-                    <div class="timeline-dot"><span class="timeline-dot-text">GC</span></div>
-                    <div class="timeline-header">
-                        <div class="timeline-company">Goldfib Capital</div>
-                        <div class="timeline-role">Founder &middot; Financial Market Research</div>
+                <div class="exp-slider-shell">
+                    <div class="exp-rail-head">
+                        <div class="exp-rail-title">Earlier · Enterprise Live Projects</div>
+                        <div class="exp-rail-note">Auto-scrolls · hover to pause</div>
                     </div>
-                    <div class="timeline-location">India &middot; Remote</div>
-                    <p class="timeline-desc">Founded a financial market research team with members from University of
-                        Virginia, IIT Bombay, IIT KGP, St. Stephen's College, and SSCBS.</p>
-                    <span class="timeline-impact">UVA &middot; IIT Bombay &middot; IIT KGP &middot; Stephens</span>
-                    <div style="margin-top:14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-                        <span style="font-size:0.8rem;color:var(--text-muted);">Interested in our research?</span>
-                        <a href="mailto:partners@goldfibcapital.in" class="btn btn-outline"
-                            style="padding:6px 16px;font-size:0.76rem;">Write to Us</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Compact cards for other experience — horizontal slider -->
-            <div style="margin-top:40px;">
-                <div
-                    style="font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">
-                    Earlier &middot; Enterprise Live Projects</div>
-                <div class="exp-slider-track" id="expSlider">
-                    <div class="exp-slider-inner" id="expSliderInner">
-                        <div class="exp-compact-card">
-                            <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/1.5_degree_logo.avif"
-                                alt="1.5 Degree" class="exp-compact-logo" loading="lazy">
-                            <div>
-                                <div class="exp-compact-name">1.5 Degree</div>
-                                <div class="exp-compact-role">Generalist Intern &middot; Product, Sales, Marketing</div>
-                                <div class="exp-compact-impact">$1Mn Series-A &middot; Led teams from SRCC, BITS, IIT
-                                    KGP</div>
-                            </div>
-                        </div>
-                        <div class="exp-compact-card">
-                            <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Amazon_India_Logo.svg"
-                                alt="Amazon" class="exp-compact-logo" loading="lazy">
-                            <div>
-                                <div class="exp-compact-name">Amazon India</div>
-                                <div class="exp-compact-role">Live Project Lead &middot; Market Research</div>
-                                <div class="exp-compact-impact">25+ team &middot; Tier-2 &amp; 3 market analysis</div>
-                            </div>
-                        </div>
-                        <div class="exp-compact-card">
-                            <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Costa_Coffee-logo-DC0FF384B3-seeklogo.com-3-1.png"
-                                alt="Costa Coffee" class="exp-compact-logo" loading="lazy">
-                            <div>
-                                <div class="exp-compact-name">Costa Coffee India</div>
-                                <div class="exp-compact-role">Strategy &amp; Analytics Intern</div>
-                                <div class="exp-compact-impact">Python &middot; Geo-spatial mapping &middot; Competitive
-                                    BI</div>
-                            </div>
-                        </div>
-                        <div class="exp-compact-card">
-                            <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/The_Oberoi_Group_-_Logo.png"
-                                alt="Oberoi" class="exp-compact-logo" loading="lazy">
-                            <div>
-                                <div class="exp-compact-name">Oberoi Group</div>
-                                <div class="exp-compact-role">Strategy Consulting &middot; Project Lead</div>
-                                <div class="exp-compact-impact">30+ team &middot; 160 schools &middot; Board-level decks
+                    <div class="exp-slider-track" id="expSlider">
+                        <div class="exp-slider-inner" id="expSliderInner">
+                            <div class="exp-compact-card">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/1.5_degree_logo.avif"
+                                    alt="1.5 Degree" class="exp-compact-logo" loading="lazy">
+                                <div>
+                                    <div class="exp-compact-name">1.5 Degree</div>
+                                    <div class="exp-compact-role">Generalist Intern · Product, Sales, Marketing</div>
+                                    <div class="exp-compact-impact">$1Mn Series-A · Led teams from SRCC, BITS, IIT KGP</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="exp-compact-card">
-                            <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/realtime-logo.png"
-                                alt="RTAF" class="exp-compact-logo" loading="lazy">
-                            <div>
-                                <div class="exp-compact-name">Real Time Angel Fund</div>
-                                <div class="exp-compact-role">Angel Fund Operations</div>
-                                <div class="exp-compact-impact">$62Mn AUM &middot; 10 startups &middot; 300 investors
+                            <div class="exp-compact-card">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Amazon_India_Logo.svg"
+                                    alt="Amazon" class="exp-compact-logo" loading="lazy">
+                                <div>
+                                    <div class="exp-compact-name">Amazon India</div>
+                                    <div class="exp-compact-role">Live Project Lead · Market Research</div>
+                                    <div class="exp-compact-impact">25+ team · Tier-2 &amp; 3 market analysis</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="exp-compact-card" aria-hidden="true">
-                            <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/1.5_degree_logo.avif"
-                                alt="" class="exp-compact-logo" loading="lazy">
-                            <div>
-                                <div class="exp-compact-name">1.5 Degree</div>
-                                <div class="exp-compact-role">Generalist Intern &middot; Product, Sales, Marketing</div>
-                                <div class="exp-compact-impact">$1Mn Series-A &middot; Led teams from SRCC, BITS, IIT
-                                    KGP</div>
-                            </div>
-                        </div>
-                        <div class="exp-compact-card" aria-hidden="true">
-                            <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Amazon_India_Logo.svg"
-                                alt="" class="exp-compact-logo" loading="lazy">
-                            <div>
-                                <div class="exp-compact-name">Amazon India</div>
-                                <div class="exp-compact-role">Live Project Lead &middot; Market Research</div>
-                                <div class="exp-compact-impact">25+ team &middot; Tier-2 &amp; 3 market analysis</div>
-                            </div>
-                        </div>
-                        <div class="exp-compact-card" aria-hidden="true">
-                            <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Costa_Coffee-logo-DC0FF384B3-seeklogo.com-3-1.png"
-                                alt="" class="exp-compact-logo" loading="lazy">
-                            <div>
-                                <div class="exp-compact-name">Costa Coffee India</div>
-                                <div class="exp-compact-role">Strategy &amp; Analytics Intern</div>
-                                <div class="exp-compact-impact">Python &middot; Geo-spatial mapping &middot; Competitive
-                                    BI</div>
-                            </div>
-                        </div>
-                        <div class="exp-compact-card" aria-hidden="true">
-                            <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/The_Oberoi_Group_-_Logo.png"
-                                alt="" class="exp-compact-logo" loading="lazy">
-                            <div>
-                                <div class="exp-compact-name">Oberoi Group</div>
-                                <div class="exp-compact-role">Strategy Consulting &middot; Project Lead</div>
-                                <div class="exp-compact-impact">30+ team &middot; 160 schools &middot; Board-level decks
+                            <div class="exp-compact-card">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Costa_Coffee-logo-DC0FF384B3-seeklogo.com-3-1.png"
+                                    alt="Costa Coffee" class="exp-compact-logo" loading="lazy">
+                                <div>
+                                    <div class="exp-compact-name">Costa Coffee India</div>
+                                    <div class="exp-compact-role">Strategy &amp; Analytics Intern</div>
+                                    <div class="exp-compact-impact">Python · Geo-spatial mapping · Competitive BI</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="exp-compact-card" aria-hidden="true">
-                            <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/realtime-logo.png"
-                                alt="" class="exp-compact-logo" loading="lazy">
-                            <div>
-                                <div class="exp-compact-name">Real Time Angel Fund</div>
-                                <div class="exp-compact-role">Angel Fund Operations</div>
-                                <div class="exp-compact-impact">$62Mn AUM &middot; 10 startups &middot; 300 investors
+                            <div class="exp-compact-card">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/The_Oberoi_Group_-_Logo.png"
+                                    alt="Oberoi" class="exp-compact-logo" loading="lazy">
+                                <div>
+                                    <div class="exp-compact-name">Oberoi Group</div>
+                                    <div class="exp-compact-role">Strategy Consulting · Project Lead</div>
+                                    <div class="exp-compact-impact">30+ team · 160 schools · Board-level decks</div>
+                                </div>
+                            </div>
+                            <div class="exp-compact-card">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/realtime-logo.png"
+                                    alt="RTAF" class="exp-compact-logo" loading="lazy">
+                                <div>
+                                    <div class="exp-compact-name">Real Time Angel Fund</div>
+                                    <div class="exp-compact-role">Angel Fund Operations</div>
+                                    <div class="exp-compact-impact">$62Mn AUM · 10 startups · 300 investors</div>
+                                </div>
+                            </div>
+                            <div class="exp-compact-card" aria-hidden="true">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/1.5_degree_logo.avif"
+                                    alt="" class="exp-compact-logo" loading="lazy">
+                                <div>
+                                    <div class="exp-compact-name">1.5 Degree</div>
+                                    <div class="exp-compact-role">Generalist Intern · Product, Sales, Marketing</div>
+                                    <div class="exp-compact-impact">$1Mn Series-A · Led teams from SRCC, BITS, IIT KGP</div>
+                                </div>
+                            </div>
+                            <div class="exp-compact-card" aria-hidden="true">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Amazon_India_Logo.svg"
+                                    alt="" class="exp-compact-logo" loading="lazy">
+                                <div>
+                                    <div class="exp-compact-name">Amazon India</div>
+                                    <div class="exp-compact-role">Live Project Lead · Market Research</div>
+                                    <div class="exp-compact-impact">25+ team · Tier-2 &amp; 3 market analysis</div>
+                                </div>
+                            </div>
+                            <div class="exp-compact-card" aria-hidden="true">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/Costa_Coffee-logo-DC0FF384B3-seeklogo.com-3-1.png"
+                                    alt="" class="exp-compact-logo" loading="lazy">
+                                <div>
+                                    <div class="exp-compact-name">Costa Coffee India</div>
+                                    <div class="exp-compact-role">Strategy &amp; Analytics Intern</div>
+                                    <div class="exp-compact-impact">Python · Geo-spatial mapping · Competitive BI</div>
+                                </div>
+                            </div>
+                            <div class="exp-compact-card" aria-hidden="true">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/The_Oberoi_Group_-_Logo.png"
+                                    alt="" class="exp-compact-logo" loading="lazy">
+                                <div>
+                                    <div class="exp-compact-name">Oberoi Group</div>
+                                    <div class="exp-compact-role">Strategy Consulting · Project Lead</div>
+                                    <div class="exp-compact-impact">30+ team · 160 schools · Board-level decks</div>
+                                </div>
+                            </div>
+                            <div class="exp-compact-card" aria-hidden="true">
+                                <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/logos/brands/realtime-logo.png"
+                                    alt="" class="exp-compact-logo" loading="lazy">
+                                <div>
+                                    <div class="exp-compact-name">Real Time Angel Fund</div>
+                                    <div class="exp-compact-role">Angel Fund Operations</div>
+                                    <div class="exp-compact-impact">$62Mn AUM · 10 startups · 300 investors</div>
                                 </div>
                             </div>
                         </div>
@@ -3552,17 +4254,17 @@
                         <span class="newsletter-pill">Options Flow</span>
                         <span class="newsletter-pill">Fed Policy</span>
                     </div>
-                    <div style="font-size:0.74rem;color:var(--text-muted);margin-bottom:14px;">Join <strong
+                    <div class="newsletter-social-proof" style="font-size:0.74rem;color:var(--text-muted);margin-bottom:0;">Join <strong
                             style="color:var(--accent);">250+ Silicon Valley executives</strong> who read this every
                         week.</div>
-                    <div style="display:flex;gap:12px;flex-wrap:wrap;">
-                        <a href="https://blockstart.kit.com" target="_blank" class="btn btn-primary">Subscribe Free</a>
-                        <button class="btn btn-outline" id="openNlReader">Read Latest Issue</button>
-                    </div>
                 </div>
                 <div class="newsletter-image">
                     <img src="https://raw.githubusercontent.com/parthkhannax/imageuploads/main/newsletter.png"
                         alt="Newsletter Snapshot" loading="lazy">
+                </div>
+                <div class="newsletter-actions">
+                    <a href="https://blockstart.kit.com" target="_blank" class="btn btn-primary">Subscribe Free</a>
+                    <button class="btn btn-outline" id="openNlReader">Read Latest Issue</button>
                 </div>
             </div>
         </div>
@@ -3641,42 +4343,94 @@
                 <div class="divider"></div>
                 <h2 class="section-title">Toolbox</h2>
             </div>
-            <div class="toolbox-sections reveal-stagger reveal">
-                <div class="toolbox-block">
-                    <div class="toolbox-block-title">Finance & Research</div>
-                    <div class="toolbox-tags">
-                        <span class="tool-tag">Investment Research</span>
-                        <span class="tool-tag">Equity Valuation</span>
-                        <span class="tool-tag">Options & Derivatives</span>
-                        <span class="tool-tag">Financial Modelling</span>
-                        <span class="tool-tag">Portfolio Construction</span>
-                        <span class="tool-tag">Macro & Fed Policy</span>
-                        <span class="tool-tag">DeFi & Digital Assets</span>
+            <div class="toolbox-slider-shell reveal">
+                <div class="toolbox-slider-head">
+                    <p class="toolbox-slider-subtitle">An alternating, swipe-friendly capability slider across finance research, growth execution, and software platforms.</p>
+                    <div class="toolbox-controls">
+                        <button class="toolbox-control" id="toolboxPrev" aria-label="Previous toolbox slide">&#8592;</button>
+                        <button class="toolbox-control" id="toolboxNext" aria-label="Next toolbox slide">&#8594;</button>
                     </div>
                 </div>
-                <div class="toolbox-block">
-                    <div class="toolbox-block-title">Growth & Operations</div>
-                    <div class="toolbox-tags">
-                        <span class="tool-tag">CRM & Funnels</span>
-                        <span class="tool-tag">Newsletter Growth</span>
-                        <span class="tool-tag">Product Dev</span>
-                        <span class="tool-tag">Startup Advisory</span>
-                        <span class="tool-tag">Market Research</span>
-                        <span class="tool-tag">Competitive Intel</span>
-                    </div>
+
+                <div class="toolbox-slider" id="toolboxSlider">
+                    <article class="toolbox-slide toolbox-slide--a">
+                        <div class="toolbox-slide-top">
+                            <div class="toolbox-slide-title-wrap">
+                                <span class="toolbox-slide-icon">&#128200;</span>
+                                <h3 class="toolbox-slide-title">Finance & Research</h3>
+                            </div>
+                            <span class="toolbox-slide-meta">01 · Institutional stack</span>
+                        </div>
+                        <p class="toolbox-slide-desc">Core tools used for market structure work, valuation, derivatives framing, and portfolio decisions.</p>
+                        <div class="toolbox-chip-grid">
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128269;</span>Investment Research</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128176;</span>Equity Valuation</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128202;</span>Options & Derivatives</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128187;</span>Financial Modelling</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#127919;</span>Portfolio Construction</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#127757;</span>Macro & Fed Policy</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128279;</span>DeFi & Digital Assets</span>
+                        </div>
+                        <div class="toolbox-logo-row">
+                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/tradingview/131722" alt="TradingView">TradingView</span>
+                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/bloomberg/000000" alt="Bloomberg">Bloomberg</span>
+                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/bitcoin/F7931A" alt="Bitcoin">Bitcoin Data</span>
+                        </div>
+                    </article>
+
+                    <article class="toolbox-slide toolbox-slide--b">
+                        <div class="toolbox-slide-top">
+                            <div class="toolbox-slide-title-wrap">
+                                <span class="toolbox-slide-icon">&#128640;</span>
+                                <h3 class="toolbox-slide-title">Growth & Operations</h3>
+                            </div>
+                            <span class="toolbox-slide-meta">02 · Build + distribute</span>
+                        </div>
+                        <p class="toolbox-slide-desc">Execution stack for newsletters, GTM systems, and founder-led operating cadence.</p>
+                        <div class="toolbox-chip-grid">
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#129309;</span>CRM & Funnels</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128233;</span>Newsletter Growth</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#9881;</span>Product Development</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#127970;</span>Startup Advisory</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128269;</span>Market Research</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#9878;</span>Competitive Intel</span>
+                        </div>
+                        <div class="toolbox-logo-row">
+                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/hubspot/FF7A59" alt="HubSpot">HubSpot</span>
+                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/apollo/311C87" alt="Apollo">Apollo.io</span>
+                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="LinkedIn">LinkedIn</span>
+                        </div>
+                    </article>
+
+                    <article class="toolbox-slide toolbox-slide--c">
+                        <div class="toolbox-slide-top">
+                            <div class="toolbox-slide-title-wrap">
+                                <span class="toolbox-slide-icon">&#128187;</span>
+                                <h3 class="toolbox-slide-title">Software & Platforms</h3>
+                            </div>
+                            <span class="toolbox-slide-meta">03 · Technical execution</span>
+                        </div>
+                        <p class="toolbox-slide-desc">Code, automation, and analytics stack used to ship quickly across research and product workflows.</p>
+                        <div class="toolbox-chip-grid">
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128013;</span>Python</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#127760;</span>HTML/CSS/JS</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#129302;</span>Claude Code</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128196;</span>Excel / Google Sheets</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128200;</span>TradingView</span>
+                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128737;</span>Bloomberg Terminal</span>
+                        </div>
+                        <div class="toolbox-logo-row">
+                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python">Python</span>
+                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript">JavaScript</span>
+                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/googlesheets/34A853" alt="Google Sheets">Google Sheets</span>
+                        </div>
+                    </article>
                 </div>
-                <div class="toolbox-block" style="grid-column:1/-1;">
-                    <div class="toolbox-block-title">Software & Platforms</div>
-                    <div class="toolbox-tags">
-                        <span class="tool-tag">Python</span>
-                        <span class="tool-tag">HTML/CSS/JS</span>
-                        <span class="tool-tag">HubSpot</span>
-                        <span class="tool-tag">TradingView</span>
-                        <span class="tool-tag">Claude Code</span>
-                        <span class="tool-tag">Apollo.io</span>
-                        <span class="tool-tag">Bloomberg Terminal</span>
-                        <span class="tool-tag">Excel / Google Sheets</span>
-                    </div>
+
+                <div class="toolbox-dots">
+                    <button class="toolbox-dot active" data-toolbox-index="0" aria-label="Go to finance slide"></button>
+                    <button class="toolbox-dot" data-toolbox-index="1" aria-label="Go to growth slide"></button>
+                    <button class="toolbox-dot" data-toolbox-index="2" aria-label="Go to software slide"></button>
                 </div>
             </div>
         </div>
@@ -4340,15 +5094,9 @@
             var heroLetsTalk = document.getElementById('heroLetsTalk');
             if (heroLetsTalk) {
                 heroLetsTalk.addEventListener('click', function () {
-                    // Scroll to contact section first
-                    var contactSection = document.getElementById('connect');
-                    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Open popup after scroll
-                    setTimeout(function () {
-                        popupOpen = true;
-                        floatPill.classList.add('visible');
-                        floatPopup.classList.add('open');
-                    }, 600);
+                    popupOpen = true;
+                    floatPill.classList.add('visible');
+                    floatPopup.classList.add('open');
                 });
             }
 
@@ -4519,6 +5267,93 @@
                     }
                 });
             });
+
+            /* ── Toolbox Slider Controls ── */
+            var toolboxSlider = document.getElementById('toolboxSlider');
+            var toolboxPrev = document.getElementById('toolboxPrev');
+            var toolboxNext = document.getElementById('toolboxNext');
+            var toolboxDots = document.querySelectorAll('.toolbox-dot');
+
+            if (toolboxSlider && toolboxPrev && toolboxNext && toolboxDots.length) {
+                var toolboxSlides = toolboxSlider.querySelectorAll('.toolbox-slide');
+                var activeToolboxIndex = 0;
+                var toolboxTimer = null;
+
+                var syncToolboxDots = function (index) {
+                    toolboxDots.forEach(function (dot, i) {
+                        dot.classList.toggle('active', i === index);
+                    });
+                };
+
+                var goToToolboxSlide = function (index, smooth) {
+                    if (!toolboxSlides.length) return;
+                    if (index < 0) index = toolboxSlides.length - 1;
+                    if (index >= toolboxSlides.length) index = 0;
+                    activeToolboxIndex = index;
+                    var targetLeft = toolboxSlides[index].offsetLeft;
+                    toolboxSlider.scrollTo({ left: targetLeft, behavior: smooth ? 'smooth' : 'auto' });
+                    syncToolboxDots(index);
+                };
+
+                var detectToolboxIndexFromScroll = function () {
+                    var sliderLeft = toolboxSlider.scrollLeft;
+                    var nearest = 0;
+                    var minDistance = Infinity;
+
+                    toolboxSlides.forEach(function (slide, i) {
+                        var dist = Math.abs(slide.offsetLeft - sliderLeft);
+                        if (dist < minDistance) {
+                            minDistance = dist;
+                            nearest = i;
+                        }
+                    });
+
+                    if (nearest !== activeToolboxIndex) {
+                        activeToolboxIndex = nearest;
+                        syncToolboxDots(nearest);
+                    }
+                };
+
+                var restartToolboxAuto = function () {
+                    if (toolboxTimer) clearInterval(toolboxTimer);
+                    toolboxTimer = setInterval(function () {
+                        goToToolboxSlide(activeToolboxIndex + 1, true);
+                    }, 5500);
+                };
+
+                toolboxPrev.addEventListener('click', function () {
+                    goToToolboxSlide(activeToolboxIndex - 1, true);
+                    restartToolboxAuto();
+                });
+
+                toolboxNext.addEventListener('click', function () {
+                    goToToolboxSlide(activeToolboxIndex + 1, true);
+                    restartToolboxAuto();
+                });
+
+                toolboxDots.forEach(function (dot) {
+                    dot.addEventListener('click', function () {
+                        var idx = parseInt(dot.getAttribute('data-toolbox-index') || '0', 10);
+                        goToToolboxSlide(idx, true);
+                        restartToolboxAuto();
+                    });
+                });
+
+                toolboxSlider.addEventListener('scroll', function () {
+                    window.requestAnimationFrame(detectToolboxIndexFromScroll);
+                });
+
+                toolboxSlider.addEventListener('mouseenter', function () {
+                    if (toolboxTimer) clearInterval(toolboxTimer);
+                });
+
+                toolboxSlider.addEventListener('mouseleave', function () {
+                    restartToolboxAuto();
+                });
+
+                goToToolboxSlide(0, false);
+                restartToolboxAuto();
+            }
 
             /* ── Magnetic Button Effect ── */
             document.querySelectorAll('.btn-primary').forEach(function (btn) {
