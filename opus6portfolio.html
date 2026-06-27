@@ -1838,49 +1838,21 @@
         }
 
         /* ══════════════════════════════════════════
-           TOOLBOX — Premium Dark Slider
+           TOOLBOX — Horizontal Marquee
            ══════════════════════════════════════════ */
-        #toolbox {
-            background: #0d1117;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            padding-top: 80px;
-            padding-bottom: 80px;
-            transition: none;
-        }
-        #toolbox .section-title {
-            color: #f0f0f0;
-        }
-        #toolbox .divider {
-            background: var(--accent);
-        }
-
-        .toolbox-slider-shell {
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            padding: 0;
-        }
-
-        .toolbox-slider-head {
+        .toolbox-intro {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 16px;
-            margin-bottom: 28px;
+            margin-bottom: 36px;
         }
 
-        .toolbox-slider-subtitle {
-            color: #8b949e;
+        .toolbox-subtitle {
+            color: var(--text-secondary);
             font-size: 0.88rem;
             line-height: 1.6;
             max-width: 560px;
-        }
-
-        .toolbox-head-right {
-            display: flex;
-            align-items: center;
-            gap: 14px;
         }
 
         .toolbox-pow-cta {
@@ -1894,7 +1866,7 @@
             padding: 10px 20px;
             border-radius: 8px;
             background: var(--accent);
-            color: #0d1117;
+            color: var(--bg);
             border: none;
             cursor: pointer;
             text-decoration: none;
@@ -1902,277 +1874,82 @@
             white-space: nowrap;
         }
         .toolbox-pow-cta:hover {
-            background: #caa564;
+            filter: brightness(1.15);
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(184,150,90,0.3);
-        }
-        .toolbox-pow-cta svg {
-            width: 14px;
-            height: 14px;
-            fill: currentColor;
+            box-shadow: 0 6px 20px rgba(184,150,90,0.25);
         }
 
-        .toolbox-controls {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .toolbox-control {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.04);
-            color: #c9d1d9;
-            cursor: pointer;
-            font-size: 1.05rem;
-            transition: all 0.25s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-        }
-        .toolbox-control:hover {
-            border-color: rgba(255,255,255,0.18);
-            background: rgba(255,255,255,0.08);
-            transform: translateY(-1px);
-        }
-
-        .toolbox-slider {
-            display: flex;
-            gap: 0;
+        .toolbox-marquee {
             overflow: hidden;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-        }
-        .toolbox-slider::-webkit-scrollbar {
-            display: none;
+            mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
         }
 
-        .toolbox-slide {
-            min-width: 100%;
-            scroll-snap-align: start;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.06);
-            padding: 32px;
+        .toolbox-marquee-row {
             display: flex;
-            flex-direction: column;
-            gap: 22px;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(145deg, rgba(22,27,34,1) 0%, rgba(13,17,23,1) 100%);
-            transition: border-color 0.35s ease;
-        }
-        .toolbox-slide:hover {
-            border-color: rgba(255,255,255,0.1);
-        }
-
-        .toolbox-slide::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 20px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-        }
-        .toolbox-slide:hover::before {
-            opacity: 1;
-        }
-
-        .toolbox-slide::after {
-            content: '';
-            position: absolute;
-            right: -40px;
-            top: -50px;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            opacity: 0.12;
-            pointer-events: none;
-            filter: blur(30px);
-        }
-
-        .toolbox-slide--a {
-            background: linear-gradient(145deg, #161b22 0%, #0d1117 100%);
-        }
-        .toolbox-slide--a::before {
-            background: linear-gradient(145deg, rgba(184,150,90,0.03) 0%, transparent 50%);
-        }
-        .toolbox-slide--a::after {
-            background: radial-gradient(circle, rgba(184,150,90,0.6), transparent 65%);
-        }
-
-        .toolbox-slide--b {
-            background: linear-gradient(145deg, #161b22 0%, #0d1117 100%);
-        }
-        .toolbox-slide--b::before {
-            background: linear-gradient(145deg, rgba(52,211,153,0.03) 0%, transparent 50%);
-        }
-        .toolbox-slide--b::after {
-            background: radial-gradient(circle, rgba(52,211,153,0.5), transparent 65%);
-        }
-
-        .toolbox-slide--c {
-            background: linear-gradient(145deg, #161b22 0%, #0d1117 100%);
-        }
-        .toolbox-slide--c::before {
-            background: linear-gradient(145deg, rgba(74,111,165,0.03) 0%, transparent 50%);
-        }
-        .toolbox-slide--c::after {
-            background: radial-gradient(circle, rgba(74,111,165,0.55), transparent 65%);
-        }
-
-        .toolbox-slide-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             gap: 14px;
-            flex-wrap: wrap;
+            width: max-content;
+            padding: 7px 0;
         }
 
-        .toolbox-slide-title-wrap {
+        .toolbox-marquee-left {
+            animation: toolbox-scroll-left 40s linear infinite;
+        }
+        .toolbox-marquee-right {
+            animation: toolbox-scroll-right 40s linear infinite;
+        }
+
+        .toolbox-marquee:hover .toolbox-marquee-row {
+            animation-play-state: paused;
+        }
+
+        @keyframes toolbox-scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes toolbox-scroll-right {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        .toolbox-card {
             display: flex;
             align-items: center;
             gap: 12px;
-        }
-
-        .toolbox-slide-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-        }
-
-        .toolbox-slide-title {
+            padding: 16px 22px;
+            border-radius: 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #f0f6fc;
-            letter-spacing: -0.4px;
+            font-size: 0.84rem;
+            font-weight: 500;
+            letter-spacing: -0.2px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+        }
+        .toolbox-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
         }
 
-        .toolbox-slide-meta {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.62rem;
-            color: var(--accent);
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            background: rgba(184,150,90,0.08);
-            padding: 5px 10px;
-            border-radius: 6px;
-            border: 1px solid rgba(184,150,90,0.12);
-        }
-
-        .toolbox-slide-desc {
-            color: #8b949e;
-            font-size: 0.86rem;
-            line-height: 1.7;
-            max-width: 860px;
-        }
-
-        .toolbox-chip-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 10px;
-        }
-
-        .toolbox-chip {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 14px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.06);
-            background: rgba(255,255,255,0.03);
-            color: #c9d1d9;
-            font-size: 0.82rem;
-            transition: all 0.25s ease;
-        }
-        .toolbox-chip:hover {
-            border-color: rgba(255,255,255,0.12);
-            background: rgba(255,255,255,0.06);
-            transform: translateY(-1px);
-        }
-
-        .toolbox-chip-dot {
+        .toolbox-card img {
             width: 22px;
             height: 22px;
-            border-radius: 7px;
-            background: rgba(255,255,255,0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.74rem;
+            object-fit: contain;
             flex-shrink: 0;
         }
 
-        .toolbox-logo-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 6px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(255,255,255,0.04);
-        }
-
-        .toolbox-logo-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 14px;
-            border-radius: 999px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
-            color: #8b949e;
+        .toolbox-card-text-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
             font-size: 0.72rem;
-            transition: all 0.25s ease;
-        }
-        .toolbox-logo-pill:hover {
-            border-color: rgba(255,255,255,0.12);
-            background: rgba(255,255,255,0.07);
-        }
-
-        .toolbox-logo-pill img {
-            width: 14px;
-            height: 14px;
-            object-fit: contain;
-            opacity: 0.85;
-        }
-
-        .toolbox-dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 20px;
-        }
-
-        .toolbox-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            border: none;
-            background: rgba(255,255,255,0.12);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            padding: 0;
-        }
-        .toolbox-dot:hover {
-            background: rgba(255,255,255,0.25);
-        }
-        .toolbox-dot.active {
-            background: var(--accent);
-            transform: scale(1.3);
-            box-shadow: 0 0 10px rgba(184,150,90,0.3);
+            letter-spacing: 0.5px;
+            color: var(--accent);
+            flex-shrink: 0;
         }
 
         /* ══════════════════════════════════════════
@@ -3575,27 +3352,24 @@
                 font-size: 0.68rem;
             }
 
-            .toolbox-slider-head {
+            .toolbox-intro {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 14px;
             }
 
-            .toolbox-head-right {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .toolbox-slider-subtitle {
+            .toolbox-subtitle {
                 font-size: 0.82rem;
             }
 
-            .toolbox-chip-grid {
-                grid-template-columns: 1fr;
+            .toolbox-card {
+                padding: 12px 16px;
+                font-size: 0.78rem;
             }
 
-            .toolbox-slide {
-                padding: 20px;
+            .toolbox-card img {
+                width: 18px;
+                height: 18px;
             }
 
             .exp-feature-head {
@@ -4456,101 +4230,49 @@
                 <div class="divider"></div>
                 <h2 class="section-title">Toolbox</h2>
             </div>
-            <div class="toolbox-slider-shell reveal">
-                <div class="toolbox-slider-head">
-                    <p class="toolbox-slider-subtitle">Swipe through my capability stack — finance research, growth execution, and software platforms.</p>
-                    <div class="toolbox-head-right">
-                        <a href="https://parthkhannax.github.io/portfolioassetofparth/proof-of-work.html" target="_blank" class="toolbox-pow-cta">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            Proof of Work
-                        </a>
-                        <div class="toolbox-controls">
-                            <button class="toolbox-control" id="toolboxPrev" aria-label="Previous toolbox slide">&#8592;</button>
-                            <button class="toolbox-control" id="toolboxNext" aria-label="Next toolbox slide">&#8594;</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="toolbox-slider" id="toolboxSlider">
-                    <article class="toolbox-slide toolbox-slide--a">
-                        <div class="toolbox-slide-top">
-                            <div class="toolbox-slide-title-wrap">
-                                <span class="toolbox-slide-icon">&#128200;</span>
-                                <h3 class="toolbox-slide-title">Finance & Research</h3>
-                            </div>
-                            <span class="toolbox-slide-meta">01 · Institutional stack</span>
-                        </div>
-                        <p class="toolbox-slide-desc">Core tools used for market structure work, valuation, derivatives framing, and portfolio decisions.</p>
-                        <div class="toolbox-chip-grid">
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128269;</span>Investment Research</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128176;</span>Equity Valuation</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128202;</span>Options & Derivatives</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128187;</span>Financial Modelling</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#127919;</span>Portfolio Construction</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#127757;</span>Macro & Fed Policy</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128279;</span>DeFi & Digital Assets</span>
-                        </div>
-                        <div class="toolbox-logo-row">
-                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/tradingview/131722" alt="TradingView">TradingView</span>
-                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/bloomberg/000000" alt="Bloomberg">Bloomberg</span>
-                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/bitcoin/F7931A" alt="Bitcoin">Bitcoin Data</span>
-                        </div>
-                    </article>
-
-                    <article class="toolbox-slide toolbox-slide--b">
-                        <div class="toolbox-slide-top">
-                            <div class="toolbox-slide-title-wrap">
-                                <span class="toolbox-slide-icon">&#128640;</span>
-                                <h3 class="toolbox-slide-title">Growth & Operations</h3>
-                            </div>
-                            <span class="toolbox-slide-meta">02 · Build + distribute</span>
-                        </div>
-                        <p class="toolbox-slide-desc">Execution stack for newsletters, GTM systems, and founder-led operating cadence.</p>
-                        <div class="toolbox-chip-grid">
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#129309;</span>CRM & Funnels</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128233;</span>Newsletter Growth</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#9881;</span>Product Development</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#127970;</span>Startup Advisory</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128269;</span>Market Research</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#9878;</span>Competitive Intel</span>
-                        </div>
-                        <div class="toolbox-logo-row">
-                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/hubspot/FF7A59" alt="HubSpot">HubSpot</span>
-                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/apollo/311C87" alt="Apollo">Apollo.io</span>
-                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="LinkedIn">LinkedIn</span>
-                        </div>
-                    </article>
-
-                    <article class="toolbox-slide toolbox-slide--c">
-                        <div class="toolbox-slide-top">
-                            <div class="toolbox-slide-title-wrap">
-                                <span class="toolbox-slide-icon">&#128187;</span>
-                                <h3 class="toolbox-slide-title">Software & Platforms</h3>
-                            </div>
-                            <span class="toolbox-slide-meta">03 · Technical execution</span>
-                        </div>
-                        <p class="toolbox-slide-desc">Code, automation, and analytics stack used to ship quickly across research and product workflows.</p>
-                        <div class="toolbox-chip-grid">
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128013;</span>Python</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#127760;</span>HTML/CSS/JS</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#129302;</span>Claude Code</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128196;</span>Excel / Google Sheets</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128200;</span>TradingView</span>
-                            <span class="toolbox-chip"><span class="toolbox-chip-dot">&#128737;</span>Bloomberg Terminal</span>
-                        </div>
-                        <div class="toolbox-logo-row">
-                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python">Python</span>
-                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript">JavaScript</span>
-                            <span class="toolbox-logo-pill"><img src="https://cdn.simpleicons.org/googlesheets/34A853" alt="Google Sheets">Google Sheets</span>
-                        </div>
-                    </article>
-                </div>
-
-                <div class="toolbox-dots">
-                    <button class="toolbox-dot active" data-toolbox-index="0" aria-label="Go to finance slide"></button>
-                    <button class="toolbox-dot" data-toolbox-index="1" aria-label="Go to growth slide"></button>
-                    <button class="toolbox-dot" data-toolbox-index="2" aria-label="Go to software slide"></button>
-                </div>
+            <div class="toolbox-intro reveal">
+                <p class="toolbox-subtitle">Platforms and tools I use daily across finance research, growth operations, and product development.</p>
+                <a href="https://parthkhannax.github.io/portfolioassetofparth/proof-of-work.html" target="_blank" class="toolbox-pow-cta">Proof of Work →</a>
+            </div>
+        </div>
+        <div class="toolbox-marquee reveal">
+            <div class="toolbox-marquee-row toolbox-marquee-left">
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/tradingview/ffffff" alt="TradingView">TradingView</div>
+                <div class="toolbox-card"><span class="toolbox-card-text-logo">BBG</span>Bloomberg Terminal</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python">Python</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/microsoftexcel/217346" alt="Excel">Excel</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/googlesheets/34A853" alt="Sheets">Google Sheets</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/bitcoin/F7931A" alt="Bitcoin">Bitcoin Data</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/anthropic/d4a574" alt="Claude">Claude AI</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub">GitHub</div>
+                <!-- duplicate for seamless loop -->
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/tradingview/ffffff" alt="TradingView">TradingView</div>
+                <div class="toolbox-card"><span class="toolbox-card-text-logo">BBG</span>Bloomberg Terminal</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python">Python</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/microsoftexcel/217346" alt="Excel">Excel</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/googlesheets/34A853" alt="Sheets">Google Sheets</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/bitcoin/F7931A" alt="Bitcoin">Bitcoin Data</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/anthropic/d4a574" alt="Claude">Claude AI</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub">GitHub</div>
+            </div>
+            <div class="toolbox-marquee-row toolbox-marquee-right">
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/hubspot/FF7A59" alt="HubSpot">HubSpot</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="LinkedIn">LinkedIn</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript">JavaScript</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git">Git</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/convertkit/FB6970" alt="Kit">Kit</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/googleanalytics/E37400" alt="Analytics">Analytics</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/calendly/006BFF" alt="Calendly">Calendly</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/x/ffffff" alt="X">X / Twitter</div>
+                <!-- duplicate for seamless loop -->
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/hubspot/FF7A59" alt="HubSpot">HubSpot</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/linkedin/0A66C2" alt="LinkedIn">LinkedIn</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript">JavaScript</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git">Git</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/convertkit/FB6970" alt="Kit">Kit</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/googleanalytics/E37400" alt="Analytics">Analytics</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/calendly/006BFF" alt="Calendly">Calendly</div>
+                <div class="toolbox-card"><img src="https://cdn.simpleicons.org/x/ffffff" alt="X">X / Twitter</div>
             </div>
         </div>
     </section>
