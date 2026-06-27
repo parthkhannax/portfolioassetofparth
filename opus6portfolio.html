@@ -5003,29 +5003,35 @@
             var nlClose = document.getElementById('nlReaderClose');
             var nlOpen = document.getElementById('openNlReader');
 
-            nlOpen.addEventListener('click', function () {
-                nlOverlay.classList.add('open');
-                document.body.style.overflow = 'hidden';
-            });
+            if (nlOpen && nlOverlay) {
+                nlOpen.addEventListener('click', function () {
+                    nlOverlay.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
 
-            nlClose.addEventListener('click', function () {
-                nlOverlay.classList.remove('open');
-                document.body.style.overflow = '';
-            });
-
-            nlOverlay.addEventListener('click', function (e) {
-                if (e.target === nlOverlay) {
+            if (nlClose && nlOverlay) {
+                nlClose.addEventListener('click', function () {
                     nlOverlay.classList.remove('open');
                     document.body.style.overflow = '';
-                }
-            });
+                });
+            }
 
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape' && nlOverlay.classList.contains('open')) {
-                    nlOverlay.classList.remove('open');
-                    document.body.style.overflow = '';
-                }
-            });
+            if (nlOverlay) {
+                nlOverlay.addEventListener('click', function (e) {
+                    if (e.target === nlOverlay) {
+                        nlOverlay.classList.remove('open');
+                        document.body.style.overflow = '';
+                    }
+                });
+
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape' && nlOverlay.classList.contains('open')) {
+                        nlOverlay.classList.remove('open');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
 
             /* ── Hero Video Card: 3D Tilt + Glare + Modal ── */
             var hWrap = document.getElementById('heroVideoWrap');
