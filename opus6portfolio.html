@@ -2712,12 +2712,24 @@
            SOCIAL PROOF LINE
            ══════════════════════════════════════════ */
         .hero-social-proof {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
             margin-bottom: 28px;
             opacity: 0;
             animation: fadeUp 0.8s ease forwards 0.55s;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 99px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .hero-social-proof:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(255,255,255,0.15);
+            transform: translateY(-1px);
         }
 
         .hero-social-proof .dot {
@@ -2737,6 +2749,18 @@
         .hero-social-proof strong {
             color: var(--accent);
             font-weight: 600;
+        }
+        
+        .hero-social-arrow {
+            width: 14px;
+            height: 14px;
+            color: var(--text-secondary);
+            transition: transform 0.3s ease, color 0.3s ease;
+            margin-left: 2px;
+        }
+        .hero-social-proof:hover .hero-social-arrow {
+            transform: translateX(3px);
+            color: var(--accent);
         }
 
         /* ══════════════════════════════════════════
@@ -3532,10 +3556,11 @@
                     <h1 class="hero-name">Parth<br><span>Khanna</span></h1>
                     <p class="hero-tagline">I develop products & investment research for a $25Mn multi-strategy Silicon
                         Valley firm.</p>
-                    <div class="hero-social-proof">
+                    <a href="https://proflexfinance.com/blog" target="_blank" class="hero-social-proof">
                         <div class="dot"></div>
                         <span><strong>300+ Silicon Valley execs</strong> read my newsletter</span>
-                    </div>
+                        <svg class="hero-social-arrow" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    </a>
                     <div class="hero-proof">
                         <div class="hero-proof-item"><strong>~$30Mn</strong> AUM</div>
                         <div class="hero-proof-item"><strong>15+</strong> Global Wins</div>
