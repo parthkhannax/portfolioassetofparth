@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parth Khanna — Proof of Work</title>
-    <meta name="description" content="Products, platforms, and systems built by Parth Khanna — from zero-dep SSGs to financial calculators to AI automation pipelines.">
+    <meta name="description" content="Production fintech built by Parth Khanna, CFA L3 candidate — real-time options monitoring, IRS 721 tax modeling, backtesting, and the research systems behind a multi-strategy firm.">
     <meta property="og:title" content="Parth Khanna — Proof of Work">
-    <meta property="og:description" content="8 production products, 116 articles generated, 21 AI skills, 35+ pages live. See the full portfolio.">
+    <meta property="og:description" content="CFA L3 candidate who builds the systems behind the returns: real-time options monitoring, tax-strategy modeling, backtesting, 116 newsletter editions, 21 AI skills.">
     <meta property="og:image" content="https://i.ibb.co/HpG4Q7XB/1697743215256.jpg">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
@@ -168,6 +168,46 @@
         /* CSS placeholder for AI card */
         .ai-placeholder { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 20px; align-content: start; }
         .ai-skill-chip { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--accent); background: var(--accent-glow); border: 1px solid rgba(184,150,90,0.15); padding: 6px 10px; border-radius: 6px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* ══════════════════════════════════════════
+           FLAGSHIP PLATFORMS
+           ══════════════════════════════════════════ */
+        .flagship-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 28px; transition: border-color var(--transition); }
+        .flagship-card:hover { border-color: var(--border-hover); }
+        .flagship-shot { position: relative; background: var(--surface); border-bottom: 1px solid var(--border); }
+        .flagship-shot .browser-chrome { border-radius: 0; }
+        .flagship-shot img { width: 100%; display: block; max-height: 420px; object-fit: cover; object-position: top center; }
+        .flagship-body { padding: 32px 36px 36px; }
+        .flagship-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+        .flagship-overline { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+        .flagship-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px; }
+        .flagship-desc { font-size: 0.92rem; color: var(--text-secondary); line-height: 1.75; font-weight: 300; max-width: 760px; margin-bottom: 24px; }
+        .flagship-statline { display: flex; gap: 36px; flex-wrap: wrap; align-items: flex-end; }
+        .flagship-stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.7rem; font-weight: 700; color: var(--accent); letter-spacing: -1px; line-height: 1; }
+        .flagship-stat-label { font-size: 0.68rem; color: var(--text-muted); margin-top: 6px; }
+        .integ-section { margin-top: 8px; }
+        .integ-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; }
+        .integ-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+        .integ-chip { display: flex; align-items: center; gap: 10px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; transition: border-color var(--transition); }
+        .integ-chip:hover { border-color: var(--accent); }
+        .integ-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+        .integ-name { font-size: 0.78rem; font-weight: 500; color: var(--text-primary); line-height: 1.2; }
+        .integ-cat { font-size: 0.62rem; color: var(--text-muted); margin-top: 2px; }
+        .integ-text { min-width: 0; }
+
+        /* Metric preview panel (for products without screenshots) */
+        .metric-preview { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 28px; background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 5%, transparent), transparent); }
+        .metric-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .metric-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+        .metric-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--accent); letter-spacing: -0.5px; line-height: 1; margin-bottom: 6px; }
+        .metric-label { font-size: 0.64rem; color: var(--text-muted); letter-spacing: 0.3px; line-height: 1.3; }
+        .metric-mono-row { display: flex; flex-direction: column; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; }
+        .metric-mono-line { display: flex; justify-content: space-between; align-items: center; padding: 7px 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); }
+        .metric-mono-line .tk { color: var(--text-primary); font-weight: 500; }
+        .metric-mono-line .up { color: var(--green); }
+        .metric-pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 0 rgba(52,211,153,0.6); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(52,211,153,0.5); } 70% { box-shadow: 0 0 0 8px rgba(52,211,153,0); } 100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); } }
+        .live-badge { display: inline-flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--green); letter-spacing: 1px; text-transform: uppercase; }
 
         /* ══════════════════════════════════════════
            REPO CARDS
@@ -444,6 +484,7 @@
             <div class="nav-left">
                 <a href="opus6portfolio.html" class="nav-logo">Parth Khanna</a>
                 <ul class="nav-links">
+                    <li><a href="#flagship">Platforms</a></li>
                     <li><a href="#products">Products</a></li>
                     <li><a href="#opensource">Open Source</a></li>
                     <li><a href="#competitions">Competitions</a></li>
@@ -466,6 +507,7 @@
     </nav>
     <div class="cmd-tooltip" id="cmdTooltip">Press <kbd>&#8984;K</kbd> to navigate anywhere</div>
     <ul class="mobile-menu" id="mobileMenu">
+        <li><a href="#flagship">Platforms</a></li>
         <li><a href="#products">Products</a></li>
         <li><a href="#opensource">Open Source</a></li>
         <li><a href="#competitions">Competitions</a></li>
@@ -480,29 +522,118 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-overline">Proof of Work</div>
-                <h1 class="hero-title">I <span>Ship</span> Things.</h1>
-                <p class="hero-desc">Tools, platforms, and automations I've built at Proflex — a Silicon Valley multi-strategy firm where I handle product, research, and growth.</p>
+                <h1 class="hero-title">I build the systems<br>behind the <span>returns</span>.</h1>
+                <p class="hero-desc">CFA Level III candidate and the builder behind the research, tooling, and content systems at Proflex — a Silicon Valley multi-strategy firm. I sit where markets meet engineering: modeling options strategies, monitoring live positions, and shipping the production fintech that runs the desk.</p>
                 <div class="hero-ctas">
-                    <a href="#products" class="btn btn-primary">View Products &darr;</a>
+                    <a href="#products" class="btn btn-primary">Products I've Built &darr;</a>
+                    <a href="#competitions" class="btn btn-outline">Presentation Decks &darr;</a>
+                    <button type="button" class="btn btn-outline" id="heroSayHi">Say Hi &#128075;</button>
                     <a href="https://github.com/parthkhannax" target="_blank" class="btn btn-outline">GitHub &nearr;</a>
                 </div>
                 <div class="hero-stats">
                     <div class="hero-stat">
-                        <div class="hero-stat-num" data-target="5">0</div>
-                        <div class="hero-stat-label">Production Tools</div>
+                        <div class="hero-stat-num" data-target="8">0</div>
+                        <div class="hero-stat-label">Production Tools Live</div>
                     </div>
                     <div class="hero-stat">
-                        <div class="hero-stat-num" data-target="110" data-suffix="+">0</div>
-                        <div class="hero-stat-label">Blog Posts Auto-Generated</div>
+                        <div class="hero-stat-num" data-target="116">0</div>
+                        <div class="hero-stat-label">Newsletter Editions Shipped</div>
                     </div>
                     <div class="hero-stat">
                         <div class="hero-stat-num" data-target="21">0</div>
-                        <div class="hero-stat-label">AI Skills Written</div>
+                        <div class="hero-stat-label">AI Skills Engineered</div>
                     </div>
                     <div class="hero-stat">
-                        <div class="hero-stat-num" data-target="35" data-suffix="+">0</div>
-                        <div class="hero-stat-label">Pages Deployed</div>
+                        <div class="hero-stat-num" data-prefix="L" data-target="3">0</div>
+                        <div class="hero-stat-label">CFA Candidate</div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="glow-divider">
+
+    <!-- ═══════════ FLAGSHIP PLATFORMS ═══════════ -->
+    <section class="section" id="flagship">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="divider"></div>
+                <div class="section-overline">THE FLAGSHIP WORK</div>
+                <h2 class="section-title">Two Production Websites, Built End to End</h2>
+                <p class="section-subtitle">I designed, built, and shipped both of Proflex's public platforms — multi-page sites built to strict brand and SEO specs, each wired with a full 10+ tool analytics, CRM, and conversion stack. This is the work I'm proudest of.</p>
+            </div>
+
+            <!-- Proflex -->
+            <div class="flagship-card reveal">
+                <div class="flagship-shot">
+                    <div class="browser-chrome">
+                        <div class="browser-dots"><span></span><span></span><span></span></div>
+                        <div class="browser-url">proflexfinance.com</div>
+                    </div>
+                    <img src="screenshots/proflex-site.png" alt="Proflex Finance website" loading="lazy">
+                </div>
+                <div class="flagship-body">
+                    <div class="flagship-head">
+                        <div>
+                            <div class="flagship-overline">RIA · ADVISORY PLATFORM</div>
+                            <div class="flagship-title">proflexfinance.com</div>
+                        </div>
+                        <a href="https://proflexfinance.com" target="_blank" class="btn btn-primary">Visit Site &nearr;</a>
+                    </div>
+                    <p class="flagship-desc">The firm's public face — an investment-advisory site spanning home, newsletter, All-Access, managed portfolios, blog, insights, and a video library. Every page ships to a strict brand spec (Playfair + Inter, exact palette, standardized nav/footer) with full SEO scaffolding: Schema.org JSON-LD, canonical tags, OG/Twitter cards, sitemap, and a template build system so new pages stay consistent.</p>
+                    <div class="flagship-statline">
+                        <div><div class="flagship-stat-num">35+</div><div class="flagship-stat-label">Pages live</div></div>
+                        <div><div class="flagship-stat-num">10+</div><div class="flagship-stat-label">Integrations wired</div></div>
+                        <div><div class="flagship-stat-num">100%</div><div class="flagship-stat-label">Schema + canonical coverage</div></div>
+                        <div><div class="flagship-stat-num">PR</div><div class="flagship-stat-label">CI-gated deploys</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Embark -->
+            <div class="flagship-card reveal">
+                <div class="flagship-shot">
+                    <div class="browser-chrome">
+                        <div class="browser-dots"><span></span><span></span><span></span></div>
+                        <div class="browser-url">embarkfunds.com</div>
+                    </div>
+                    <img src="screenshots/embark-site.png" alt="Embark Funds website" loading="lazy">
+                </div>
+                <div class="flagship-body">
+                    <div class="flagship-head">
+                        <div>
+                            <div class="flagship-overline">FLAGSHIP FUND · IRS §721</div>
+                            <div class="flagship-title">embarkfunds.com</div>
+                        </div>
+                        <a href="https://embarkfunds.com" target="_blank" class="btn btn-primary">Visit Site &nearr;</a>
+                    </div>
+                    <p class="flagship-desc">The conversion engine for Proflex's flagship product — a multi-page site explaining the 721 exchange ("get paid to hold your stock longer") with live eligibility checks, an income calculator, how-it-works flow, FAQs, and trust/compliance pages. Same strict spec and analytics stack, tuned for high-intent concentrated-stock holders moving down the funnel.</p>
+                    <div class="flagship-statline">
+                        <div><div class="flagship-stat-num">§721</div><div class="flagship-stat-label">Tax-strategy product site</div></div>
+                        <div><div class="flagship-stat-num">10+</div><div class="flagship-stat-label">Integrations wired</div></div>
+                        <div><div class="flagship-stat-num">Calc</div><div class="flagship-stat-label">Live eligibility + income tools</div></div>
+                        <div><div class="flagship-stat-num">CRO</div><div class="flagship-stat-label">Conversion-optimized funnel</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integration stack -->
+            <div class="integ-section reveal">
+                <div class="integ-label">// The stack wired into every page</div>
+                <div class="integ-grid reveal-stagger">
+                    <div class="integ-chip"><div class="integ-dot"></div><div class="integ-text"><div class="integ-name">HubSpot CRM</div><div class="integ-cat">Lead capture &amp; nurture</div></div></div>
+                    <div class="integ-chip"><div class="integ-dot"></div><div class="integ-text"><div class="integ-name">Google Tag Manager</div><div class="integ-cat">Tag orchestration</div></div></div>
+                    <div class="integ-chip"><div class="integ-dot"></div><div class="integ-text"><div class="integ-name">Search Console</div><div class="integ-cat">Index &amp; query data</div></div></div>
+                    <div class="integ-chip"><div class="integ-dot"></div><div class="integ-text"><div class="integ-name">Microsoft Clarity</div><div class="integ-cat">Heatmaps &amp; sessions</div></div></div>
+                    <div class="integ-chip"><div class="integ-dot"></div><div class="integ-text"><div class="integ-name">Lucky Orange</div><div class="integ-cat">Session recording</div></div></div>
+                    <div class="integ-chip"><div class="integ-dot"></div><div class="integ-text"><div class="integ-name">Google Analytics</div><div class="integ-cat">Traffic &amp; conversions</div></div></div>
+                    <div class="integ-chip"><div class="integ-dot"></div><div class="integ-text"><div class="integ-name">Kit (ConvertKit)</div><div class="integ-cat">Email &amp; newsletters</div></div></div>
+                    <div class="integ-chip"><div class="integ-dot"></div><div class="integ-text"><div class="integ-name">Schema.org JSON-LD</div><div class="integ-cat">Structured data</div></div></div>
+                    <div class="integ-chip"><div class="integ-dot"></div><div class="integ-text"><div class="integ-name">Vercel</div><div class="integ-cat">Hosting &amp; CI deploys</div></div></div>
+                    <div class="integ-chip"><div class="integ-dot"></div><div class="integ-text"><div class="integ-name">Calendly / Booking</div><div class="integ-cat">Strategy-call scheduling</div></div></div>
+                    <div class="integ-chip"><div class="integ-dot"></div><div class="integ-text"><div class="integ-name">Meta Pixel</div><div class="integ-cat">Webinar retargeting</div></div></div>
+                    <div class="integ-chip"><div class="integ-dot"></div><div class="integ-text"><div class="integ-name">Sitemap / robots</div><div class="integ-cat">Crawl control</div></div></div>
                 </div>
             </div>
         </div>
@@ -515,34 +646,40 @@
         <div class="container">
             <div class="section-header reveal">
                 <div class="divider"></div>
-                <div class="section-overline">WHAT I'VE BUILT</div>
-                <h2 class="section-title">Products Shipped</h2>
-                <p class="section-subtitle">Tools I built and deployed for Proflex Finance. All live, all in production.</p>
+                <div class="section-overline">MARKETS × ENGINEERING</div>
+                <h2 class="section-title">Systems I've Built</h2>
+                <p class="section-subtitle">Production fintech I designed and shipped for Proflex Finance — from real-time options monitoring to tax-strategy modeling. Built by someone who understands the trade, not just the code.</p>
             </div>
 
-            <!-- Product 1: Content Engine -->
+            <!-- Product 1: Position Monitor -->
             <div class="product-card reveal">
                 <div class="product-content">
-                    <div class="product-overline">STATIC SITE GENERATOR</div>
-                    <h3 class="product-title">Proflex Content Engine</h3>
-                    <p class="product-desc">Zero-dependency Node.js static site generator. Pulls newsletters from ConvertKit API, generates SEO meta, Schema.org markup, FAQs, and related articles automatically. Currently serves 110+ blog posts.</p>
+                    <div class="product-overline">REAL-TIME RISK MONITORING</div>
+                    <h3 class="product-title">Options Position Monitor</h3>
+                    <p class="product-desc">A market-hours-aware service that tracks the firm's live options book in real time. Pulls quotes via a resilient multi-endpoint Yahoo Finance layer, computes per-position alert levels, and fires notifications when a position breaches thresholds — so nothing gets missed during the session. Serverless on Vercel with Blob-backed state.</p>
                     <div class="product-tags">
-                        <span class="tool-tag">Node.js</span>
-                        <span class="tool-tag">ConvertKit API</span>
-                        <span class="tool-tag">Schema.org</span>
-                        <span class="tool-tag">SEO</span>
+                        <span class="tool-tag">Serverless</span>
+                        <span class="tool-tag">Real-Time Quotes</span>
+                        <span class="tool-tag">Options Greeks</span>
+                        <span class="tool-tag">Alerting</span>
                     </div>
                     <div class="product-ctas">
-                        <a href="https://webassets-kohl.vercel.app/blog" target="_blank" class="btn btn-primary">Live Site &nearr;</a>
+                        <span class="btn btn-outline" style="cursor:default;"><span class="live-badge"><span class="metric-pulse"></span>Live · Internal Desk Tool</span></span>
                     </div>
                 </div>
                 <div class="product-preview">
                     <div class="browser-chrome">
                         <div class="browser-dots"><span></span><span></span><span></span></div>
-                        <div class="browser-url">webassets-kohl.vercel.app/blog</div>
+                        <div class="browser-url">proflex-monitor · status</div>
                     </div>
-                    <div class="browser-body">
-                        <img src="screenshots/blog.png" alt="Proflex Blog" loading="lazy">
+                    <div class="metric-preview">
+                        <div class="metric-mono-row">
+                            <div class="metric-mono-line"><span class="tk">NVDA $210P</span><span class="up">▲ in range</span></div>
+                            <div class="metric-mono-line"><span class="tk">AAPL $295C</span><span class="up">▲ in range</span></div>
+                            <div class="metric-mono-line"><span class="tk">AVGO $1700C</span><span style="color:var(--accent)">● watch</span></div>
+                            <div class="metric-mono-line"><span class="tk">GOOG $185P</span><span class="up">▲ in range</span></div>
+                        </div>
+                        <div class="live-badge"><span class="metric-pulse"></span>Refreshing during market hours</div>
                     </div>
                 </div>
             </div>
@@ -550,13 +687,14 @@
             <!-- Product 2: Embark Calculator -->
             <div class="product-card reveal">
                 <div class="product-content">
-                    <div class="product-overline">INTERACTIVE FINTECH</div>
-                    <h3 class="product-title">Embark Calculator</h3>
-                    <p class="product-desc">Interactive calculator for IRS Section 721 exchange scenarios. Lets prospects model tax savings, income generation, and diversification outcomes. Built for the Proflex sales team to use in client conversations.</p>
+                    <div class="product-overline">TAX-STRATEGY MODELING</div>
+                    <h3 class="product-title">Embark 721 Exchange Calculator</h3>
+                    <p class="product-desc">Interactive model for IRS Section 721 UPREIT contributions — the core of Embark's offering. Lets a concentrated-stock holder quantify deferred capital-gains tax, projected income, and diversification outcomes vs. an outright sale. Now a fixture in client conversations with RSU-heavy Silicon Valley prospects.</p>
                     <div class="product-tags">
+                        <span class="tool-tag">IRS §721</span>
+                        <span class="tool-tag">Tax Modeling</span>
                         <span class="tool-tag">Chart.js</span>
-                        <span class="tool-tag">Financial Modeling</span>
-                        <span class="tool-tag">Tax Planning</span>
+                        <span class="tool-tag">Sales Enablement</span>
                     </div>
                     <div class="product-ctas">
                         <a href="https://webassets-kohl.vercel.app/EmbarkCalculator.html" target="_blank" class="btn btn-primary">Live Tool &nearr;</a>
@@ -568,48 +706,145 @@
                         <div class="browser-url">webassets-kohl.vercel.app/EmbarkCalculator</div>
                     </div>
                     <div class="browser-body">
-                        <img src="screenshots/calculator.png" alt="Embark Calculator" loading="lazy">
+                        <img src="screenshots/calculator.png" alt="Embark 721 Calculator" loading="lazy">
                     </div>
                 </div>
             </div>
 
-            <!-- Product 3: Blog Writer CMS -->
+            <!-- Product 3: Tradesheet & P&L System -->
             <div class="product-card reveal">
                 <div class="product-content">
-                    <div class="product-overline">CONTENT MANAGEMENT</div>
-                    <h3 class="product-title">Blog Writer CMS</h3>
-                    <p class="product-desc">WYSIWYG editor so non-technical team members can write and publish blog posts without touching code. Auto-generates slugs, meta tags, and Schema.org markup on publish.</p>
+                    <div class="product-overline">PORTFOLIO OPS</div>
+                    <h3 class="product-title">Weekly Tradesheet &amp; P&amp;L System</h3>
+                    <p class="product-desc">The publishing pipeline behind Proflex's options trade alerts. Formats every trade to a strict spec, writes open/closed positions and live returns straight into the tracking sheet, and drafts the subscriber broadcast — one command, end to end. Engineered with rate-limit batching so 100+ live formulas refresh without timing out.</p>
                     <div class="product-tags">
-                        <span class="tool-tag">Quill.js</span>
-                        <span class="tool-tag">CMS</span>
-                        <span class="tool-tag">Vercel</span>
-                        <span class="tool-tag">Static Publishing</span>
+                        <span class="tool-tag">Apps Script</span>
+                        <span class="tool-tag">Options Strategy</span>
+                        <span class="tool-tag">Live P&amp;L</span>
+                        <span class="tool-tag">Automation</span>
                     </div>
                     <div class="product-ctas">
-                        <a href="https://webassets-kohl.vercel.app/writer" target="_blank" class="btn btn-primary">Live Tool &nearr;</a>
+                        <span class="btn btn-outline" style="cursor:default;"><span class="live-badge"><span class="metric-pulse"></span>Live · Powers Weekly Alerts</span></span>
                     </div>
                 </div>
                 <div class="product-preview">
                     <div class="browser-chrome">
                         <div class="browser-dots"><span></span><span></span><span></span></div>
-                        <div class="browser-url">webassets-kohl.vercel.app/writer</div>
+                        <div class="browser-url">Growth Gazette · Income Insider — Positions</div>
                     </div>
-                    <div class="browser-body">
-                        <img src="screenshots/writer.png" alt="Blog Writer CMS" loading="lazy">
+                    <div class="metric-preview">
+                        <div class="metric-row">
+                            <div class="metric-box"><div class="metric-num">2</div><div class="metric-label">Strategy books tracked (GG + II)</div></div>
+                            <div class="metric-box"><div class="metric-num">100+</div><div class="metric-label">Live formulas, zero timeouts</div></div>
+                            <div class="metric-box"><div class="metric-num">[win&nbsp;%]</div><div class="metric-label">Trade-alert hit rate — add yours</div></div>
+                            <div class="metric-box"><div class="metric-num">1&nbsp;cmd</div><div class="metric-label">Format → sheet → broadcast draft</div></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Product 4: Market Intelligence Decks -->
+            <!-- Product 4: Content Engine -->
             <div class="product-card reveal">
                 <div class="product-content">
-                    <div class="product-overline">DATA VISUALIZATION</div>
+                    <div class="product-overline">CONTENT INFRASTRUCTURE</div>
+                    <h3 class="product-title">Proflex Content Engine</h3>
+                    <p class="product-desc">Zero-dependency Node.js static-site generator powering the firm's research blog. Pulls newsletters from the Kit (ConvertKit) API and auto-generates SEO meta, Schema.org markup, FAQs, and internal links. Distributes 116 newsletter editions to a growing investor audience — the top of Proflex's content-to-AUM funnel.</p>
+                    <div class="product-tags">
+                        <span class="tool-tag">Node.js</span>
+                        <span class="tool-tag">Kit API</span>
+                        <span class="tool-tag">Schema.org</span>
+                        <span class="tool-tag">SEO / GEO</span>
+                    </div>
+                    <div class="product-ctas">
+                        <a href="https://webassets-kohl.vercel.app/blog" target="_blank" class="btn btn-primary">Live Site &nearr;</a>
+                    </div>
+                </div>
+                <div class="product-preview">
+                    <div class="browser-chrome">
+                        <div class="browser-dots"><span></span><span></span><span></span></div>
+                        <div class="browser-url">webassets-kohl.vercel.app/blog</div>
+                    </div>
+                    <div class="browser-body">
+                        <img src="screenshots/blog.png" alt="Proflex Research Blog" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5: Backtesting Framework -->
+            <div class="product-card reveal">
+                <div class="product-content">
+                    <div class="product-overline">QUANT RESEARCH</div>
+                    <h3 class="product-title">Strategy Backtesting Framework</h3>
+                    <p class="product-desc">A Python framework for testing systematic strategies against historical data before any capital is committed — turning "this feels like a good trade" into a measurable edge. Used to validate the rules behind the firm's published options and income strategies.</p>
+                    <div class="product-tags">
+                        <span class="tool-tag">Python</span>
+                        <span class="tool-tag">Backtesting</span>
+                        <span class="tool-tag">Signals</span>
+                        <span class="tool-tag">Risk Metrics</span>
+                    </div>
+                    <div class="product-ctas">
+                        <a href="https://github.com/proflexdevs/backtest" target="_blank" class="btn btn-outline">Repository &nearr;</a>
+                    </div>
+                </div>
+                <div class="product-preview">
+                    <div class="browser-chrome">
+                        <div class="browser-dots"><span></span><span></span><span></span></div>
+                        <div class="browser-url">proflexdevs/backtest</div>
+                    </div>
+                    <div class="metric-preview">
+                        <div class="metric-row">
+                            <div class="metric-box"><div class="metric-num">CAGR</div><div class="metric-label">Annualized return</div></div>
+                            <div class="metric-box"><div class="metric-num">Sharpe</div><div class="metric-label">Risk-adjusted return</div></div>
+                            <div class="metric-box"><div class="metric-num">Max DD</div><div class="metric-label">Drawdown control</div></div>
+                            <div class="metric-box"><div class="metric-num">Win&nbsp;%</div><div class="metric-label">Hit rate per ruleset</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6: BA II Plus Calculator -->
+            <div class="product-card reveal">
+                <div class="product-content">
+                    <div class="product-overline">OPEN SOURCE · ⭐ 3</div>
+                    <h3 class="product-title">BA II Plus Financial Calculator</h3>
+                    <p class="product-desc">A faithful, zero-dependency web build of the BA II Plus — the calculator every CFA candidate lives in. Full TVM, NPV, IRR, cash-flow worksheet, and STO/RCL memory. Built it to the spec while studying for the exams; it's now the most-starred thing on my GitHub.</p>
+                    <div class="product-tags">
+                        <span class="tool-tag">JavaScript</span>
+                        <span class="tool-tag">TVM / NPV / IRR</span>
+                        <span class="tool-tag">Zero Deps</span>
+                        <span class="tool-tag">CFA Prep</span>
+                    </div>
+                    <div class="product-ctas">
+                        <a href="https://parthkhannax.github.io/ba2plus-calculator/" target="_blank" class="btn btn-primary">Live Tool &nearr;</a>
+                        <a href="https://github.com/parthkhannax/ba2plus-calculator" target="_blank" class="btn btn-outline">Source &nearr;</a>
+                    </div>
+                </div>
+                <div class="product-preview">
+                    <div class="browser-chrome">
+                        <div class="browser-dots"><span></span><span></span><span></span></div>
+                        <div class="browser-url">parthkhannax.github.io/ba2plus-calculator</div>
+                    </div>
+                    <div class="metric-preview">
+                        <div class="metric-row">
+                            <div class="metric-box"><div class="metric-num">TVM</div><div class="metric-label">N · I/Y · PV · PMT · FV</div></div>
+                            <div class="metric-box"><div class="metric-num">CF</div><div class="metric-label">NPV / IRR worksheet</div></div>
+                            <div class="metric-box"><div class="metric-num">STO</div><div class="metric-label">10-register memory</div></div>
+                            <div class="metric-box"><div class="metric-num">0</div><div class="metric-label">Dependencies</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 7: Market Intelligence Decks -->
+            <div class="product-card reveal">
+                <div class="product-content">
+                    <div class="product-overline">MARKET RESEARCH</div>
                     <h3 class="product-title">Market Intelligence Decks</h3>
-                    <p class="product-desc">Fullscreen HTML slideshows with Chart.js charts for weekly market commentary. Auto-play, keyboard nav, responsive. New data gets swapped in each week — no redesign needed.</p>
+                    <p class="product-desc">Fullscreen, presentation-grade HTML decks with Chart.js visualizations for weekly market commentary — earnings, top movers, sector heatmaps, and thematic signals. Auto-play and keyboard nav; new data swaps in each week with no redesign.</p>
                     <div class="product-tags">
                         <span class="tool-tag">Chart.js</span>
-                        <span class="tool-tag">Slideshows</span>
-                        <span class="tool-tag">Auto-play</span>
+                        <span class="tool-tag">Data Viz</span>
+                        <span class="tool-tag">Market Commentary</span>
                     </div>
                     <div class="product-ctas">
                         <a href="https://webassets-kohl.vercel.app/proflexinsights" target="_blank" class="btn btn-primary">Live Deck &nearr;</a>
@@ -621,17 +856,17 @@
                         <div class="browser-url">webassets-kohl.vercel.app/proflexinsights</div>
                     </div>
                     <div class="browser-body">
-                        <img src="screenshots/insights.png" alt="Proflex Insights" loading="lazy">
+                        <img src="screenshots/all-access.png" alt="Proflex All-Access research dashboard" loading="lazy">
                     </div>
                 </div>
             </div>
 
-            <!-- Product 5: AI Automation Pipeline -->
+            <!-- Product 8: AI Automation Pipeline -->
             <div class="product-card reveal">
                 <div class="product-content">
                     <div class="product-overline">AI ENGINEERING</div>
-                    <h3 class="product-title">AI Automation Pipeline</h3>
-                    <p class="product-desc">21 custom Claude Code skills that automate newsletter drafts, SEO audits, competitor research, and content publishing. Saves ~10 hours/week of manual work across three newsletter products.</p>
+                    <h3 class="product-title">Research &amp; Content AI Pipeline</h3>
+                    <p class="product-desc">21 custom Claude Code skills that run the firm's content machine — pulling live market data into newsletter drafts, generating trade alerts in-voice, running SEO/GEO audits, and producing branded PDF research. Roughly 10 hours/week reclaimed across three newsletter products.</p>
                     <div class="product-tags">
                         <span class="tool-tag">Claude Code</span>
                         <span class="tool-tag">21 Skills</span>
@@ -684,23 +919,31 @@
                 <div class="divider"></div>
                 <div class="section-overline">CODE &amp; CONTRIBUTIONS</div>
                 <h2 class="section-title">Open Source</h2>
-                <p class="section-subtitle">Side projects and utilities — mostly early-stage, built to learn.</p>
+                <p class="section-subtitle">Financial tooling and research utilities I've open-sourced — from a CFA-grade calculator to an equity-research assistant.</p>
             </div>
 
             <div class="repo-grid reveal-stagger reveal">
-                <a href="https://github.com/parthkhannax/stock-research-assistant" target="_blank" class="repo-card">
-                    <div class="repo-lang-dot python"></div>
+                <a href="https://github.com/parthkhannax/ba2plus-calculator" target="_blank" class="repo-card">
+                    <div class="repo-lang-dot javascript"></div>
                     <div class="repo-info">
-                        <div class="repo-name">stock-research-assistant</div>
-                        <div class="repo-desc">Automated equity research pipeline</div>
+                        <div class="repo-name">ba2plus-calculator&nbsp;<span style="color:var(--accent)">★ 3</span></div>
+                        <div class="repo-desc">CFA-grade BA II Plus — TVM, NPV, IRR, CF worksheet. Zero deps.</div>
                     </div>
                     <div class="repo-arrow">View &rarr;</div>
                 </a>
-                <a href="https://github.com/parthkhannax/filetab-vscode" target="_blank" class="repo-card">
+                <a href="https://github.com/parthkhannax/stock-research-assistant" target="_blank" class="repo-card">
                     <div class="repo-lang-dot typescript"></div>
                     <div class="repo-info">
-                        <div class="repo-name">filetab-vscode</div>
-                        <div class="repo-desc">VSCode extension for file tab management</div>
+                        <div class="repo-name">stock-research-assistant</div>
+                        <div class="repo-desc">AI equity research — real-time data, caching, Gemini analysis</div>
+                    </div>
+                    <div class="repo-arrow">View &rarr;</div>
+                </a>
+                <a href="https://github.com/parthkhannax/claude-newsletter-skills" target="_blank" class="repo-card">
+                    <div class="repo-lang-dot javascript"></div>
+                    <div class="repo-info">
+                        <div class="repo-name">claude-newsletter-skills&nbsp;<span style="color:var(--accent)">★ 1</span></div>
+                        <div class="repo-desc">Newsletter generation with real-time market data</div>
                     </div>
                     <div class="repo-arrow">View &rarr;</div>
                 </a>
@@ -708,15 +951,7 @@
                     <div class="repo-lang-dot python"></div>
                     <div class="repo-info">
                         <div class="repo-name">proflexdevs/backtest</div>
-                        <div class="repo-desc">Financial backtesting framework</div>
-                    </div>
-                    <div class="repo-arrow">View &rarr;</div>
-                </a>
-                <a href="https://github.com/parthkhannax/growth-gazette-dev" target="_blank" class="repo-card">
-                    <div class="repo-lang-dot javascript"></div>
-                    <div class="repo-info">
-                        <div class="repo-name">growth-gazette-dev</div>
-                        <div class="repo-desc">Newsletter development tooling</div>
+                        <div class="repo-desc">Systematic strategy backtesting framework</div>
                     </div>
                     <div class="repo-arrow">View &rarr;</div>
                 </a>
@@ -1047,6 +1282,7 @@
         function animateCounter(el) {
             var target = parseInt(el.dataset.target);
             var suffix = el.dataset.suffix || '';
+            var prefix = el.dataset.prefix || '';
             var duration = 1800;
             var start = performance.now();
             function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
@@ -1054,7 +1290,7 @@
                 var elapsed = now - start;
                 var progress = Math.min(elapsed / duration, 1);
                 var current = Math.round(easeOutExpo(progress) * target);
-                el.textContent = current + suffix;
+                el.textContent = prefix + current + suffix;
                 if (progress < 1) requestAnimationFrame(tick);
             }
             requestAnimationFrame(tick);
@@ -1196,6 +1432,8 @@
         contactObserver.observe(contactSection);
 
         floatPill.addEventListener('click', function() { popupOpen = !popupOpen; floatPopup.classList.toggle('open', popupOpen); });
+        var heroSayHi = document.getElementById('heroSayHi');
+        if (heroSayHi) heroSayHi.addEventListener('click', function() { floatPill.classList.add('visible'); popupOpen = true; floatPopup.classList.add('open'); floatMsg.focus(); });
         floatClose.addEventListener('click', function() { popupOpen = false; floatPopup.classList.remove('open'); });
         floatSend.addEventListener('click', function() {
             var msg = floatMsg.value.trim();
