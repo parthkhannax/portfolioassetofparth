@@ -2844,6 +2844,37 @@
             visibility: visible;
         }
 
+        /* Resume modal */
+        .resume-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.25s, visibility 0.25s;
+        }
+        .resume-overlay.open { opacity: 1; visibility: visible; }
+        .resume-box {
+            width: 880px; max-width: 94vw; height: 90vh;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; overflow: hidden; display: flex; flex-direction: column;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            transform: scale(0.96) translateY(10px); transition: transform 0.25s;
+        }
+        .resume-overlay.open .resume-box { transform: scale(1) translateY(0); }
+        .resume-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+        .resume-bar-title { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.95rem; color: var(--text-primary); }
+        .resume-bar-actions { display: flex; align-items: center; gap: 8px; }
+        .resume-frame { flex: 1; border: none; width: 100%; background: #fff; }
+        .resume-close { width: 36px; height: 36px; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); border-radius: 8px; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .resume-close:hover { border-color: var(--accent); color: var(--accent); }
+
         .nl-reader {
             width: 760px;
             max-width: 92vw;
@@ -3568,6 +3599,7 @@
                     </div>
                     <div class="hero-ctas">
                         <button class="btn btn-primary" id="heroLetsTalk">Say Hi</button>
+                        <button class="btn btn-outline" id="heroResume" type="button">View Resume &#128196;</button>
                         <a href="https://calendly.com/parthbusinessofficialid/catchup-with-parth" target="_blank"
                             class="btn btn-outline">Book 20-Min Call</a>
                         <a href="proof-of-work.html" target="_blank" class="btn btn-outline">Proof of Work</a>
@@ -4403,6 +4435,20 @@
     </div>
 
     <!-- ═══════════ NEWSLETTER READER MODAL ═══════════ -->
+    <!-- ═══════════ RESUME MODAL ═══════════ -->
+    <div class="resume-overlay" id="resumeOverlay">
+        <div class="resume-box">
+            <div class="resume-bar">
+                <span class="resume-bar-title">Parth Khanna — Resume</span>
+                <div class="resume-bar-actions">
+                    <a href="assets/Parth-Khanna-Resume.pdf" download class="btn btn-outline" style="padding:7px 14px;font-size:0.78rem;">Download PDF &darr;</a>
+                    <button class="resume-close" id="resumeClose" aria-label="Close">&times;</button>
+                </div>
+            </div>
+            <iframe class="resume-frame" id="resumeFrame" src="" title="Parth Khanna Resume"></iframe>
+        </div>
+    </div>
+
     <div class="nl-reader-overlay" id="nlReaderOverlay">
         <div class="nl-reader">
             <div class="nl-reader-header">
@@ -4764,7 +4810,7 @@
             var activeIndex = 0;
 
             var actions = {
-                resume: 'https://bit.ly/ParthProofofWork',
+                resume: 'inline:resume',
                 call: 'https://calendly.com/parthbusinessofficialid/catchup-with-parth',
                 newsletter: 'inline:nlReader',
                 email: 'mailto:parth@proflexfinance.com',
@@ -4807,6 +4853,9 @@
                             closePalette();
                             document.getElementById('nlReaderOverlay').classList.add('open');
                             document.body.style.overflow = 'hidden';
+                        } else if (actions[action] === 'inline:resume') {
+                            closePalette();
+                            openResume();
                         } else if (action === 'email') {
                             window.location.href = actions[action];
                         } else {
@@ -4957,14 +5006,48 @@
             });
 
             /* ── Hero Let's Talk → opens floating popup ── */
+            function openSayHi() { popupOpen = true; floatPill.classList.add('visible'); floatPopup.classList.add('open'); if (floatMsg) floatMsg.focus(); }
             var heroLetsTalk = document.getElementById('heroLetsTalk');
-            if (heroLetsTalk) {
-                heroLetsTalk.addEventListener('click', function () {
-                    popupOpen = true;
-                    floatPill.classList.add('visible');
-                    floatPopup.classList.add('open');
-                });
+            if (heroLetsTalk) { heroLetsTalk.addEventListener('click', function () { openSayHi(); }); }
+
+            /* ── Resume modal ── */
+            var resumeOverlay = document.getElementById('resumeOverlay');
+            var resumeFrame = document.getElementById('resumeFrame');
+            var resumeClose = document.getElementById('resumeClose');
+            var RESUME_URL = 'assets/Parth-Khanna-Resume.pdf';
+            var isMobileRes = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+            window.openResume = function () {
+                if (isMobileRes) { window.open(RESUME_URL, '_blank'); return; }
+                resumeFrame.src = RESUME_URL;
+                resumeOverlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            };
+            function closeResume() {
+                resumeOverlay.classList.remove('open');
+                resumeFrame.src = '';
+                document.body.style.overflow = '';
             }
+            if (resumeClose) resumeClose.addEventListener('click', closeResume);
+            if (resumeOverlay) resumeOverlay.addEventListener('click', function (e) { if (e.target === resumeOverlay) closeResume(); });
+            var heroResume = document.getElementById('heroResume');
+            if (heroResume) heroResume.addEventListener('click', function () { window.openResume(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeResume(); });
+
+            /* ── Don't lose the prospect: auto "Say Hi" near end + exit-intent (once/session) ── */
+            var sayHiShown = sessionStorage.getItem('pk-sayhi-shown') === '1';
+            function triggerSayHi() {
+                if (sayHiShown || popupOpen || resumeOverlay.classList.contains('open')) return;
+                sayHiShown = true;
+                sessionStorage.setItem('pk-sayhi-shown', '1');
+                openSayHi();
+            }
+            window.addEventListener('scroll', function () {
+                if (sayHiShown) return;
+                if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 700) triggerSayHi();
+            }, { passive: true });
+            document.addEventListener('mouseout', function (e) {
+                if (!sayHiShown && !e.relatedTarget && e.clientY <= 0) triggerSayHi();
+            });
 
             /* ── Mobile Hamburger Menu ── */
             var navHamburger = document.getElementById('navHamburger');

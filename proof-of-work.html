@@ -526,6 +526,7 @@
                 <p class="hero-desc">CFA Level III candidate and the builder behind the research, tooling, and content systems at Proflex — a Silicon Valley multi-strategy firm. I sit where markets meet engineering: modeling options strategies, monitoring live positions, and shipping the production fintech that runs the desk.</p>
                 <div class="hero-ctas">
                     <a href="#products" class="btn btn-primary">Products I've Built &darr;</a>
+                    <button type="button" class="btn btn-outline" onclick="openResume()">View Resume &#128196;</button>
                     <a href="#competitions" class="btn btn-outline">Presentation Decks &darr;</a>
                     <button type="button" class="btn btn-outline" id="heroSayHi">Say Hi &#128075;</button>
                     <a href="https://github.com/parthkhannax" target="_blank" class="btn btn-outline">GitHub &nearr;</a>
@@ -1433,7 +1434,25 @@
 
         floatPill.addEventListener('click', function() { popupOpen = !popupOpen; floatPopup.classList.toggle('open', popupOpen); });
         var heroSayHi = document.getElementById('heroSayHi');
-        if (heroSayHi) heroSayHi.addEventListener('click', function() { floatPill.classList.add('visible'); popupOpen = true; floatPopup.classList.add('open'); floatMsg.focus(); });
+        function openSayHi() { floatPill.classList.add('visible'); popupOpen = true; floatPopup.classList.add('open'); floatMsg.focus(); }
+        if (heroSayHi) heroSayHi.addEventListener('click', function() { openSayHi(); });
+
+        /* ── Don't lose the prospect: auto "Say Hi" near end + exit-intent (once/session) ── */
+        var sayHiShown = sessionStorage.getItem('pk-sayhi-shown') === '1';
+        function triggerSayHi() {
+            if (sayHiShown || popupOpen) return;
+            sayHiShown = true;
+            sessionStorage.setItem('pk-sayhi-shown', '1');
+            openSayHi();
+        }
+        window.addEventListener('scroll', function() {
+            if (sayHiShown) return;
+            var scrolled = window.scrollY + window.innerHeight;
+            if (scrolled >= document.documentElement.scrollHeight - 700) triggerSayHi();
+        }, { passive: true });
+        document.addEventListener('mouseout', function(e) {
+            if (!sayHiShown && !e.relatedTarget && e.clientY <= 0) triggerSayHi();
+        });
         floatClose.addEventListener('click', function() { popupOpen = false; floatPopup.classList.remove('open'); });
         floatSend.addEventListener('click', function() {
             var msg = floatMsg.value.trim();
@@ -1517,6 +1536,22 @@
         document.getElementById('viewerOverlay').classList.remove('active');
         document.getElementById('viewerFrame').src = '';
         document.body.style.overflow = '';
+    }
+
+    var RESUME_URL = 'assets/Parth-Khanna-Resume.pdf';
+    function openResume() {
+        if (isMobile) { window.open(RESUME_URL, '_blank'); return; }
+        var f = document.getElementById('viewerFrame');
+        f.src = RESUME_URL;
+        f.style.display = '';
+        document.getElementById('viewerDownload').classList.remove('active');
+        document.getElementById('viewerOverlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        f.onerror = function() {
+            f.style.display = 'none';
+            document.getElementById('viewerDirectLink').href = RESUME_URL;
+            document.getElementById('viewerDownload').classList.add('active');
+        };
     }
 
     document.addEventListener('keydown', function(e) {
